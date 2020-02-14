@@ -1,0 +1,13 @@
+RF_n_estimators: 25
+RF_max_depth: 10
+SVM_random_state: 0
+LR_random_state: 0
+RNN_window_size: 2
+RNN_n : 10
+RNN_epochs : 100
+RNN_learning_rate : 0.01
+MLP_solver : lbfgs
+MLP_random_state : 1
+MLP_layers : 5
+MLP_neurons : 2
+MLP_alpha : 0.0001
