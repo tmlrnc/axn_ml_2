@@ -1,8 +1,9 @@
 import argparse
 
 from ohe.config import init_ohe_config
-from ohe.predictor import OneHotPredictorBuilder
+from ohe.predictor import OneHotPredictorBuilder, Runner
 from ohe.encoder import OneHotEncoderBuilder
+from ohe.predictor.algorithm import get_algorithm_from_string
 
 def parse_command_line():
     parser = argparse.ArgumentParser()
@@ -10,7 +11,7 @@ def parse_command_line():
     parser.add_argument('--file_out_ohe')
     parser.add_argument('--file_out_predict')
     parser.add_argument('--target')
-    parser.add_argument('--training_test_split_percent')
+    parser.add_argument('--training_test_split_percent', type=int)
     parser.add_argument('--file_in_config')
 
     parser.add_argument(
@@ -32,19 +33,33 @@ def main():
     file_in_config = args.file_in_config
     init_ohe_config(file_in_config)
 
+    algorithms = set( get_algorithm_from_string(p.strip().upper()) for p in args.predictor)
+
+
     ohe_builder = OneHotEncoderBuilder(file_in_name)
     for ignore in args.ignore:
         ohe_builder.ignore(ignore)
     ohe = ohe_builder.build()
-    one_hot_encode_object, feature_name_list = ohe.one_hot_encode()
+    data_frame, feature_name_list = ohe.one_hot_encode()
     ohe.write_ohe_csv(file_out_ohe)
 
-    ohp_builder = OneHotPredictorBuilder(target,training_test_split_percent)
-    for predictor in args.predictor:
-        ohp_builder.add_predictor(predictor)
-    ohp = ohp_builder.build()
-    ohp.predict(one_hot_encode_object,feature_name_list, target)
-    ohp.write_predict_csv(file_out_predict)
+    ohp_builder = OneHotPredictorBuilder(target, training_test_split_percent, data_frame)
+    # Drops target and ignored from features
+    features = ( f for f in feature_name_list if f not in args.ignore and f != target )
+    for f in features:
+        ohp_builder.add_feature(f)
+
+
+    runner = Runner(ohp_builder, algorithms)
+    runner.run_and_build_predictions()
+    runner.write_predict_csv(file_out_predict)
+
+
+    #for predictor in args.predictor:
+    #    ohp_builder.add_predictor(predictor)
+    #ohp = ohp_builder.build()
+    #ohp.predict(one_hot_encode_object,feature_name_list, target)
+    #ohp.write_predict_csv(file_out_predict)
 
 if __name__ == '__main__':
     main()

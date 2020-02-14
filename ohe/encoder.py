@@ -3,6 +3,7 @@ from sklearn.preprocessing import OneHotEncoder
 import pandas
 import numpy as np
 
+# TODO: Add documentation
 class OneHotEncoder(object):
 
     def __init__(self, file_in,ignore_list_in):
@@ -15,10 +16,12 @@ class OneHotEncoder(object):
         self.data_frame_all_ignore = self.data_frame_all[self.ignore]
         self.data_frame_all_ignore_list = self.data_frame_all_ignore.tolist()
         self.csv_column_name_list = list(self.data_frame.columns)
+        self.encoded = False
 
         return
 
     def write_ohe_csv(self,file_out_name):
+        self.one_hot_encode()
         with open(file_out_name, "w") as f:
             writer = csv.writer(f)
             myarr = np.array(self.ignore)
@@ -33,6 +36,9 @@ class OneHotEncoder(object):
 
 
     def one_hot_encode(self):
+        if self.encoded:
+            return self.data_frame, self.csv_column_name_list
+
         from sklearn.preprocessing import OneHotEncoder
         self.enc = OneHotEncoder(handle_unknown='ignore')
         self.enc.fit(self.data_frame)
@@ -41,7 +47,7 @@ class OneHotEncoder(object):
         self.header = self.enc.get_feature_names(self.csv_column_name_list)
         self.ndarray = self.X_train_one_hot.toarray()
         self.listOflist = self.ndarray.tolist()
-
+        self.encoded = True
         return self.data_frame, self.csv_column_name_list
 
 

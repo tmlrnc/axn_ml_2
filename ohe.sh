@@ -11,6 +11,5 @@ python -m ohe.ohe_predict  \
   --training_test_split_percent 70 \
   --predictor SVM \
   --predictor LR \
-  --predictor RF \
-  --predictor GNB \
+  --predictor rf \
   --predictor MLP

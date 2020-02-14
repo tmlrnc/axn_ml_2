@@ -1,4 +1,5 @@
 import csv
+from abc import ABC
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
@@ -9,7 +10,7 @@ from sklearn.neural_network import MLPClassifier
 from ohe.config import get_ohe_config
 
 
-class OneHotPredictor(object):
+class OneHotPredictor(ABC):
 
     def get_accuracy(self,y_pred_one_hot, y_test, test_len):
         correct = 0
@@ -39,12 +40,12 @@ class OneHotPredictor(object):
         self.l_acc = -1
         self.r_acc = -1
         self.mlp_acc = -1
-
-
-
-
-
         return
+
+    def predict(self):
+        raise Exception("Not yet implemented.")
+        pass
+
 
 
     def predict_GaussianNB(self):
@@ -68,7 +69,6 @@ class OneHotPredictor(object):
         self.mlp.fit(self.X_train_one_hot, self.y_train)
 
 
-        self.l.fit(self.X_train_one_hot, self.y_train)
         self.y_pred_one_hot_mlp = list(self.mlp.predict(self.X_test_one_hot))
         self.mlp_acc = self.get_accuracy(self.y_pred_one_hot_mlp, self.y_test, self.test_len)
         self.accuracy_list.append(self.mlp_acc)
