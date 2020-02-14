@@ -1,9 +1,8 @@
 import argparse
 
 from ohe.config import init_ohe_config
-from ohe.predictor import OneHotPredictorBuilder, Runner
+from ohe.predictor import OneHotPredictorBuilder, Runner, get_algorithm_from_string
 from ohe.encoder import OneHotEncoderBuilder
-from ohe.predictor.algorithm import get_algorithm_from_string
 
 def parse_command_line():
     parser = argparse.ArgumentParser()

@@ -1,6 +1,8 @@
 import csv
+import sys
+import importlib
+import pkgutil
 from abc import ABC, abstractmethod
-
 from sklearn.preprocessing import OneHotEncoder as sk_OneHotEncoder
 
 class OneHotPredictor(ABC):
@@ -115,17 +117,42 @@ class Runner(object):
             _writer.writerow(headers)
             _writer.writerow(values)
 
-algorithm_lookup =  {}
+
+### Below is a bit of "magic" to make the Commandline decorator work.
+
+__algorithm_lookup =  {}
 
 def Commandline(arg_name, **kwargs):
     """
     Decorator for OneHotPredictor classes.
     Given a subclass of OneHotPredictor, add it to the algorithm lookup table
     """
-    if arg_name in algorithm_lookup:
+    if arg_name in __algorithm_lookup:
         raise Exception(f"Duplicate Commandline argument definition for {arg_name} found.")
 
     def wrap(klass):
-        algorithm_lookup[arg_name] = klass
+        __algorithm_lookup[arg_name] = klass
         return klass
     return wrap
+
+def get_algorithm_from_string(command_line_arg):
+    if command_line_arg not in __algorithm_lookup:
+        raise Exception(f"No algorithm found for {command_line_arg}.")
+    return __algorithm_lookup[command_line_arg]
+
+
+def __import_submodules(package_name):
+    """ Import all submodules of a module, recursively
+    :param package_name: Package name
+    :type package_name: str
+    :rtype: dict[types.ModuleType]
+    """
+    package = sys.modules[package_name]
+    return {
+        name: importlib.import_module(package_name + '.' + name)
+        for loader, name, is_pkg in pkgutil.walk_packages(package.__path__)
+    }
+
+# Loads all of the algorithm classes from this packages
+import ohe.predictor.algorithm
+__import_submodules('ohe.predictor.algorithm')
