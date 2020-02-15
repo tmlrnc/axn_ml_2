@@ -7,9 +7,27 @@ from sklearn.preprocessing import OneHotEncoder as sk_OneHotEncoder
 
 class OneHotPredictor(ABC):
     """
- OHE selects the optimal machine learning algorithm having the highest accuracy in predicting the target given the same input features. It is a Dynamic Dispatch Architecture using the Design Patterns: Builder, Factory, and Decorator Function Registration.
+Overview
+The optimal machine learning algorithm selector determines the highest accuracy technique in predicting a target given the same input features.
+It is a Dynamic Dispatch Architecture using the Design Patterns: Builder, Factory, and Decorator Function Registration.
 
-To add a new ML algorithm to OHE create a new python class file in the algorithm directory using this design pattern:
+The machine learning algorithms that are currently optimized are:
+
+Support Vector Machines
+Logical Regression
+AdaBoost Classifier
+Gaussian Process Classifier
+K Nearest Neighbors
+Random Forest
+Multi Layer Perceptron Neural Net
+Quadratic Discriminant Analysis
+Gaussian Naive Bayes
+Decision Tree Classifier
+
+
+To add a new ML algorithm to OHE
+
+create a new python class file in the algorithm directory using this design pattern:
 
 from ohe.predictor import OneHotPredictor, Commandline
 from ohe.config import get_ohe_config
@@ -28,20 +46,31 @@ class NEW_MACHINE_LEARNING_ALGORITHM_INITIALS_OHP(OneHotPredictor):
        self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)
        return self.acc
 
+
+
 The hyper parameters of the ML algorithms are driven from a config file that are iteratively optimized.
 
-The machine learning algorithms that are optimized are:
+Add the NEW_MACHINE_LEARNING_ALGORITHM_INITIALS to the run command input predictor :
+python -m ohe  \
+ --file_in csvs/Married_Dog_Child_ID_Age.csv \
+ --file_out_ohe csvs/Married_Dog_ID_Age_OHE.csv  \
+ --file_out_predict csvs/Married_Dog_PREDICT_V2.csv \
+ --file_in_config config/ohe_config.yaml \
+ --ignore ID \
+ --ignore Age \
+ --target Kids \
+ --training_test_split_percent 70 \
+ --predictor SVM \
+ --predictor LR \
+ --predictor RF \
+ --predictor MLP \
+ --predictor GPC \
+ --predictor QDA \
+ --predictor KNN \
+ --predictor GNB \
+ --predictor DTC \
+ --predictor ADA
 
-Support Vector Machines
-Logical Regression
-AdaBoost Classifier
-Gaussian Process Classifier
-K Nearest Neighbors
-Random Forest
-Multi Layer Perceptron Neural Net
-Quadratic Discriminant Analysis
-Gaussian Naive Bayes
-Decision Tree Classifier
 
     """
 
@@ -71,6 +100,12 @@ Decision Tree Classifier
         pass
 
 class OneHotPredictorBuilder(object):
+    """
+
+    reads the data frame and sp;its into training and test vectors
+
+
+     """
 
     def __init__(self, target, training_test_split_percent, data_frame):
         if target == None:
@@ -123,7 +158,13 @@ class OneHotPredictorBuilder(object):
 
 class Runner(object):
     """
-    Describe the purpose of the class and give examples of how to use it
+
+    class pulls togtehr bbuilder onbkect that has data frame and all algorithsm fropm command line and algo directory
+    then trains the ML functions
+    theb runs the ML predictors
+    then checks accu then writes the ML preds and acc to file
+    letf most predictors is optimal
+
     """
 
     def __init__(self, builder, algorithms):
