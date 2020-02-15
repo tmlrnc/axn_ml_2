@@ -11,5 +11,11 @@ python -m ohe  \
   --training_test_split_percent 70 \
   --predictor SVM \
   --predictor LR \
-  --predictor rf \
-  --predictor MLP
+  --predictor RF \
+  --predictor MLP \
+  --predictor GPC \
+  --predictor QDA \
+  --predictor KNN \
+  --predictor GNB \
+  --predictor DTC \
+  --predictor ADA

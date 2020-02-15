@@ -6,6 +6,44 @@ from abc import ABC, abstractmethod
 from sklearn.preprocessing import OneHotEncoder as sk_OneHotEncoder
 
 class OneHotPredictor(ABC):
+    """
+ OHE selects the optimal machine learning algorithm having the highest accuracy in predicting the target given the same input features. It is a Dynamic Dispatch Architecture using the Design Patterns: Builder, Factory, and Decorator Function Registration.
+
+To add a new ML algorithm to OHE create a new python class file in the algorithm directory using this design pattern:
+
+from ohe.predictor import OneHotPredictor, Commandline
+from ohe.config import get_ohe_config
+
+@Commandline("NEW_MACHINE_LEARNING_ALGORITHM_INITIALS")
+class NEW_MACHINE_LEARNING_ALGORITHM_INITIALS_OHP(OneHotPredictor):
+
+   def __init__(self, target, X_test, X_train, y_test, y_train):
+       super().__init__(target, X_test, X_train, y_test, y_train)
+       self.model_name = 'NEW MACHINE LEARNING ALGORITHM NAME'
+
+   def predict(self):
+       algorithm = NewMac()
+       algorithm.fit(self.X_train.toarray(), self.y_train)
+       y_pred = list(algorithm.predict(self.X_test.toarray()))
+       self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)
+       return self.acc
+
+The hyper parameters of the ML algorithms are driven from a config file that are iteratively optimized.
+
+The machine learning algorithms that are optimized are:
+
+Support Vector Machines
+Logical Regression
+AdaBoost Classifier
+Gaussian Process Classifier
+K Nearest Neighbors
+Random Forest
+Multi Layer Perceptron Neural Net
+Quadratic Discriminant Analysis
+Gaussian Naive Bayes
+Decision Tree Classifier
+
+    """
 
     @staticmethod
     def get_accuracy(y_pred_one_hot, y_test):
@@ -84,8 +122,16 @@ class OneHotPredictorBuilder(object):
 
 
 class Runner(object):
+    """
+    Describe the purpose of the class and give examples of how to use it
+    """
 
     def __init__(self, builder, algorithms):
+        """
+
+        :param builder:
+        :param algorithms:
+        """
         self.builder = builder
         self.algorithms = algorithms
         self.results = None

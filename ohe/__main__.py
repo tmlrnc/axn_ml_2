@@ -53,13 +53,6 @@ def main():
     runner.run_and_build_predictions()
     runner.write_predict_csv(file_out_predict)
 
-
-    #for predictor in args.predictor:
-    #    ohp_builder.add_predictor(predictor)
-    #ohp = ohp_builder.build()
-    #ohp.predict(one_hot_encode_object,feature_name_list, target)
-    #ohp.write_predict_csv(file_out_predict)
-
 if __name__ == '__main__':
     main()
 
