@@ -71,6 +71,9 @@ python -m ohe  \
  --predictor DTC \
  --predictor ADA
 
+ *********
+ --preditor NEW_MACHINE_LEARNING_ALGORITHM_INITIALS
+
 
     """
 
@@ -102,8 +105,21 @@ python -m ohe  \
 class OneHotPredictorBuilder(object):
     """
 
-    reads the data frame and sp;its into training and test vectors
+    reads the data frame and splits into training and test vectors
+    using the splpit percentage from the command line
+    the input to this OneHotPredictorBuilder is a csv fiule that gets parced to an array of integers or strings,
+    denoting the values taken on by categorical features. The features are encoded using a one-hot ‘one-of-K’ encoding scheme.
+    This creates a binary column for each category and returns a sparse matrix or dense array
+    the encoder derives the categories based on the unique values in each feature.
 
+     when features are categorical.
+     For example a person could have features
+     ["male", "female"],
+     ["from Europe", "from US", "from Asia"],
+     ["uses Firefox", "uses Chrome", "uses Safari", "uses Internet Explorer"].
+     Such features can be efficiently coded as integers,
+     for instance ["male", "from US", "uses Internet Explorer"] could be expressed as [0, 1, 3]
+     while ["female", "from Asia", "uses Chrome"] would be [1, 2, 1].
 
      """
 
@@ -159,11 +175,12 @@ class OneHotPredictorBuilder(object):
 class Runner(object):
     """
 
-    class pulls togtehr bbuilder onbkect that has data frame and all algorithsm fropm command line and algo directory
+    class pulls together builder object that has data frame and all algorithm fropm command line
+    and algorithm directory
     then trains the ML functions
     theb runs the ML predictors
-    then checks accu then writes the ML preds and acc to file
-    letf most predictors is optimal
+    then checks accuracy then writes the ML and accuracy to file
+    left most predictors is optimal
 
     """
 
