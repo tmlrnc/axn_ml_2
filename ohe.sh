@@ -3,8 +3,8 @@
 python -m ohe  \
   --file_in csvs/Married_Dog_Child_ID_Age.csv \
   --file_out_ohe csvs/Married_Dog_ID_Age_OHE.csv  \
-  --file_out_predict csvs/Married_Dog_PREDICT_V2.csv \
-  --file_in_config config/ohe_config.yaml \
+  --file_out_predict csvs/Married_Dog_PREDICT_RUN1.csv \
+  --file_in_config config/ohe_config_RUN1.yaml \
   --ignore ID \
   --ignore Age \
   --target Kids \
@@ -18,4 +18,6 @@ python -m ohe  \
   --predictor KNN \
   --predictor GNB \
   --predictor DTC \
+  --predictor LDA \
+  --predictor ETC \
   --predictor ADA

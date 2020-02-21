@@ -4,7 +4,7 @@ from ohe.predictor import OneHotPredictor, Commandline
 from ohe.config import get_ohe_config
 
 @Commandline("GNB")
-class KNN_OHP(OneHotPredictor):
+class GNB_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         super().__init__(target, X_test, X_train, y_test, y_train)

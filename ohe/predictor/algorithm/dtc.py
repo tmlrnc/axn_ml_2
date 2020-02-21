@@ -10,7 +10,7 @@ class DTC_OHP(OneHotPredictor):
         self.model_name = 'Decision Tree Classifier'
 
     def predict(self):
-        algorithm = DecisionTreeClassifier(random_state=0)
+        algorithm = DecisionTreeClassifier(random_state=get_ohe_config().DTC_random_state)
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)

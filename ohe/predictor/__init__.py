@@ -175,10 +175,10 @@ class OneHotPredictorBuilder(object):
 class Runner(object):
     """
 
-    class pulls together builder object that has data frame and all algorithm fropm command line
+    class pulls together builder object that has data frame and all algorithm from command line
     and algorithm directory
     then trains the ML functions
-    theb runs the ML predictors
+    then runs the ML predictors
     then checks accuracy then writes the ML and accuracy to file
     left most predictors is optimal
 

@@ -18,6 +18,8 @@ class OHE_Config(object):
         self.RF_max_depth = config_dict["RF_max_depth"]
         self.SVM_random_state = config_dict["SVM_random_state"]
         self.LR_random_state = config_dict["LR_random_state"]
+        self.DTC_random_state = config_dict["DTC_random_state"]
+        self.RNR_radius = config_dict["RNR_radius"]
 
 
         self.RNN_window_size = config_dict["RNN_window_size"]

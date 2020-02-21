@@ -1,17 +1,18 @@
-from sklearn.neighbors import RadiusNeighborsRegressor
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+
 
 from ohe.predictor import OneHotPredictor, Commandline
 from ohe.config import get_ohe_config
 
-@Commandline("RNR")
-class RNR_OHP(OneHotPredictor):
+@Commandline("LDA")
+class LDA_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         super().__init__(target, X_test, X_train, y_test, y_train)
-        self.model_name = 'Radius Neighbors Regressor'
+        self.model_name = 'Linear Discriminant Analysis'
 
     def predict(self):
-        algorithm = RadiusNeighborsRegressor(radius=get_ohe_config().RNR_radius)
+        algorithm = LinearDiscriminantAnalysis()
         algorithm.fit(self.X_train.toarray(), self.y_train)
         y_pred = list(algorithm.predict(self.X_test.toarray()))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)
