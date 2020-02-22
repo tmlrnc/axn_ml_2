@@ -53,16 +53,35 @@ def main():
     data_frame, feature_name_list = ohe.one_hot_encode()
     ohe.write_ohe_csv(file_out_ohe)
 
+
+    # build across all targets
+    # get all target names
+    all_targets = ( f for f in feature_name_list if f not in args.ignore and f != target )
+
+    # run original target
     ohp_builder = OneHotPredictorBuilder(target, training_test_split_percent, data_frame)
-    # Drops target and ignored from features
     features = ( f for f in feature_name_list if f not in args.ignore and f != target )
     for f in features:
         ohp_builder.add_feature(f)
 
-
     runner = Runner(ohp_builder, algorithms)
     runner.run_and_build_predictions()
-    runner.write_predict_csv(file_out_predict)
+    runner.write_predict_csv(file_out_predict,target)
+
+    # run all rest of targets
+
+    for new_target in all_targets:
+        ohp_builder = OneHotPredictorBuilder(new_target, training_test_split_percent, data_frame)
+        features = (f for f in feature_name_list if f not in args.ignore and f != new_target)
+        for f in features:
+            ohp_builder.add_feature(f)
+
+        runner = Runner(ohp_builder, algorithms)
+        runner.run_and_build_predictions()
+        runner.write_predict_csv(file_out_predict, new_target)
+
+
+
 
 if __name__ == '__main__':
     main()

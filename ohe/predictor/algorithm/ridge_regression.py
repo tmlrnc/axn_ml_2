@@ -3,7 +3,7 @@ from ohe.predictor import OneHotPredictor, Commandline
 from ohe.config import get_ohe_config
 
 @Commandline("RIDGE_REGRESSION")
-class LINEAR_REGRESSION_OHP(OneHotPredictor):
+class RIDGE_REGRESSION_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         """

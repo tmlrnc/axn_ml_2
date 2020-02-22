@@ -20,4 +20,5 @@ python -m ohe  \
   --predictor DTC \
   --predictor LDA \
   --predictor ETC \
+  --predictor NU_SVM \
   --predictor ADA

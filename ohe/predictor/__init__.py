@@ -193,9 +193,6 @@ class OneHotPredictorBuilder(object):
 
         X, Y = shuffle(X_pre_shuffle, Y_pre_shuffle, random_state=13)
 
-
-
-
         X_train = X.iloc[:train_len]
         X_test = X.iloc[train_len:]
 
@@ -246,6 +243,7 @@ class Runner(object):
         self.algorithms = algorithms
         self.results = None
 
+
     def run_and_build_predictions(self):
         if self.results is not None:
             return self.results
@@ -261,7 +259,7 @@ class Runner(object):
         self.results.sort(key=lambda r: r['accuracy'], reverse=True)
         return self.results
 
-    def write_predict_csv(self, file_out_name):
+    def write_predict_csv(self, file_out_name,target):
         """
         write csv file with configured python machine learning algorithm and accuracy
         :param file_out_name: string
@@ -270,8 +268,16 @@ class Runner(object):
             self.run_and_build_predictions()
 
         headers = [ r['model_name'] for r in self.results ]
+        headers.append("Target")
+
         values = [ r['accuracy'] for r in self.results ]
-        with open(file_out_name, mode='w') as _file:
+        values.append(target)
+        import string
+        new_csv = target + ".csv"
+        file_out_name_new_str = file_out_name.replace('.csv', new_csv)
+
+
+        with open(file_out_name_new_str, mode='w') as _file:
             _writer = csv.writer(_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             _writer.writerow(headers)
             _writer.writerow(values)
