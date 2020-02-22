@@ -1,13 +1,13 @@
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.ensemble import AdaBoostClassifier
 
 from ohe.predictor import Commandline
 from ohe.predictor.algorithm.simple_predictor import SimplePredictor
 
-model_name = 'Linear Discriminant Analysis'
-algorithm = lambda: LinearDiscriminantAnalysis()
+model_name = 'AdaBoost Classifier'
+algorithm = lambda: AdaBoostClassifier(n_estimators=100, random_state=0)
 
-@Commandline("LDA")
-class LDA_OHP(SimplePredictor):
+@Commandline("ADA")
+class ADA_OHP(SimplePredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         """

@@ -174,19 +174,28 @@ class OneHotPredictorBuilder(object):
 
     def _split_data_frame(self, data_frame):
         """
-          splits feature inout data into trainng and test parts
+          splits feature input data array of floats into training and test parts
+          depending onn the split percent variable
 
           :param data_frame: panda frame
           :returns accuracy: float
 
           """
+        from sklearn.utils import shuffle
         if self.X_test is not None:
             return
         split_percent = self.training_test_split_percent / 100
-        Y = data_frame[self.target]
-        train_len = int(round(Y.size * split_percent))
-        X = data_frame[self.features]
-        # TODO: Shuffle before split
+
+
+        Y_pre_shuffle = data_frame[self.target]
+        train_len = int(round(Y_pre_shuffle.size * split_percent))
+        X_pre_shuffle = data_frame[self.features]
+
+        X, Y = shuffle(X_pre_shuffle, Y_pre_shuffle, random_state=13)
+
+
+
+
         X_train = X.iloc[:train_len]
         X_test = X.iloc[train_len:]
 
@@ -199,6 +208,14 @@ class OneHotPredictorBuilder(object):
         self.y_test = Y.iloc[train_len:]
 
     def build(self, Constructor):
+        """
+
+        calls the constructor of the python machine learning algorithm class
+        and passes the
+        array of floats into training and test parts already split
+
+
+        """
         self._split_data_frame(self.data_frame)
         return Constructor(self.target,
                            self.X_test,
@@ -246,7 +263,7 @@ class Runner(object):
 
     def write_predict_csv(self, file_out_name):
         """
-        write csv file
+        write csv file with configured python machine learning algorithm and accuracy
         :param file_out_name: string
         """
         if self.results is None:
