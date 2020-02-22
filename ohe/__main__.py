@@ -23,6 +23,17 @@ def parse_command_line():
     return args
 
 def main():
+    """
+
+  READ FILE_IN_RAW.CSV
+  GET COLUMN HEADERS
+  FOR EACH COLUMN NOT IN IGNORE LIST :
+  GET ALL CATEGORIES = UNIQUE COLUMN VALUES
+  GENERATE ONE HOT ENCODING HEADER
+  ENCODE EACH ROW WITH 1 or 0 FOR EACH HEADER
+
+
+      """
     args = parse_command_line()
     file_in_name = args.file_in
     file_out_ohe = args.file_out_ohe

@@ -3,10 +3,35 @@ from sklearn.preprocessing import OneHotEncoder
 import pandas
 import numpy as np
 
-# TODO: Add documentation
 class OneHotEncoder(object):
+    """
+    features are encoded using a one-hot ‘one-of-K’ encoding scheme.
+    This creates a binary column for each category and returns a sparse matrix or dense array
+    the encoder derives the categories based on the unique values in each feature.
 
+     when features are categorical.
+     For example a person could have features
+     ["male", "female"],
+     ["from Europe", "from US", "from Asia"],
+     ["uses Firefox", "uses Chrome", "uses Safari", "uses Internet Explorer"].
+     Such features can be efficiently coded as integers,
+     for instance ["male", "from US", "uses Internet Explorer"] could be expressed as [0, 1, 3]
+     while ["female", "from Asia", "uses Chrome"] would be [1, 2, 1].
+
+    READ FILE_IN_RAW.CSV
+    GET COLUMN HEADERS
+    FOR EACH COLUMN NOT IN IGNORE LIST :
+    GET ALL CATEGORIES = UNIQUE COLUMN VALUES
+    GENERATE ONE HOT ENCODING HEADER
+    ENCODE EACH ROW WITH 1 or 0 FOR EACH HEADER
+    """
     def __init__(self, file_in,ignore_list_in):
+        """
+        opens file and writes one hot encoded data
+
+        :param ignore_list_in: list[] : list of feature to ignore
+        :param file_in: string : input data file
+        """
         self.file_in_name = file_in
         self.ignore_list = ignore_list_in
         self.data_frame_all = pandas.read_csv(file_in)
@@ -21,6 +46,11 @@ class OneHotEncoder(object):
         return
 
     def write_ohe_csv(self,file_out_name):
+        """
+        opens file and writes one hot encoded data
+
+        :param file_out_name: Name of File to Write to
+        """
         self.one_hot_encode()
         with open(file_out_name, "w") as f:
             writer = csv.writer(f)
@@ -36,6 +66,13 @@ class OneHotEncoder(object):
 
 
     def one_hot_encode(self):
+        """
+         runs OneHotEncoder() function on class data
+
+        :returns data_frame: array
+        :returns csv_column_name_list: array
+
+         """
         if self.encoded:
             return self.data_frame, self.csv_column_name_list
 
@@ -55,14 +92,30 @@ class OneHotEncoder(object):
 
 class OneHotEncoderBuilder(object):
     def __init__(self, filename):
+        """
+        opens file and writes one hot encoded data
+
+        :param filename: string : input data file
+        """
         if filename == None:
             raise Exception("Filename cannot be none")
         self.filename = filename
         self.ignore_list = []
 
     def ignore(self, ignore):
+        """
+        constructs ignore list
+
+        :param ignore: string : one feature string on list
+        """
         self.ignore_list.append(ignore)
         return self
 
     def build(self):
+        """
+        builds OHE class
+
+        :returns OneHotEncoder: class
+
+        """
         return OneHotEncoder(self.filename, self.ignore_list)

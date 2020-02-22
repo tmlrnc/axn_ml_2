@@ -79,6 +79,14 @@ python -m ohe  \
 
     @staticmethod
     def get_accuracy(y_pred_one_hot, y_test):
+        """
+        opens file and writes one hot encoded data
+
+        :param y_pred_one_hot: array - predicted values
+        :param y_test: array - actual values
+        :returns accuracy: float
+
+        """
         correct = 0
         test_len = len(y_test)
         y_pred_one_hot_list = list(y_pred_one_hot)
@@ -88,7 +96,16 @@ python -m ohe  \
                 correct = correct + 1
         return ((correct / test_len) * 100)
 
-    def __init__(self, target, X_test, X_train, y_test, y_train): #predict_list, training_test_split_percent):
+    def __init__(self, target, X_test, X_train, y_test, y_train):
+        """
+        opens file and writes one hot encoded data
+
+        :param target: string - label to be predicted or classified
+        :param X_test: array(float) - testing features
+        :param X_train: array(float) - training features
+        :param y_test: array(float) - testing label
+        :param y_train: array(float) - testing label
+        """
         self.target = target
         self.X_test = X_test
         self.X_train = X_train
@@ -104,7 +121,6 @@ python -m ohe  \
 
 class OneHotPredictorBuilder(object):
     """
-
     reads the data frame and splits into training and test vectors
     using the splpit percentage from the command line
     the input to this OneHotPredictorBuilder is a csv fiule that gets parced to an array of integers or strings,
@@ -112,7 +128,7 @@ class OneHotPredictorBuilder(object):
     This creates a binary column for each category and returns a sparse matrix or dense array
     the encoder derives the categories based on the unique values in each feature.
 
-     when features are categorical.
+     When features are categorical.
      For example a person could have features
      ["male", "female"],
      ["from Europe", "from US", "from Asia"],
@@ -124,6 +140,14 @@ class OneHotPredictorBuilder(object):
      """
 
     def __init__(self, target, training_test_split_percent, data_frame):
+        """
+        initializes
+        :param target: string
+        :param training_test_split_percent: string
+        :param data_frame: panda frame
+
+
+          """
         if target == None:
             raise Exception("target cannot be none")
         self.target = target
@@ -136,6 +160,11 @@ class OneHotPredictorBuilder(object):
         self.y_train = None
 
     def add_feature(self, feature):
+        """
+        add feature
+        :param feature: string
+
+          """
         if self.X_test is not None:
             raise Exception("Cannot add features after building predictor")
         if feature == self.target:
@@ -144,7 +173,13 @@ class OneHotPredictorBuilder(object):
         return self
 
     def _split_data_frame(self, data_frame):
-        # If we have already split the data_frame, we don't need to split it again
+        """
+          splits feature inout data into trainng and test parts
+
+          :param data_frame: panda frame
+          :returns accuracy: float
+
+          """
         if self.X_test is not None:
             return
         split_percent = self.training_test_split_percent / 100
@@ -187,8 +222,8 @@ class Runner(object):
     def __init__(self, builder, algorithms):
         """
 
-        :param builder:
-        :param algorithms:
+        :param builder: class that reads data and encodes it for use in algorithms
+        :param algorithms: library of scikit learn machine learning models
         """
         self.builder = builder
         self.algorithms = algorithms
@@ -210,7 +245,10 @@ class Runner(object):
         return self.results
 
     def write_predict_csv(self, file_out_name):
-
+        """
+        write csv file
+        :param file_out_name: string
+        """
         if self.results is None:
             self.run_and_build_predictions()
 

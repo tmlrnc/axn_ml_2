@@ -1,7 +1,13 @@
 import yaml
 
 class OHE_Config(object):
+    """
 
+  reads config yaml file into config dictionary data object
+  to drive the scikit learn machine learning algorithm
+
+
+      """
     ohe_config = None
 
     def __init__(self, config_yaml_file="./ohe_config.yaml"):
