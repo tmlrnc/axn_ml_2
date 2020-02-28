@@ -8,6 +8,14 @@ class Category(object):
         self.feature = feature
         self.count = 0
 
+    def is_noisy(self, threshold):
+        return self.count < threshold
+
+    def is_not_noisy(self, threshold):
+        return not self.is_noisy(threshold)
+
+
+
 
 class Feature(object):
 
@@ -19,6 +27,11 @@ class Feature(object):
             return Feature.features[name]
         return Feature(name)
 
+
+    @staticmethod
+    def get_non_noisy_features(noise_threshold):
+        non_noisy = set()
+        return set(f for f in Feature.features.values() if f.is_not_noisy(noise_threshold))
 
     @staticmethod
     def get_noisy_features(noise_threshold):
@@ -33,6 +46,38 @@ class Feature(object):
         self.total_count = 0
         self.categories = {}
         Feature.features[name] = self
+
+    def get_categories(self):
+        return list(self.categories.values())
+
+    @staticmethod
+    def get_smallest_sample_size(noise_threshold):
+
+        """
+
+        percentage of smallest non noisy category = noise threshold / (SAMPLE SIZE I AM SEEKING)
+
+        SAMPLE SIZE I AM SEEKING =  noise threshold / percentage of smallest non noisy category
+
+
+        """
+
+
+        smallest_count = []
+        total_count = 0
+        non_noisy_features = Feature.get_non_noisy_features(noise_threshold)
+        for my_non_noisy_features in non_noisy_features:
+            cat_v = list(my_non_noisy_features.categories.values())
+            smallest_count.append(cat_v[0].count)
+            total_count = total_count + cat_v[0].count
+
+
+        min_count = min(smallest_count)
+        percent_of_smallest_non_noisy_cat = min_count/total_count
+
+        sample_size = noise_threshold/percent_of_smallest_non_noisy_cat
+
+        return sample_size
 
     def get_category_percent(self, category):
         return round((category.count / self.total_count)*1000)/1000
@@ -53,6 +98,23 @@ class Feature(object):
                 return True
         return False
 
+
+    def get_least_not_noisy(self, threshold):
+
+        for c in self.categories.values():
+
+            if c.count >= threshold:
+
+                return True
+        return False
+
+    def is_not_noisy(self, threshold):
+        for c in self.categories.values():
+            if c.count >= threshold:
+                return True
+        return False
+
+
     def __repr__(self):
         return f"Feature({self.name})"
 
@@ -72,12 +134,7 @@ def parse_command_line():
 
 def main():
     """
-  READ FILE_IN_RAW.CSV
-  GET COLUMN HEADERS
-  FOR EACH COLUMN NOT IN IGNORE LIST :
-  GET ALL CATEGORIES = UNIQUE COLUMN VALUES
-  GENERATE ONE HOT ENCODING HEADER
-  ENCODE EACH ROW WITH 1 or 0 FOR EACH HEADER
+
 
       """
     args = parse_command_line()
@@ -93,12 +150,11 @@ def main():
             feature.count(v)
 
 
-    print(Feature.get_noisy_features(noise_threshold))
 
+    nnf = Feature.get_non_noisy_features(noise_threshold)
 
-
-
-
+    s1 = Feature.get_smallest_sample_size(noise_threshold)
+    print("s1 " + str(s1))
 
 if __name__ == '__main__':
     main()
