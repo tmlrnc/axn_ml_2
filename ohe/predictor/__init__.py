@@ -256,10 +256,12 @@ class Runner(object):
             result['accuracy'] = predictor.predict()
             self.results.append( result )
 
-        self.results.sort(key=lambda r: r['accuracy'], reverse=True)
+        self.results.sort(key=lambda r: r['model_name'], reverse=False)
+
+
         return self.results
 
-    def write_predict_csv(self, file_out_name,target):
+    def write_predict_csv(self, file_out_name,target,write_header_flag=1):
         """
         write csv file with configured python machine learning algorithm and accuracy
         :param file_out_name: string
@@ -273,13 +275,13 @@ class Runner(object):
         values = [ r['accuracy'] for r in self.results ]
         values.append(target)
         import string
-        new_csv = target + ".csv"
-        file_out_name_new_str = file_out_name.replace('.csv', new_csv)
 
 
-        with open(file_out_name_new_str, mode='w') as _file:
+
+        with open(file_out_name, mode='a') as _file:
             _writer = csv.writer(_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            _writer.writerow(headers)
+            if(write_header_flag == 1):
+                _writer.writerow(headers)
             _writer.writerow(values)
 
 

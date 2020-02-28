@@ -27,10 +27,9 @@ class BaseModel(db.Model):
         }
 
 
-class Station(BaseModel, db.Model):
-    """Model for the stations table"""
-    __tablename__ = 'stations'
+class GenieFeartures(BaseModel, db.Model):
+    __tablename__ = 'genie_features'
 
     id = db.Column(db.Integer, primary_key = True)
-    lat = db.Column(db.Float)
-    lng = db.Column(db.Float)
+    feature_name = db.Column(db.String)
+    feature_value = db.Column(db.String)
