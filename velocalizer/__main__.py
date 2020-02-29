@@ -44,6 +44,7 @@ class Feature(object):
 
         self.name = name
         self.total_count = 0
+        self.record_count = 0
         self.categories = {}
         Feature.features[name] = self
 
@@ -59,22 +60,19 @@ class Feature(object):
 
         SAMPLE SIZE I AM SEEKING =  noise threshold / percentage of smallest non noisy category
 
-
         """
-
 
         smallest_count = []
         total_count = 0
+        record_cnt= Feature.record_count
         non_noisy_features = Feature.get_non_noisy_features(noise_threshold)
         for my_non_noisy_features in non_noisy_features:
             cat_v = list(my_non_noisy_features.categories.values())
             smallest_count.append(cat_v[0].count)
             total_count = total_count + cat_v[0].count
 
-
         min_count = min(smallest_count)
-        percent_of_smallest_non_noisy_cat = min_count/total_count
-
+        percent_of_smallest_non_noisy_cat = min_count/record_cnt
         sample_size = noise_threshold/percent_of_smallest_non_noisy_cat
 
         return sample_size
@@ -100,11 +98,8 @@ class Feature(object):
 
 
     def get_least_not_noisy(self, threshold):
-
         for c in self.categories.values():
-
             if c.count >= threshold:
-
                 return True
         return False
 
@@ -144,12 +139,14 @@ def main():
     with open(file_in_name, encoding='utf-8-sig') as io:
         records = list(csv.DictReader(io))
 
+    record_count = 0
     for record in records:
+        record_count = record_count + 1
         for k, v in record.items():
             feature = Feature.get_feature(k)
             feature.count(v)
 
-
+    Feature.record_count = record_count
 
     nnf = Feature.get_non_noisy_features(noise_threshold)
 
