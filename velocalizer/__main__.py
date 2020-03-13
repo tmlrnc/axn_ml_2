@@ -2,6 +2,73 @@ import argparse
 import csv
 import math
 import random
+
+
+
+
+class DataSet(object):
+
+
+    def __init__(self, filename):
+
+        with open(filename, encoding='utf-8-sig') as io:
+            self.records = list(csv.DictReader(io))
+        self.record_count = 0
+        for record in self.records:
+            self.record_count = self.record_count + 1
+            for k, v in record.items():
+                feature = Feature.get_feature(k)
+                feature.count(v)
+        Feature.record_count = self.record_count
+
+
+        return
+
+    def get_smallest_sample_feature(self, noise_threshold, non_noisy_feature):
+        random.shuffle(self.records)
+        new_records = []
+        category_count = {}
+        metadata = non_noisy_feature.get_smallest_sample_metadata(noise_threshold)
+        for category in metadata:
+            category_count[category] = metadata[category]
+        print(category_count)
+        for r in self.records:
+            target_category = str(r[non_noisy_feature.name])
+            if target_category not in category_count:
+                # If the target_category is not in our category_count, we skip this record
+                continue
+            # Otherwise, we save the record
+            new_records.append(r)
+            # And reduce the count
+            category_count[target_category] -= 1
+            if category_count[target_category] == 0:
+                # If the target category count is 0, we are done and remove it from the dictionary
+                del category_count[target_category]
+            if category_count == {}:
+                # If there are no more categories, we are done
+                return new_records
+
+        return new_records
+
+    def write_smallest_sample_feature_to_csv(self,list_of_sample_for_feature, file_out_name,feature):
+
+        new_end = "_" + str(feature) + ".csv"
+        file_out_name_new = file_out_name.replace(".csv", new_end)
+        with open(file_out_name_new, 'w', newline='') as csvfile:
+            mywriter = csv.writer(csvfile)
+            key_count = 0
+            for row in list_of_sample_for_feature:
+                if key_count == 0 :
+                    list_keys = [k for k in row]
+                    mywriter.writerow(list_keys)
+                    key_count = 1
+                list_values = [v for v in row.values()]
+                mywriter.writerow(list_values)
+
+    def get_non_noisy_features(self, noise_threshold):
+        return Feature.get_non_noisy_features(noise_threshold)
+
+
 class Category(object):
 
     def __init__(self, name, feature):
@@ -57,15 +124,12 @@ class Feature(object):
         """
 
         record_cnt= Feature.record_count
-        print("TOTAL RECORD COUNT " + str(record_cnt))
 
         non_noisy_features = Feature.get_non_noisy_features(noise_threshold)
         for my_non_noisy_features in non_noisy_features:
-
             categories_values = list(my_non_noisy_features.categories.values())
             category_percentage = categories_values[0].count/record_cnt
             category_sample_size = round(noise_threshold/category_percentage)
-
             categories_values[0].sample_size = category_sample_size
 
         return
@@ -146,93 +210,23 @@ def parse_command_line():
     parser.add_argument('--file_out',
                         required=True,
                         help="The data out file sample.")
-
+    parser.add_argument('--feature_all',
+                        required=True,
+                        help="The data file to velocalyze.")
     parser.add_argument('--noise_threshold',
                         type=int,
                         default=5000,
                         help="Specifies the minimum number of (Category, Value) pairs that are required to not be considered a noisy category.")
-
+    parser.add_argument(
+        '--features',
+        action='append')
+    parser.add_argument(
+        '--ignore',
+        action='append')
     args = parser.parse_args()
     return args
 
 
-class DataSet(object):
-
-
-    def __init__(self, filename):
-
-        with open(filename, encoding='utf-8-sig') as io:
-            self.records = list(csv.DictReader(io))
-
-        self.record_count = 0
-        for record in self.records:
-            self.record_count = self.record_count + 1
-            for k, v in record.items():
-                feature = Feature.get_feature(k)
-                feature.count(v)
-        Feature.record_count = self.record_count
-
-
-        return
-
-
-    def get_smallest_sample_feature(self, noise_threshold,non_noisy_feature):
-        random.shuffle(self.records)
-        new_records = []
-        category_count = {}
-        metadata = non_noisy_feature.get_smallest_sample_metadata(noise_threshold)
-        for category in metadata:
-            category_count[category] = metadata[category]
-        for r in self.records:
-            target_category = str(r[non_noisy_feature.name])
-            if category_count[target_category] > 0:
-                new_records.append(r)
-                category_count[target_category] = category_count[target_category] - 1
-                if category_count[target_category] == 0:
-                    return new_records
-
-        raise Exception("Could not build smallest sample")
-
-
-
-        return new_records
-
-
-
-    def get_non_noisy_features(self, noise_threshold,outfile):
-        return Feature.get_non_noisy_features(noise_threshold)
-
-
-
-    def write_smallest_non_noisy_sample(self, noise_threshold,outfile):
-
-
-        random.shuffle(self.records)
-
-        curr_count1 = 0
-        curr_count2 = 0
-        non_noisy_features = Feature.get_non_noisy_features(noise_threshold)
-
-        for record in self.records:
-            print(record)
-            for non_noisy_feature in non_noisy_features:
-                meta = non_noisy_feature.get_smallest_sample_metadata(noise_threshold)
-                print("meta VALUES " + str(meta))
-                print("feature.name KEYS " + str(non_noisy_feature.name))
-                print("record[non_noisy_feature.name] " + str(record[non_noisy_feature.name]))
-
-                ss = self.get_smallest_sample(noise_threshold,non_noisy_feature.name)
-
-                print("ss VALUES " + str(ss))
-
-
-
-
-
-
-
-
-        return
 
 def main():
     """
@@ -241,19 +235,30 @@ def main():
     args = parse_command_line()
     file_in_name = args.file_in
     file_out_name = args.file_out
+    feature_all = args.feature_all
 
     noise_threshold = args.noise_threshold
+    feature_list = []
+    for my_feature in args.features:
+        feature_list.append(my_feature)
+    ignore_list = []
+    for ignore in args.ignore:
+        ignore_list.append(ignore)
     data = DataSet(file_in_name)
-    #data.write_smallest_non_noisy_sample(noise_threshold,file_out_name)
+    feature_set_non_noisy = Feature.get_non_noisy_features(noise_threshold)
+    feature_set_to_sample = set()
+    if feature_all == "Yes":
+        feature_set_to_sample = feature_set_non_noisy
+    else:
+        for feat in feature_set_non_noisy:
+            if feat.name in feature_list:
+                feature_set_to_sample.add(feat)
 
-
-    non_noisy_features = Feature.get_non_noisy_features(noise_threshold)
-
-    for feat in non_noisy_features:
-        new_recs = data.get_smallest_sample_feature(noise_threshold,feat)
-        print(new_recs)
-        exit()
-
+    for feature in feature_set_to_sample:
+        if feature.name not in ignore_list:
+            print(feature.name)
+            list_of_sample_for_feature = data.get_smallest_sample_feature(noise_threshold,feature)
+            data.write_smallest_sample_feature_to_csv(list_of_sample_for_feature,file_out_name,feature)
 
 
 if __name__ == '__main__':

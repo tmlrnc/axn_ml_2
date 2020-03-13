@@ -9,12 +9,7 @@ python -m velocalizer  \
   --ignore Person_Last_Nam \
   --ignore Person_Address_1 \
   --ignore Person_City \
-  --features axn_HH_GrndKids_cod \
-  --features axn_HH_TeensPreteens_cod \
-  --features axn_HH_YngKids_cod \
-  --features axn_PsySoc_Prog_cod \
-  --feature_all Yes
-
+  --features All
 
 
 

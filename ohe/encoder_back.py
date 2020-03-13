@@ -35,24 +35,20 @@ class OneHotEncoder(object):
         self.file_in_name = file_in
         self.ignore_list = ignore_list_in
 
-        print("self.ignore_list " + str(self.ignore_list))
+        #print("self.ignore_list " + str(self.ignore_list))
         self.data_frame_all = pandas.read_csv(file_in).fillna(value = 0)
 
         self.data_frame = self.data_frame_all
 
-        self.data_frame = self.data_frame_all.drop(self.ignore_list, 1)
 
 
-        self.data_frame_ignore_frame = self.data_frame_all[self.ignore_list]
-        #print("self.data_frame_ignore_frame " + str(self.data_frame_ignore_frame))
+        #self.data_frame = self.data_frame_all.drop(self.ignore_list, 1)
 
-        #print("self.data_frame_ignore_frame t ")
 
-        print(type(self.data_frame_ignore_frame))
 
-        self.data_frame_ignore_frame_list = self.data_frame_ignore_frame.values.tolist()
 
-        #print("self.data_frame_ignore_frame_list " + str(self.data_frame_ignore_frame_list))
+        #self.data_frame_all_ignore_list = self.data_frame_all_ignore.tolist()
+
 
 
         self.csv_column_name_list = list(self.data_frame.columns)
@@ -69,20 +65,14 @@ class OneHotEncoder(object):
 
         with open(file_out_name, "w") as f:
             writer = csv.writer(f)
-            myarr = np.array(self.ignore_list)
-
-            arr_flat = np.append(self.header,myarr)
-
-            new_header = arr_flat.tolist()
-
-            writer.writerow(new_header)
+            #myarr = np.array(self.ignore)
+            #arr_flat = np.append(self.header,myarr)
+            writer.writerow(self.header)
             i = 0
-            print(type(self.listOflist))
-
             for row in self.listOflist:
-                row_int = [int(i) for i in row]
-                new_row = row_int + self.data_frame_ignore_frame_list[i]
-                writer.writerow(new_row)
+                #ignore_value = self.data_frame_all_ignore_list[i]
+                #row.append(ignore_value)
+                writer.writerow(row)
                 i = i + 1
 
 
@@ -105,14 +95,10 @@ class OneHotEncoder(object):
         self.enc.fit(self.data_frame)
         self.X_train_one_hot = self.enc.transform(self.data_frame)
 
-
-
         self.header = self.enc.get_feature_names(self.csv_column_name_list)
 
+
         self.ndarray = self.X_train_one_hot.toarray()
-
-
-
         self.listOflist = self.ndarray.tolist()
         self.encoded = True
         return self.data_frame, self.csv_column_name_list

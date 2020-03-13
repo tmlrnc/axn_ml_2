@@ -3,7 +3,7 @@ from ohe.predictor import OneHotPredictor, Commandline
 from ohe.config import get_ohe_config
 
 @Commandline("PERCEPTRON_NEURAL_NET")
-class LINEAR_REGRESSION_OHP(OneHotPredictor):
+class PERCEPTRON_NEURAL_NET_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         """
