@@ -4,6 +4,7 @@ import importlib
 import pkgutil
 from abc import ABC, abstractmethod
 from sklearn.preprocessing import OneHotEncoder as sk_OneHotEncoder
+from sklearn.metrics import f1_score
 
 class OneHotPredictor(ABC):
     """
@@ -76,6 +77,28 @@ python -m ohe  \
 
 
     """
+
+    @staticmethod
+    def get_f1_score(y_pred_one_hot, y_test):
+        """
+        opens file and writes one hot encoded data
+
+        :param y_pred_one_hot: array - predicted values
+        :param y_test: array - actual values
+        :returns The F1 score: float
+        The F1 score can be interpreted as a weighted average of the precision and recall,
+        where an F1 score reaches its best value at 1 and worst score at 0.
+        The relative contribution of precision and recall to the F1 score are equal. The formula for the F1 score is:
+        F1 = 2 * (precision * recall) / (precision + recall)
+
+        """
+        f1 = 0
+
+        f1 = f1_score(y_test, y_pred_one_hot, average='weighted')
+
+        return f1
+
+
 
     @staticmethod
     def get_accuracy(y_pred_one_hot, y_test):

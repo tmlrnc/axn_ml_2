@@ -68,8 +68,6 @@ def main():
     # build across all targets
     # get all target names
     write_header_flag = 1
-
-
     if ohe_only != "YES":
         for new_target in all_targets:
             ohp_builder = OneHotPredictorBuilder(new_target, training_test_split_percent, data_frame)
