@@ -17,7 +17,7 @@ class PCA_OHP(OneHotPredictor):
         :param y_train: array(float) - testing label
         """
         super().__init__(target, X_test, X_train, y_test, y_train)
-        self.model_name = 'Radius Neighbors Regressor'
+        self.model_name = 'PCA'
 
     def predict(self):
         """

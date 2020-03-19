@@ -12,6 +12,8 @@ python -m ohe  \
   --ohe_only NO \
   --predictor SVM \
   --predictor ADA \
+  --predictor LR \
+    --predictor GNB \
+  --predictor QDA \
   --predictor ENTROPY_DECISION_TREE \
-  --predictor LeastSquaresLDA \
   --predictor MLP

@@ -308,6 +308,9 @@ class Runner(object):
 
             result['f1_score'] = acc_dict['f1_score']
             result['classification_accuracy'] = acc_dict['classification_accuracy']
+            #result['accuracy'] = predictor.predict()
+
+
 
             self.results.append( result )
 
@@ -327,16 +330,9 @@ class Runner(object):
 
         headers = [ r['model_name'] for r in self.results ]
         headers.append("Target")
-        headers.insert(0, "Score Type")
 
-        values_f1_score = [ r['f1_score'] for r in self.results ]
-        values_f1_score.append(target)
-        values_f1_score.insert(0, "f1_score")
-
-
-        values_classification_accuracy = [ r['classification_accuracy'] for r in self.results ]
-        values_classification_accuracy.append(target)
-        values_classification_accuracy.insert(0, "classification_accuracy")
+        values = [ r['accuracy'] for r in self.results ]
+        values.append(target)
 
 
         import string
@@ -347,8 +343,7 @@ class Runner(object):
             _writer = csv.writer(_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             if(write_header_flag == 1):
                 _writer.writerow(headers)
-            _writer.writerow(values_f1_score)
-            _writer.writerow(values_classification_accuracy)
+            _writer.writerow(values)
 
 
 ### Below is a bit of "magic" to make the Commandline decorator work.
