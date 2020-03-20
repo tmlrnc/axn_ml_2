@@ -5,6 +5,9 @@ import pkgutil
 from abc import ABC, abstractmethod
 from sklearn.preprocessing import OneHotEncoder as sk_OneHotEncoder
 from sklearn.metrics import f1_score
+import string
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
 
 class OneHotPredictor(ABC):
     """
@@ -79,6 +82,46 @@ python -m ohe  \
     """
 
     @staticmethod
+    def get_recall_score(y_pred_one_hot, y_test):
+        """
+        opens file and writes one hot encoded data
+
+        :param y_pred_one_hot: array - predicted values
+        :param y_test: array - actual values
+        :returns The F1 score: float
+        The F1 score can be interpreted as a weighted average of the precision and recall,
+        where an F1 score reaches its best value at 1 and worst score at 0.
+        The relative contribution of precision and recall to the F1 score are equal. The formula for the F1 score is:
+        F1 = 2 * (precision * recall) / (precision + recall)
+
+        """
+        recall = 0
+
+        recall = recall_score(y_test, y_pred_one_hot, average='micro', zero_division=1)
+
+        return recall
+
+    @staticmethod
+    def get_precision_score(y_pred_one_hot, y_test):
+        """
+        opens file and writes one hot encoded data
+
+        :param y_pred_one_hot: array - predicted values
+        :param y_test: array - actual values
+        :returns The F1 score: float
+        The F1 score can be interpreted as a weighted average of the precision and recall,
+        where an F1 score reaches its best value at 1 and worst score at 0.
+        The relative contribution of precision and recall to the F1 score are equal. The formula for the F1 score is:
+        F1 = 2 * (precision * recall) / (precision + recall)
+
+        """
+        precision = 0
+
+        precision = precision_score(y_test, y_pred_one_hot, average=None)
+
+        return precision
+
+    @staticmethod
     def get_f1_score(y_pred_one_hot, y_test):
         """
         opens file and writes one hot encoded data
@@ -111,13 +154,15 @@ python -m ohe  \
 
         """
         correct = 0
+        classification_accuracy = 0
         test_len = len(y_test)
         y_pred_one_hot_list = list(y_pred_one_hot)
         y_test_list = list(y_test)
         for i in range(test_len):
             if y_pred_one_hot_list[i] == y_test_list[i]:
                 correct = correct + 1
-        return ((correct / test_len) * 100)
+        classification_accuracy = ((correct / test_len) * 100)
+        return classification_accuracy
 
     @staticmethod
     def get_accuracy(y_pred_one_hot, y_test):
@@ -131,18 +176,11 @@ python -m ohe  \
         """
         acc_dict = {}
 
-        f1 = f1_score(y_test, y_pred_one_hot, average='weighted')
-        acc_dict["f1_score"] = f1
+        acc_dict["f1_score"] = OneHotPredictor.get_f1_score(y_pred_one_hot,y_test)
+        acc_dict["classification_accuracy"] = OneHotPredictor.get_classification_accuracy(y_pred_one_hot,y_test)
+        acc_dict['precision'] = OneHotPredictor.get_precision_score(y_pred_one_hot,y_test)
+        acc_dict['recall'] = OneHotPredictor.get_recall_score(y_pred_one_hot,y_test)
 
-        correct = 0
-        test_len = len(y_test)
-        y_pred_one_hot_list = list(y_pred_one_hot)
-        y_test_list = list(y_test)
-        for i in range(test_len):
-            if y_pred_one_hot_list[i] == y_test_list[i]:
-                correct = correct + 1
-        classification_accuracy = ((correct / test_len) * 100)
-        acc_dict["classification_accuracy"] = classification_accuracy
 
         return acc_dict
 
@@ -300,18 +338,19 @@ class Runner(object):
         self.results = []
 
         for alg in self.algorithms:
-            result = {}
+
             predictor = self.builder.build(alg)
-            result['model_name'] = predictor.model_name
 
+            model_name = str(predictor.model_name)
             acc_dict = predictor.predict()
+            for key in acc_dict.keys():
+                result = {}
+                result['model_name_score_name'] = model_name + "_" + key
+                result['score_value'] = acc_dict[key]
+                self.results.append(result)
 
-            result['f1_score'] = acc_dict['f1_score']
-            result['classification_accuracy'] = acc_dict['classification_accuracy']
 
-            self.results.append( result )
-
-        self.results.sort(key=lambda r: r['model_name'], reverse=False)
+        self.results.sort(key=lambda r: r['model_name_score_name'], reverse=False)
 
 
         return self.results
@@ -325,30 +364,16 @@ class Runner(object):
             self.run_and_build_predictions()
 
 
-        headers = [ r['model_name'] for r in self.results ]
+        headers = [ r['model_name_score_name'] for r in self.results ]
         headers.append("Target")
-        headers.insert(0, "Score Type")
 
-        values_f1_score = [ r['f1_score'] for r in self.results ]
-        values_f1_score.append(target)
-        values_f1_score.insert(0, "f1_score")
-
-
-        values_classification_accuracy = [ r['classification_accuracy'] for r in self.results ]
-        values_classification_accuracy.append(target)
-        values_classification_accuracy.insert(0, "classification_accuracy")
-
-
-        import string
-
-
-
+        values_score = [ r['score_value'] for r in self.results ]
+        values_score.append(target)
         with open(file_out_name, mode='a') as _file:
             _writer = csv.writer(_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             if(write_header_flag == 1):
                 _writer.writerow(headers)
-            _writer.writerow(values_f1_score)
-            _writer.writerow(values_classification_accuracy)
+            _writer.writerow(values_score)
 
 
 ### Below is a bit of "magic" to make the Commandline decorator work.

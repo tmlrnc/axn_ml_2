@@ -8,12 +8,13 @@ python -m ohe  \
   --ignore ID \
   --ignore Age \
   --target Kids \
+  --target Home \
   --training_test_split_percent 70 \
   --ohe_only NO \
   --predictor SVM \
   --predictor ADA \
   --predictor LR \
-    --predictor GNB \
+  --predictor GNB \
   --predictor QDA \
   --predictor ENTROPY_DECISION_TREE \
   --predictor MLP

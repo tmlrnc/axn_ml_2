@@ -77,7 +77,7 @@ def main():
             runner = Runner(ohp_builder, algorithms)
             runner.run_and_build_predictions()
             runner.write_predict_csv(file_out_predict, new_target,write_header_flag)
-
+            write_header_flag = 0
 
 
 
