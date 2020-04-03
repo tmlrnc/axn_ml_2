@@ -1,11 +1,16 @@
 import argparse
 
 from ohe.config import init_ohe_config
+from ohe.discretize import K_Means, normalizer
+from sklearn.preprocessing import KBinsDiscretizer
+
+from ohe.binize import VL_Binizer
+
+import pandas as pd
+import numpy
+
 from ohe.predictor import OneHotPredictorBuilder, Runner, get_algorithm_from_string
 from ohe.encoder import OneHotEncoderBuilder
-
-
-
 
 
 def parse_command_line():
@@ -16,7 +21,6 @@ def parse_command_line():
     parser.add_argument('--training_test_split_percent', type=int)
     parser.add_argument('--file_in_config')
     parser.add_argument('--ohe_only')
-
     parser.add_argument(
         '--target',
         action='append')
@@ -25,6 +29,9 @@ def parse_command_line():
         action='append')
     parser.add_argument(
         '--predictor',
+        action='append')
+    parser.add_argument(
+        '--score',
         action='append')
     args = parser.parse_args()
     return args
@@ -47,12 +54,107 @@ def main():
     file_in_config = args.file_in_config
     ohe_only = args.ohe_only
 
-    init_ohe_config(file_in_config)
 
+
+    ######################################################################
+
+
+    df = pd.read_csv(file_in_name, sep=',', header=None)
+    X = df.to_numpy()
+
+
+    est = KBinsDiscretizer(n_bins=5, encode='ordinal', strategy='uniform')
+    est.fit(X)
+    Xt = est.transform(X)
+
+
+    print("Xt " + str(Xt))
+    print("bin_edges_ " + str(est.bin_edges_))
+
+
+    bin = VL_Binizer(n_bins=5, encode='ordinal', strategy='uniform')
+    bin.fit(X)
+    Xt_VL = bin.transform(X)
+
+    print("Xt_VL " + str(Xt_VL))
+    print("bin_edges_ " + str(bin.bin_edges_))
+
+    print('*************************************')
+
+    bin_AS = VL_Binizer(n_bins=5, encode='ordinal', strategy='analyst_supervised', edge_array=[1,5.,10.])
+    bin_AS.fit(X)
+    Xt_VL = bin_AS.transform(X)
+
+    print("analyst_supervised Xt_VL " + str(Xt_VL))
+    print("analyst_supervised bin_edges_ " + str(bin_AS.bin_edges_))
+
+    print('*************************************')
+
+    bin_AS = VL_Binizer(n_bins=5, encode='ordinal', strategy='analyst_supervised', edge_array=[3.,9.])
+    bin_AS.fit(X)
+    Xt_VL = bin_AS.transform(X)
+
+    print("analyst_supervised Xt_VL " + str(Xt_VL))
+    print("analyst_supervised bin_edges_ " + str(bin_AS.bin_edges_))
+
+
+    print('*************************************')
+
+    bin_AS = VL_Binizer(n_bins=5, encode='ordinal', strategy='analyst_supervised', edge_array=[55.])
+    bin_AS.fit(X)
+    Xt_VL = bin_AS.transform(X)
+
+    print("analyst_supervised Xt_VL " + str(Xt_VL))
+    print("analyst_supervised bin_edges_ " + str(bin_AS.bin_edges_))
+
+
+    exit()
+
+
+    normalizer.fit(X)
+    # apply transform
+    normalized = normalizer.transform(X)
+    # inverse transform
+    inverse = normalizer.inverse_transform(normalized)
+
+    print("normalized " + str(normalized))
+    print("inverse " + str(inverse))
+
+
+    model = K_Means(k=4,tol=0.001, max_iter=200)
+    model.fit(X)
+
+    for centroid in model.centroids:
+        print('*************************************')
+        print(model.centroids[centroid][0])
+
+    mode_norm = K_Means(k=4, tol=0.001, max_iter=200)
+    mode_norm.fit(normalized)
+
+    my_cent = []
+    for centroid in mode_norm.centroids:
+        print('************************************* NORMALIZED')
+        print(mode_norm.centroids[centroid][0])
+        my_cent.append(mode_norm.centroids[centroid][0])
+
+    arr = numpy.array(my_cent)
+    myarr = arr.reshape(-1,1)
+    my_cent_i_x = normalizer.inverse_transform(myarr)
+    for x in my_cent_i_x:
+        print(x)
+
+
+    df = pd.read_csv(file_in_name, sep=',', header=None)
+    Y = df.to_numpy()
+
+
+
+
+
+    init_ohe_config(file_in_config)
     algorithms = set( get_algorithm_from_string(p.strip().upper()) for p in args.predictor)
     ohe_builder = OneHotEncoderBuilder(file_in_name)
-
-
+    score_list = args.score
     for ignore in args.ignore:
         ohe_builder.ignore(ignore)
     ohe = ohe_builder.build()
@@ -75,7 +177,7 @@ def main():
             for f in features:
                 ohp_builder.add_feature(f)
             runner = Runner(ohp_builder, algorithms)
-            runner.run_and_build_predictions()
+            runner.run_and_build_predictions(score_list)
             runner.write_predict_csv(file_out_predict, new_target,write_header_flag)
             write_header_flag = 0
 
