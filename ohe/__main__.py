@@ -5,6 +5,9 @@ from ohe.discretize import K_Means, normalizer
 from sklearn.preprocessing import KBinsDiscretizer
 
 from ohe.binize import VL_Binizer
+from ohe.binize_kmeans import VL_Discretizer_KMeans
+
+import pandas
 
 import pandas as pd
 import numpy
@@ -33,6 +36,9 @@ def parse_command_line():
     parser.add_argument(
         '--score',
         action='append')
+    parser.add_argument(
+        '--dicretize_uniform',
+        action='append')
     args = parser.parse_args()
     return args
 
@@ -53,13 +59,13 @@ def main():
     training_test_split_percent = args.training_test_split_percent
     file_in_config = args.file_in_config
     ohe_only = args.ohe_only
-
+    dicretize_uniform = args.dicretize_uniform
 
 
     ######################################################################
 
 
-    df = pd.read_csv(file_in_name, sep=',', header=None)
+    df = pd.read_csv(file_in_name, sep=',')
     X = df.to_numpy()
 
 
@@ -81,7 +87,7 @@ def main():
 
     print('*************************************')
 
-    bin_AS = VL_Binizer(n_bins=5, encode='ordinal', strategy='analyst_supervised', edge_array=[1,5.,10.])
+    bin_AS = VL_Binizer(n_bins=5, encode='ordinal', strategy='analyst_supervised', edge_array=[.2,.5,.7])
     bin_AS.fit(X)
     Xt_VL = bin_AS.transform(X)
 
@@ -90,7 +96,7 @@ def main():
 
     print('*************************************')
 
-    bin_AS = VL_Binizer(n_bins=5, encode='ordinal', strategy='analyst_supervised', edge_array=[3.,9.])
+    bin_AS = VL_Binizer(n_bins=5, encode='ordinal', strategy='analyst_supervised', edge_array=[.3,.9])
     bin_AS.fit(X)
     Xt_VL = bin_AS.transform(X)
 
@@ -100,13 +106,63 @@ def main():
 
     print('*************************************')
 
-    bin_AS = VL_Binizer(n_bins=5, encode='ordinal', strategy='analyst_supervised', edge_array=[55.])
+    bin_AS = VL_Binizer(n_bins=5, encode='ordinal', strategy='analyst_supervised', edge_array=[.5])
     bin_AS.fit(X)
     Xt_VL = bin_AS.transform(X)
 
     print("analyst_supervised Xt_VL " + str(Xt_VL))
     print("analyst_supervised bin_edges_ " + str(bin_AS.bin_edges_))
 
+
+
+    print('*************************************')
+
+    df = pd.read_csv(file_in_name, sep=',', header=None)
+    X = df.to_numpy()
+
+    data_frame_all = pandas.read_csv(file_in_name).fillna(value=0)
+    csv_column_name_list = list(data_frame_all.columns)
+    X = data_frame_all.to_numpy()
+
+    bin_AS_K = VL_Discretizer_KMeans(n_bins=5, encode='ordinal', strategy='uniform')
+    bin_AS_K.fit(X)
+    Xt_VL_K = bin_AS_K.transform(X)
+
+    print("analyst_supervised Xt_VL " + str(Xt_VL_K))
+    print("analyst_supervised bin_edges_ " + str(bin_AS_K.bin_edges_))
+
+
+    print('*************************************')
+
+    df = pd.read_csv(file_in_name, sep=',', header=None)
+    X = df.to_numpy()
+
+    data_frame_all = pandas.read_csv(file_in_name).fillna(value=0)
+    csv_column_name_list = list(data_frame_all.columns)
+    X = data_frame_all.to_numpy()
+
+    bin_AS_K = VL_Discretizer_KMeans(n_bins=5, encode='ordinal', strategy='analyst_supervised', edge_array=[.1,.5,.8])
+    bin_AS_K.fit(X)
+    Xt_VL_K = bin_AS_K.transform(X)
+
+    print("analyst_supervised Xt_VL " + str(type(Xt_VL_K)))
+    print("analyst_supervised bin_edges_ " + str(bin_AS_K.bin_edges_))
+
+    headers = csv_column_name_list
+
+    Xt_VL_K_list = list(Xt_VL_K)
+
+    import csv
+    write_header_flag = 1
+
+
+
+    with open(file_out_ohe, mode='a') as _file:
+        _writer = csv.writer(_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        if (write_header_flag == 1):
+            _writer.writerow(headers)
+        for row in Xt_VL_K_list:
+            _writer.writerow(row)
 
     exit()
 
@@ -155,6 +211,8 @@ def main():
     algorithms = set( get_algorithm_from_string(p.strip().upper()) for p in args.predictor)
     ohe_builder = OneHotEncoderBuilder(file_in_name)
     score_list = args.score
+    dicretize_list = args.dicretize
+
     for ignore in args.ignore:
         ohe_builder.ignore(ignore)
     ohe = ohe_builder.build()
