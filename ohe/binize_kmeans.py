@@ -15,8 +15,6 @@ from sklearn.preprocessing import OneHotEncoder
 class VL_Discretizer_KMeans():
     """
     Bin continuous data into intervals.
-
-
     Parameters
     ----------
     n_bins : int or array-like, shape (n_features,) (default=5)
