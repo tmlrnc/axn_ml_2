@@ -38,12 +38,7 @@ def parse_command_line():
     parser.add_argument(
         '--score',
         action='append')
-    parser.add_argument(
-        '--dicretize_uniform',
-        action='append')
-    parser.add_argument(
-        '--dicretize_kmeans',
-        action='append')
+    parser.add_argument('--dicretize', nargs='+')
     args = parser.parse_args()
     return args
 
@@ -67,22 +62,22 @@ def main():
     file_out_discrete = args.file_out_discrete
     file_out_predict = args.file_out_predict
     file_out_ohe_dis = args.file_out_ohe_dis
-
     training_test_split_percent = args.training_test_split_percent
     file_in_config = args.file_in_config
     write_predictions = args.write_predictions
-    dicretize_uniform_list = args.dicretize_uniform
-    dicretize_kmeans_list = args.dicretize_kmeans
+    vl_dicretize_list = args.dicretize
+
+    #print("vl_dicretize_list " + str(vl_dicretize_list))
+
     score_list = args.score
     init_ohe_config(file_in_config)
     algorithms = set( get_algorithm_from_string(p.strip().upper()) for p in args.predictor)
     ######################################################################
     #
-    # discretize
+    # Discretize
     #
     discretizer_builder = DiscretizerBuilder(file_in_name)
-    for dicretize in args.dicretize_uniform:
-        discretizer_builder.discretize(dicretize)
+    discretizer_builder.discretize(vl_dicretize_list)
     discretizer = discretizer_builder.build()
     discretizer.discretize()
     discretizer.write_discretize_csv(file_out_discrete)
@@ -107,7 +102,7 @@ def main():
     df_dis_ohe_result = discrete_out_df.join(ohe_out_df)
     df_dis_ohe_result.to_csv(file_out_ohe_dis)
     #
-    # predict scoring
+    # Predict Scoring
     #
     if write_predictions == "YES":
         write_header_flag = 1

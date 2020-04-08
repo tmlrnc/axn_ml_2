@@ -1,13 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/ohe/discretizer.py" line="192" mnemonic="9" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="aa8d1203-b8ac-4268-8c44-e2a52e439940" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ohe/encoder_back.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/ohe/discretize.py" afterPath="$PROJECT_DIR$/ohe/vl_kmeans_kmedian.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/corr.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ohe/migrations/README" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ohe/migrations/alembic.ini" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ohe/migrations/env.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ohe/migrations/script.py.mako" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ohe_ax.sh" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/velocalizer.sh" afterPath="$PROJECT_DIR$/feature_sample.sh" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/velocalizer/__init__.py" afterPath="$PROJECT_DIR$/feature_sample/__init__.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/velocalizer/__main__.py" afterPath="$PROJECT_DIR$/feature_sample/__main__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe.sh" afterPath="$PROJECT_DIR$/ohe.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/__main__.py" afterPath="$PROJECT_DIR$/ohe/__main__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/binize_kmeans.py" afterPath="$PROJECT_DIR$/ohe/binize_kmeans.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/discretizer.py" afterPath="$PROJECT_DIR$/ohe/discretizer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/__init__.py" afterPath="$PROJECT_DIR$/ohe/predictor/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/__init__bk.py" afterPath="$PROJECT_DIR$/ohe/predictor/__init__bk.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/ada.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/ada.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/ard.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/ard.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/ball_tree.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/ball_tree.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/bayesian_ridge.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/bayesian_ridge.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/brute_force_radius.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/brute_force_radius.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/dtc.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/dtc.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/eigen_LDA.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/eigen_LDA.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/elastic_net.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/elastic_net.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/elastic_net_logistic_regression.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/elastic_net_logistic_regression.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/entropy_decision_tree.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/entropy_decision_tree.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/etc.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/etc.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/gnb.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/gnb.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/gpc.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/gpc.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/kd_tree.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/kd_tree.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/kmeans.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/kmeans.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/kmedian_VL.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/kmedian_VL.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/knn.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/knn.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/lars_lasso.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/lars_lasso.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/lasso.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/lasso.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/lda.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/lda.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/least_sqaures_LDA.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/least_sqaures_LDA.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/linear_regression.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/linear_regression.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/linear_svm.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/linear_svm.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/linear_svm_sigmoid.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/linear_svm_sigmoid.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/logistic_regression.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/logistic_regression.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/mlp.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/mlp.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/mlp_nesterov.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/mlp_nesterov.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/mlp_regression.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/mlp_regression.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/multi_class_logistic_regression.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/multi_class_logistic_regression.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/nu_svm.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/nu_svm.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/nu_svm_sigmoid.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/nu_svm_sigmoid.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/omp.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/omp.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/omp_cv.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/omp_cv.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/pac.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/pac.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/pca.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/pca.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/perceptron_neural_net.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/perceptron_neural_net.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/qda.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/qda.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/random_forest.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/random_forest.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/ridge_cross_validation.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/ridge_cross_validation.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/ridge_regression.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/ridge_regression.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/rnr.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/rnr.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/simple_predictor.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/simple_predictor.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ohe/predictor/algorithm/svm.py" afterPath="$PROJECT_DIR$/ohe/predictor/algorithm/svm.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,58 +73,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ohe.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ohe.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ohe.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="18" lean-forward="true" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+            <state relative-caret-position="135">
+              <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="binize_kmeans.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ohe/binize_kmeans.py">
+      <file leaf-file-name="ohe_uniform.sh" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ohe_uniform.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1200">
-              <caret line="1" column="14" lean-forward="true" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+            <state relative-caret-position="45">
+              <caret line="3" column="29" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="29" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__main__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ohe/__main__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="512">
-              <caret line="104" column="44" lean-forward="true" selection-start-line="104" selection-start-column="44" selection-end-line="104" selection-end-column="44" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="binize.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ohe/binize.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="138" column="27" lean-forward="true" selection-start-line="138" selection-start-column="27" selection-end-line="138" selection-end-column="27" />
-              <folding>
-                <element signature="e#1#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="discretizer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ohe/discretizer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="497">
-              <caret line="82" column="52" lean-forward="false" selection-start-line="82" selection-start-column="52" selection-end-line="82" selection-end-column="52" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -85,7 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>y_pred</find>
       <find>build</find>
       <find>X_train_ordinal</find>
       <find>col_len</find>
@@ -115,6 +133,7 @@
       <find>ordinal</find>
       <find>_validate_n_bins</find>
       <find>score</find>
+      <find>dicretize_manual</find>
     </findStrings>
     <replaceStrings>
       <replace>get_ohe_config().</replace>
@@ -126,9 +145,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ohe/predictor/algorithm/bayesian_ridge.py" />
-        <option value="$PROJECT_DIR$/ohe/predictor/algorithm/omp.py" />
-        <option value="$PROJECT_DIR$/ohe/predictor/algorithm/omp_cv.py" />
         <option value="$PROJECT_DIR$/ohe/predictor/algorithm/ard.py" />
         <option value="$PROJECT_DIR$/ohe/predictor/algorithm/pac.py" />
         <option value="$PROJECT_DIR$/ohe/predictor/algorithm/mlp_regression.py" />
@@ -140,11 +156,9 @@
         <option value="$PROJECT_DIR$/../../gny-experiment/distributed/genie_retail_predictions.js" />
         <option value="$PROJECT_DIR$/../../gny-experiment/distributed/genie_location_predictions.js" />
         <option value="$PROJECT_DIR$/correlation/__main__.py" />
-        <option value="$PROJECT_DIR$/corr.sh" />
         <option value="$PROJECT_DIR$/ohe/encoder.py" />
         <option value="$PROJECT_DIR$/ohe/predictor/algorithm/perceptron_neural_net.py" />
         <option value="$PROJECT_DIR$/velocalizer/__main__.py" />
-        <option value="$PROJECT_DIR$/velocalizer.sh" />
         <option value="$PROJECT_DIR$/ohe/predictor/algorithm/mlp_nesterov.py" />
         <option value="$PROJECT_DIR$/ohe/predictor/algorithm/nu_svm_sigmoid.py" />
         <option value="$PROJECT_DIR$/ohe/predictor/algorithm/linear_svm_sigmoid.py" />
@@ -174,16 +188,21 @@
         <option value="$PROJECT_DIR$/ohe/binize.py" />
         <option value="$USER_HOME$/Downloads/genie_ml/genie_ml/fcnnls.js" />
         <option value="$PROJECT_DIR$/ohe/binize_kmeans.py" />
-        <option value="$PROJECT_DIR$/ohe/discretizer.py" />
+        <option value="$PROJECT_DIR$/corr.sh" />
+        <option value="$PROJECT_DIR$/velocalizer.sh" />
         <option value="$PROJECT_DIR$/ohe/__main__.py" />
         <option value="$PROJECT_DIR$/ohe.sh" />
+        <option value="$PROJECT_DIR$/ohe/discretizer.py" />
+        <option value="$PROJECT_DIR$/discrete.sh" />
+        <option value="$PROJECT_DIR$/ohe_uniform.sh" />
+        <option value="$PROJECT_DIR$/discrete/__main__.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="1680" />
     <option name="y" value="23" />
-    <option name="width" value="1425" />
+    <option name="width" value="1458" />
     <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -215,18 +234,12 @@
             <path>
               <item name="ml" type="b2602c69:ProjectViewProjectNode" />
               <item name="ml" type="462c0819:PsiDirectoryNode" />
-              <item name="ohe" type="462c0819:PsiDirectoryNode" />
+              <item name="discrete" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ml" type="b2602c69:ProjectViewProjectNode" />
               <item name="ml" type="462c0819:PsiDirectoryNode" />
               <item name="ohe" type="462c0819:PsiDirectoryNode" />
-              <item name="predictor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ml" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ml" type="462c0819:PsiDirectoryNode" />
-              <item name="velocalizer" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -237,9 +250,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/ohe" />
       <recent name="$PROJECT_DIR$/ohe/predictor/algorithm" />
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/ohe/predictor" />
       <recent name="$PROJECT_DIR$/../../gny-experiment/distributed" />
     </key>
@@ -298,7 +311,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1680" y="23" width="1425" height="1057" extended-state="0" />
+    <frame x="1680" y="23" width="1458" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -309,11 +322,11 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994923" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13403508" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13100137" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Project Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Job Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924336" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328934" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -346,44 +359,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../gny-experiment/distributed/genie_neural_network_keywords.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../gny-experiment/distributed/genie_word2vec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/anomaly-master/test/smoke.js" />
-    <entry file="file://$USER_HOME$/Downloads/anomaly-master/example/streaming.js" />
-    <entry file="file://$USER_HOME$/Downloads/anomaly-master/index.js" />
-    <entry file="file://$PROJECT_DIR$/../../gny-experiment/distributed/genie_location_predictions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="74" column="39" lean-forward="true" selection-start-line="74" selection-start-column="39" selection-end-line="74" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../gny-experiment/distributed/genie_fraud_neural_net_tensor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="38" lean-forward="true" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../gny-experiment/distributed/genie_retail_predictions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="121" column="54" lean-forward="true" selection-start-line="121" selection-start-column="54" selection-end-line="121" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../gny-experiment/distributed/genie_svm.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -426,6 +401,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="10" column="11" lean-forward="true" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -435,6 +411,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -442,6 +419,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -449,6 +427,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="52" lean-forward="true" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#37#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -456,6 +437,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -463,6 +445,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#71#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -470,6 +455,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -538,7 +526,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/velocalizer/__init__.py">
+    <entry file="file://$PROJECT_DIR$/feature_sample/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -626,14 +614,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/velocalizer/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2977">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ohe/encoder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -642,48 +622,123 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ohe/discretizer.py">
+    <entry file="file://$PROJECT_DIR$/setup.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="82" column="52" lean-forward="false" selection-start-line="82" selection-start-column="52" selection-end-line="82" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ohe/binize_kmeans.py">
+    <entry file="file://$PROJECT_DIR$/feature_sample/__main__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1200">
-          <caret line="1" column="14" lean-forward="true" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+        <state relative-caret-position="188">
+          <caret line="223" column="19" lean-forward="false" selection-start-line="223" selection-start-column="19" selection-end-line="223" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/corr.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ohe/binize.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="138" column="27" lean-forward="true" selection-start-line="138" selection-start-column="27" selection-end-line="138" selection-end-column="27" />
+        <state relative-caret-position="255">
+          <caret line="140" column="29" lean-forward="true" selection-start-line="140" selection-start-column="29" selection-end-line="140" selection-end-column="29" />
           <folding>
-            <element signature="e#1#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ohe/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="104" column="44" lean-forward="true" selection-start-line="104" selection-start-column="44" selection-end-line="104" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#1#15#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ohe.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="18" lean-forward="true" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+        <state relative-caret-position="135">
+          <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ohe_kmeans.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="55" lean-forward="false" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ohe/binize_kmeans.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-514">
+          <caret line="65" column="8" lean-forward="false" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/feature_sample.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="15" lean-forward="false" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ohe_manual.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="35" lean-forward="true" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ohe/discretizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="223" column="38" lean-forward="false" selection-start-line="223" selection-start-column="38" selection-end-line="223" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#2333#5694#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ohe/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="71" column="27" lean-forward="true" selection-start-line="71" selection-start-column="27" selection-end-line="71" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/discrete/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/discrete.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ohe_uniform.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="29" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="29" />
           <folding />
         </state>
       </provider>

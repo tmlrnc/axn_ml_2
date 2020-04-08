@@ -9,7 +9,7 @@ python -m ohe  \
   --file_in_config config/ohe_config_RUN1.yaml \
   --ignore PPM \
   --ignore DEATH \
-  --dicretize kmeans   3  PPM   \
+  --dicretize analyst_supervised   5  PPM .1 .5 .8  \
   --target STATUS \
   --training_test_split_percent 70 \
   --write_predictions YES \

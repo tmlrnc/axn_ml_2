@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-python -m velocalizer  \
+python -m feature_sample  \
   --file_in csvs/12AxilientAdmin_V1.csv \
   --file_out csvs/12AxilientAdmin_V1_SAMPLE.csv \
   --noise_threshold 300 \
