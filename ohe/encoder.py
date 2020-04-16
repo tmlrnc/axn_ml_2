@@ -100,7 +100,7 @@ class OneHotEncoder(object):
         from sklearn.preprocessing import OneHotEncoder
         self.enc = OneHotEncoder(handle_unknown='ignore')
 
-
+        #print("one_hot_encode-- --- START ")
 
         self.enc.fit(self.data_frame)
         self.X_train_one_hot = self.enc.transform(self.data_frame)

@@ -2,9 +2,9 @@ import csv
 import pandas
 import numpy as np
 
-from ohe.vl_kmeans_kmedian import K_Means, normalizer
-from ohe.binize import VL_Binizer
-from ohe.binize_kmeans import VL_Discretizer_KMeans
+from discrete.vl_kmeans_kmedian import K_Means, normalizer
+from discrete.binize import VL_Binizer
+from discrete.binize_kmeans import VL_Discretizer_KMeans
 
 import pandas
 import pandas as pd
@@ -28,7 +28,6 @@ class Discretizer(object):
         self.Xt_VL_K_list = []
         self.vl_discretize_list = vl_discretize_list
         self.edge_array_list = []
-
         i = 0
         for dis in vl_discretize_list:
             if i == 0 :
@@ -43,6 +42,7 @@ class Discretizer(object):
             i = i + 1
 
         self.data_frame_all = pandas.read_csv(file_in).fillna(value = 0)
+        len(self.data_frame_all)
         self.data_frame = self.data_frame_all
         self.data_frame = self.data_frame_all.drop(self.discretize_list, 1)
         self.data_frame_ignore_frame = self.data_frame_all[self.discretize_list]
@@ -61,8 +61,11 @@ class Discretizer(object):
         """
         newhead = []
 
+        drop = ""
         for head in self.headers:
-            nh = head + "DISCRETE"
+            nh = head + "_DISCRETE"
+            drop = head
+            print("head " + str(head))
             newhead.append(nh)
 
         with open(file_out_name, mode='a') as _file:
@@ -71,109 +74,9 @@ class Discretizer(object):
                 _writer.writerow(newhead)
             for row in self.Xt_VL_K_list:
                 _writer.writerow(row)
+        return drop
 
 
-
-    def discretize_all(self):
-        """
-
-        :returns data_frame: array
-        :returns csv_column_name_list: array
-
-         """
-
-
-        ############################# only in list
-
-
-        print("discretize_list in discretize " + str(self.discretize_list))
-        print("vl_discretize_list in discretize " + str(self.vl_discretize_list))
-
-
-        #df = pd.read_csv(self.file_in_name, sep=',',usecols=["PPM"] )
-        df = pd.read_csv(self.file_in_name, sep=',',usecols=self.discretize_list )
-
-        X = df.to_numpy()
-
-        my_strategy = self.discretize_strategy[0]
-        print("my_strategy " + str(my_strategy))
-
-        #bin = VL_Binizer(n_bins=5, encode='ordinal', strategy='uniform')
-
-        bin = VL_Binizer(n_bins=5, encode='ordinal', strategy=my_strategy)
-
-        bin.fit(X)
-        Xt_VL = bin.transform(X)
-
-        print("Xt_VL " + str(Xt_VL))
-        print("bin_edges_ " + str(bin.bin_edges_))
-
-
-        print('************************************* here')
-
-
-        bin_AS = VL_Binizer(n_bins=5, encode='ordinal', strategy='analyst_supervised', edge_array=[.2, .5, .7])
-        bin_AS.fit(X)
-        Xt_VL = bin_AS.transform(X)
-
-        print("analyst_supervised Xt_VL " + str(Xt_VL))
-        print("analyst_supervised bin_edges_ " + str(bin_AS.bin_edges_))
-
-        print('*************************************')
-        bin_AS = VL_Binizer(n_bins=5, encode='ordinal', strategy='analyst_supervised', edge_array=[.3, .9])
-        bin_AS.fit(X)
-        Xt_VL = bin_AS.transform(X)
-
-        print("analyst_supervised Xt_VL " + str(Xt_VL))
-        print("analyst_supervised bin_edges_ " + str(bin_AS.bin_edges_))
-
-        print('*************************************')
-
-        bin_AS = VL_Binizer(n_bins=5, encode='ordinal', strategy='analyst_supervised', edge_array=[.5])
-        bin_AS.fit(X)
-        Xt_VL = bin_AS.transform(X)
-
-        print("analyst_supervised Xt_VL " + str(Xt_VL))
-        print("analyst_supervised bin_edges_ " + str(bin_AS.bin_edges_))
-
-        print('*************************************')
-
-
-
-        data_frame_all = pandas.read_csv(self.file_in_name,usecols=["PPM"])
-        self.csv_column_name_list = list(data_frame_all.columns)
-        X = data_frame_all.to_numpy()
-
-        self.data_frame = data_frame_all
-        bin_AS_K = VL_Discretizer_KMeans(n_bins=5, encode='ordinal', strategy='uniform')
-        bin_AS_K.fit(X)
-        Xt_VL_K = bin_AS_K.transform(X)
-
-        print("analyst_supervised Xt_VL " + str(Xt_VL_K))
-        print("analyst_supervised bin_edges_ " + str(bin_AS_K.bin_edges_))
-
-        print('*************************************')
-
-        df = pd.read_csv(self.file_in_name, sep=',', header=None)
-        X = df.to_numpy()
-
-        data_frame_all = pandas.read_csv(self.file_in_name,usecols=["PPM"])
-        csv_column_name_list = list(data_frame_all.columns)
-        X = data_frame_all.to_numpy()
-
-        bin_AS_K = VL_Discretizer_KMeans(n_bins=5, encode='ordinal', strategy='analyst_supervised',
-                                         edge_array=[.1, .5, .8])
-        bin_AS_K.fit(X)
-        Xt_VL_K = bin_AS_K.transform(X)
-
-        print("analyst_supervised Xt_VL " + str(type(Xt_VL_K)))
-        print("analyst_supervised bin_edges_ " + str(bin_AS_K.bin_edges_))
-
-        self.headers = csv_column_name_list
-
-        self.Xt_VL_K_list = list(Xt_VL_K)
-
-        return self.data_frame, self.csv_column_name_list
 
 
     def discretize(self):
@@ -184,7 +87,8 @@ class Discretizer(object):
 
          """
 
-        data_frame_all = pd.read_csv(self.file_in_name, sep=',',usecols=self.discretize_list )
+        df_0 = pd.read_csv(self.file_in_name, sep=',',usecols=self.discretize_list )
+        data_frame_all = df_0.fillna(0)
         self.data_frame = data_frame_all
         X = data_frame_all.to_numpy()
         self.csv_column_name_list = list(data_frame_all.columns)
@@ -192,18 +96,23 @@ class Discretizer(object):
         my_strategy = self.discretize_strategy[0]
         my_bins = int(self.discretize_bins[0])
 
-        print("my_strategy " + str(my_strategy))
-        print("my_bins " + str(my_bins))
+        #print("X " + str(X))
+        #print("my_strategy " + str(my_strategy))
+        #print("my_bins " + str(my_bins))
 
         if my_strategy == "uniform":
+
+
 
             binizer = VL_Binizer(n_bins=my_bins, encode='ordinal', strategy=my_strategy)
             binizer.fit(X)
             Xt_VL = binizer.transform(X)
-            print("EDGES " + str(binizer.bin_edges_))
-            print("TRANSFORMED COLUMN" + str(Xt_VL))
+            #print("EDGES " + str(binizer.bin_edges_))
+            #print("TRANSFORMED COLUMN" + str(Xt_VL))
             self.Xt_VL_K_list = list(Xt_VL)
             print('UNIFORM strategy ************************************* ')
+
+
 
         elif my_strategy == "analyst_supervised":
             my_edge_array = []
@@ -213,8 +122,8 @@ class Discretizer(object):
             binizer = VL_Discretizer_KMeans(n_bins=my_bins, encode='ordinal', strategy=my_strategy, edge_array=my_edge_array)
             binizer.fit(X)
             Xt_VL_K = binizer.transform(X)
-            print("EDGES " + str(binizer.bin_edges_))
-            print("TRANSFORMED COLUMN " + str(Xt_VL_K))
+            #print("EDGES " + str(binizer.bin_edges_))
+            #print("TRANSFORMED COLUMN " + str(Xt_VL_K))
             self.Xt_VL_K_list = list(Xt_VL_K)
             print('analyst_supervised strategy ************************************* ')
 
@@ -224,8 +133,8 @@ class Discretizer(object):
             binizer = VL_Discretizer_KMeans(n_bins=my_bins, encode='ordinal', strategy=my_strategy)
             binizer.fit(X)
             Xt_VL_K = binizer.transform(X)
-            print("EDGES " + str(binizer.bin_edges_))
-            print("TRANSFORMED COLUMN " + str(Xt_VL_K))
+            #print("EDGES " + str(binizer.bin_edges_))
+            #print("TRANSFORMED COLUMN " + str(Xt_VL_K))
             self.Xt_VL_K_list = list(Xt_VL_K)
             print('kmeans strategy ************************************* ')
 
