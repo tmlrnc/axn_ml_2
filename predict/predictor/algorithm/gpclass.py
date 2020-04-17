@@ -4,8 +4,8 @@ from sklearn.gaussian_process.kernels import RBF
 from predict.predictor import OneHotPredictor, Commandline
 from predict.config import get_ohe_config
 
-@Commandline("GPC")
-class GPC_OHP(OneHotPredictor):
+@Commandline("GPCLASS")
+class GPCLASS_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         """
@@ -18,7 +18,7 @@ class GPC_OHP(OneHotPredictor):
         :param y_train: array(float) - testing label
         """
         super().__init__(target, X_test, X_train, y_test, y_train)
-        self.model_name = 'GPC'
+        self.model_name = 'GPCLASS'
 
     def predict(self):
         """
@@ -35,7 +35,7 @@ class GPC_OHP(OneHotPredictor):
         """
         kernel = 1.0 * RBF(1.0)
         algorithm = GaussianProcessClassifier(kernel=kernel, random_state=0)
-        algorithm.fit(self.X_train.toarray(), self.y_train)
-        y_pred = list(algorithm.predict(self.X_test.toarray()))
+        algorithm.fit(self.X_train, self.y_train)
+        y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)
         return self.acc

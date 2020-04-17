@@ -2,24 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa8d1203-b8ac-4268-8c44-e2a52e439940" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/ohe_config.yaml" afterPath="$PROJECT_DIR$/config/ohe_config.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/config.py" afterPath="$PROJECT_DIR$/predict/config.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/entropy_decision_tree.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/entropy_decision_tree.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/kmeans.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/kmeans.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/kneighborregressor.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/kneighborregressor.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/knn.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/knn.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/lars_lasso.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/lars_lasso.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/linear_regression.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/linear_regression.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/linear_svm.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/linear_svm.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/linear_svm_sigmoid.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/linear_svm_sigmoid.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/mlp_nesterov.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/mlp_nesterov.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/omp.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/omp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/omp_cv.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/omp_cv.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/pac.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/pac.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/perceptron_neural_net.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/perceptron_neural_net.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/qda.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/qda.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/ridge_cross_validation.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/ridge_cross_validation.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/rnr.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/rnr.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/gpc.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/gpc.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/mlp.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/mlp.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_100_try.sh" afterPath="$PROJECT_DIR$/test_100_try.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_ALG.sh" afterPath="$PROJECT_DIR$/test_ALG.sh" />
     </list>
@@ -35,40 +19,40 @@
       <file leaf-file-name="test_100_try.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_100_try.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="23" lean-forward="true" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+            <state relative-caret-position="165">
+              <caret line="11" column="38" lean-forward="true" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_ALG.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test_ALG.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_ALG.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
-              <caret line="9" column="66" lean-forward="true" selection-start-line="9" selection-start-column="66" selection-end-line="9" selection-end-column="66" />
+              <caret line="9" column="66" lean-forward="false" selection-start-line="9" selection-start-column="66" selection-end-line="9" selection-end-column="66" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nearestneighborregressor.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/nearestneighborregressor.py">
+      <file leaf-file-name="gpc.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/gpc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="33" lean-forward="false" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+            <state relative-caret-position="210">
+              <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
               <folding>
-                <element signature="e#0#46#0" expanded="true" />
+                <element signature="e#0#62#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mlp.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/mlp.py">
+      <file leaf-file-name="gpclass.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/gpclass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="19" column="23" lean-forward="true" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+            <state relative-caret-position="90">
+              <caret line="10" column="11" lean-forward="true" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -126,11 +110,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/predict/predictor/algorithm/nu_svm.py" />
-        <option value="$PROJECT_DIR$/predict/predictor/algorithm/eigen_LDA.py" />
-        <option value="$PROJECT_DIR$/predict/predictor/algorithm/brute_force_radius.py" />
-        <option value="$PROJECT_DIR$/predict/predictor/algorithm/ard.py" />
-        <option value="$PROJECT_DIR$/predict/predictor/algorithm/nu_svm_sigmoid.py" />
         <option value="$PROJECT_DIR$/predict/predictor/algorithm/least_sqaures_LDA.py" />
         <option value="$PROJECT_DIR$/predict/predictor/algorithm/multi_class_logistic_regression.py" />
         <option value="$PROJECT_DIR$/predict/predictor/algorithm/ridge_regression.py" />
@@ -175,8 +154,13 @@
         <option value="$PROJECT_DIR$/predict/predictor/algorithm/rnr.py" />
         <option value="$PROJECT_DIR$/predict/predictor/algorithm/distancernr.py" />
         <option value="$PROJECT_DIR$/predict/predictor/algorithm/qda.py" />
-        <option value="$PROJECT_DIR$/test_100_try.sh" />
+        <option value="$PROJECT_DIR$/predict/predictor/algorithm/mlp.py" />
+        <option value="$PROJECT_DIR$/predict/predictor/algorithm/mlpclassalpha.py" />
+        <option value="$PROJECT_DIR$/predict/predictor/algorithm/mlpclass.py" />
         <option value="$PROJECT_DIR$/test_ALG.sh" />
+        <option value="$PROJECT_DIR$/predict/predictor/algorithm/gpc.py" />
+        <option value="$PROJECT_DIR$/predict/predictor/algorithm/gpclass.py" />
+        <option value="$PROJECT_DIR$/test_100_try.sh" />
       </list>
     </option>
   </component>
@@ -353,56 +337,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/ridge_cross_validation_normalized.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="18" column="40" lean-forward="false" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/simple_predictor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/kmedian_VL.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="14" column="32" lean-forward="false" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/ridge_cross_validation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#32#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sklearn/cluster/k_means_.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="759" column="77" lean-forward="true" selection-start-line="759" selection-start-column="77" selection-end-line="759" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/kmedian.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="7" column="65" lean-forward="true" selection-start-line="7" selection-start-column="65" selection-end-line="7" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/perceptron_neural_net_elastic_net_penalty.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -757,28 +691,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/mlp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="19" column="23" lean-forward="true" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/nearestneighborregressor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="33" lean-forward="false" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+        <state relative-caret-position="495">
+          <caret line="33" column="33" lean-forward="false" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
           <folding>
             <element signature="e#0#46#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_100_try.sh">
+    <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/mlp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="23" lean-forward="true" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+        <state relative-caret-position="75">
+          <caret line="8" column="65" lean-forward="true" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sklearn/neural_network/multilayer_perceptron.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="959" column="18" lean-forward="false" selection-start-line="959" selection-start-column="18" selection-end-line="959" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/mlpclass.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/sklearn/neighbors/unsupervised.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="8" column="54" lean-forward="false" selection-start-line="8" selection-start-column="54" selection-end-line="8" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/mlpclassalpha.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="13" column="95" lean-forward="false" selection-start-line="13" selection-start-column="95" selection-end-line="13" selection-end-column="95" />
           <folding />
         </state>
       </provider>
@@ -786,7 +744,33 @@
     <entry file="file://$PROJECT_DIR$/test_ALG.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="9" column="66" lean-forward="true" selection-start-line="9" selection-start-column="66" selection-end-line="9" selection-end-column="66" />
+          <caret line="9" column="66" lean-forward="false" selection-start-line="9" selection-start-column="66" selection-end-line="9" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/gpc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_100_try.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="38" lean-forward="true" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predict/predictor/algorithm/gpclass.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="10" column="11" lean-forward="true" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
           <folding />
         </state>
       </provider>
