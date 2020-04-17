@@ -2,7 +2,7 @@ from sklearn.linear_model import Perceptron
 from predict.predictor import OneHotPredictor, Commandline
 from predict.config import get_ohe_config
 
-@Commandline("PERCEPTRON_NEURAL_NET")
+@Commandline("PERCEPTRONNEURALNET")
 class PERCEPTRON_NEURAL_NET_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
@@ -16,7 +16,7 @@ class PERCEPTRON_NEURAL_NET_OHP(OneHotPredictor):
         :param y_train: array(float) - testing label
         """
         super().__init__(target, X_test, X_train, y_test, y_train)
-        self.model_name = 'PERCEPTRON_NEURAL_NET'
+        self.model_name = 'PERCEPTRONNEURALNET'
 
     def predict(self):
         """

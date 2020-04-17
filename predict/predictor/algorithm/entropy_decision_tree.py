@@ -32,8 +32,8 @@ class ENTROPY_DECISION_TREE_OHP(OneHotPredictor):
         then returns the accuracy
         """
         algorithm = DecisionTreeClassifier(criterion='entropy')
-        algorithm.fit(self.X_train.toarray(), self.y_train)
-        y_pred = list(algorithm.predict(self.X_test.toarray()))
+        algorithm.fit(self.X_train, self.y_train)
+        y_pred = list(algorithm.predict(self.X_test))
 
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)
 

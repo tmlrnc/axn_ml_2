@@ -5,7 +5,7 @@ from predict.predictor import OneHotPredictor, Commandline
 from predict.config import get_ohe_config
 
 import numpy as np
-@Commandline("PassiveAggressiveClassifier")
+@Commandline("PASSAGGCLASS")
 class PAC_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
@@ -19,7 +19,7 @@ class PAC_OHP(OneHotPredictor):
         :param y_train: array(float) - testing label
         """
         super().__init__(target, X_test, X_train, y_test, y_train)
-        self.model_name = 'Passive Aggressive Classifier'
+        self.model_name = 'PASSAGGCLASS'
 
     def predict(self):
         """
@@ -34,7 +34,7 @@ class PAC_OHP(OneHotPredictor):
 
          then returns the accuracy
          """
-        algorithm = PassiveAggressiveClassifier(max_iter=1000, random_state=0,tol = 1e-3)
+        algorithm = PassiveAggressiveClassifier(max_iter=100, random_state=0,tol = 1e-3)
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)

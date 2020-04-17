@@ -4,8 +4,8 @@ from predict.predictor import OneHotPredictor, Commandline
 from predict.config import get_ohe_config
 
 import numpy as np
-@Commandline("OMP")
-class OMP_OHP(OneHotPredictor):
+@Commandline("OMPNONE")
+class OMPNONE_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         """
@@ -18,7 +18,7 @@ class OMP_OHP(OneHotPredictor):
         :param y_train: array(float) - testing label
         """
         super().__init__(target, X_test, X_train, y_test, y_train)
-        self.model_name = 'OMP'
+        self.model_name = 'OMPNONE'
 
     def predict(self):
         """
@@ -35,7 +35,7 @@ class OMP_OHP(OneHotPredictor):
          """
 
         n_nonzero_coefs = 17
-        algorithm = OrthogonalMatchingPursuit(n_nonzero_coefs=n_nonzero_coefs)
+        algorithm = OrthogonalMatchingPursuit()
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)

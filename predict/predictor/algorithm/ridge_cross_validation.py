@@ -3,8 +3,8 @@ from predict.predictor import OneHotPredictor, Commandline
 from predict.config import get_ohe_config
 
 import numpy as np
-@Commandline("RIDGE_CROSS_VALIDATION")
-class RIDGE_REGRESSION_OHP(OneHotPredictor):
+@Commandline("RIDGECROSSVALIDATION")
+class RIDGE_CROSS_REGRESSION_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         """
@@ -17,7 +17,7 @@ class RIDGE_REGRESSION_OHP(OneHotPredictor):
         :param y_train: array(float) - testing label
         """
         super().__init__(target, X_test, X_train, y_test, y_train)
-        self.model_name = 'RIDGE CROSS VALIDATION'
+        self.model_name = 'RIDGECROSSVALIDATION'
 
     def predict(self):
         """

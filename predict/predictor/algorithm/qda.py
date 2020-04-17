@@ -3,8 +3,8 @@ from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from predict.predictor import OneHotPredictor, Commandline
 from predict.config import get_ohe_config
 
-@Commandline("QDA")
-class QDA_OHP(OneHotPredictor):
+@Commandline("QDANN")
+class QDANN_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         """
@@ -17,7 +17,7 @@ class QDA_OHP(OneHotPredictor):
         :param y_train: array(float) - testing label
         """
         super().__init__(target, X_test, X_train, y_test, y_train)
-        self.model_name = 'QDA'
+        self.model_name = 'QDANN'
 
     def predict(self):
         """
@@ -33,7 +33,7 @@ class QDA_OHP(OneHotPredictor):
         then returns the accuracy
         """
         algorithm = QuadraticDiscriminantAnalysis()
-        algorithm.fit(self.X_train.toarray(), self.y_train)
-        y_pred = list(algorithm.predict(self.X_test.toarray()))
+        algorithm.fit(self.X_train, self.y_train)
+        y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)
         return self.acc

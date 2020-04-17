@@ -18,7 +18,7 @@ for I in 2 3 ; do
           --file_in_config config/ohe_config.yaml \
           --target B_DISCRETE \
           --training_test_split_percent 70 \
-          --predictor BAYESIANRIDGE \
+          --predictor QDANN \
           --score f1_score \
           --score classification_accuracy \
           --file_out "csvs/test_data_100_try/test_data_100_PREDICT_$I$J.csv"

@@ -1,11 +1,9 @@
-from sklearn.linear_model import OrthogonalMatchingPursuitCV
-
+from sklearn.linear_model import Perceptron
 from predict.predictor import OneHotPredictor, Commandline
 from predict.config import get_ohe_config
 
-import numpy as np
-@Commandline("OMPNONECV")
-class OMPCV_OHP(OneHotPredictor):
+@Commandline("PERCEPTRONNEURALNETNONLINEAR")
+class PERCEPTRON_NEURAL_NET_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         """
@@ -18,7 +16,7 @@ class OMPCV_OHP(OneHotPredictor):
         :param y_train: array(float) - testing label
         """
         super().__init__(target, X_test, X_train, y_test, y_train)
-        self.model_name = 'OMPNONECV'
+        self.model_name = 'PERCEPTRONNEURALNETNONLINEAR'
 
     def predict(self):
         """
@@ -33,9 +31,7 @@ class OMPCV_OHP(OneHotPredictor):
 
          then returns the accuracy
          """
-
-        n_nonzero_coefs = 17
-        algorithm = OrthogonalMatchingPursuitCV()
+        algorithm = Perceptron(tol=1e-3, random_state=0,class_weight="balanced")
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)

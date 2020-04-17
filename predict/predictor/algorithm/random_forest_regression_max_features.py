@@ -1,9 +1,14 @@
-from sklearn.cluster import KMeans
+
 from predict.predictor import OneHotPredictor, Commandline
 from predict.config import get_ohe_config
 
-@Commandline("KMEANS")
-class KMeans_OHP(OneHotPredictor):
+
+from sklearn.model_selection import cross_val_score, GridSearchCV
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.preprocessing import MinMaxScaler
+
+@Commandline("RANDOMFORRESTREGMAX")
+class RandomForestRegression_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         """
@@ -16,7 +21,7 @@ class KMeans_OHP(OneHotPredictor):
         :param y_train: array(float) - testing label
         """
         super().__init__(target, X_test, X_train, y_test, y_train)
-        self.model_name = 'KMeans'
+        self.model_name = 'RANDOMFORRESTREGMAX'
 
     def predict(self):
         """
@@ -31,7 +36,8 @@ class KMeans_OHP(OneHotPredictor):
 
         then returns the accuracy
         """
-        algorithm = KMeans(n_clusters=get_ohe_config().Kmeans_bins, random_state=0)
+        algorithm = RandomForestRegressor(n_estimators=get_ohe_config().RFR_n_estimators,
+                                        max_depth=get_ohe_config().RFR_max_depth,max_features='sqrt')
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)

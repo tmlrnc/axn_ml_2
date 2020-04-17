@@ -3,8 +3,8 @@ from sklearn.neighbors import RadiusNeighborsRegressor
 from predict.predictor import OneHotPredictor, Commandline
 from predict.config import get_ohe_config
 
-@Commandline("RNR")
-class RNR_OHP(OneHotPredictor):
+@Commandline("RNRREG")
+class RNREG_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         """
@@ -17,7 +17,7 @@ class RNR_OHP(OneHotPredictor):
         :param y_train: array(float) - testing label
         """
         super().__init__(target, X_test, X_train, y_test, y_train)
-        self.model_name = 'Radius Neighbors Regressor'
+        self.model_name = 'RNRREG'
 
     def predict(self):
         """
@@ -33,7 +33,7 @@ class RNR_OHP(OneHotPredictor):
          then returns the accuracy
          """
         algorithm = RadiusNeighborsRegressor(radius=get_ohe_config().RNR_radius)
-        algorithm.fit(self.X_train.toarray(), self.y_train)
-        y_pred = list(algorithm.predict(self.X_test.toarray()))
+        algorithm.fit(self.X_train, self.y_train)
+        y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)
         return self.acc

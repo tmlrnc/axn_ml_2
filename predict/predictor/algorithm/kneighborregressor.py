@@ -32,7 +32,7 @@ class KNeighborsRegressor_OHP(OneHotPredictor):
         then returns the accuracy
         """
         algorithm = KNeighborsRegressor(n_neighbors=3)
-        algorithm.fit(self.X_train.toarray(), self.y_train)
-        y_pred = list(algorithm.predict(self.X_test.toarray()))
+        algorithm.fit(self.X_train, self.y_train)
+        y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)
         return self.acc

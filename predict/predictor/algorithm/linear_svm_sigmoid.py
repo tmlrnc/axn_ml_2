@@ -3,7 +3,7 @@ from sklearn.svm import SVC
 from predict.predictor import OneHotPredictor, Commandline
 from predict.config import get_ohe_config
 
-@Commandline("NON_LIN_SVM_SIGMOID")
+@Commandline("NONLINSVMSIGMOID")
 class NON_LINEAR_SVM_SIGMOID_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
@@ -17,7 +17,7 @@ class NON_LINEAR_SVM_SIGMOID_OHP(OneHotPredictor):
         :param y_train: array(float) - testing label
         """
         super().__init__(target, X_test, X_train, y_test, y_train)
-        self.model_name = 'Non Linear Support Vector Classification Sigmoid'
+        self.model_name = 'NONLINSVMSIGMOID'
 
     def predict(self):
         """

@@ -32,6 +32,8 @@ class OHE_Config(object):
         self.LR_random_state = config_dict["LR_random_state"]
         self.DTC_random_state = config_dict["DTC_random_state"]
         self.RNR_radius = config_dict["RNR_radius"]
+        self.Kmeans_bins = config_dict["Kmeans_bins"]
+        self.KNeighborsClassifier_NN = config_dict["KNeighborsClassifier_NN"]
 
 
         self.RNN_window_size = config_dict["RNN_window_size"]
