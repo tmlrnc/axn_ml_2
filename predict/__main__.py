@@ -37,6 +37,56 @@ def main():
   GENERATE ONE HOT ENCODING HEADER
   ENCODE EACH ROW WITH 1 or 0 FOR EACH HEADER
 
+
+"RFR" RandomForestRegressor - random_forest_regression.py
+"LR" LogisticRegression - logistic_regression.py
+"MLP" MLPRegressor - mlp_regression.py
+"SVM" LinearSVC - svm.py
+"NUSVM" NuSVC - nu_svm.py
+"BFRA" BruteForceRadius - brute_force_radius.py
+"NUSVMSIG" NU_SVM_Sigmoid - nu_svm_sigmoid.py
+"LSQLDA" LeastSquaresLDA - least_sqaures_LDA.py
+"MULTICLASSLR" MULTI_CLASS_LogisticRegression - multi_class_logistic_regression.py
+"RIDGEREGRESSION" RIDGE_REGRESSION - ridge_regression.py
+"LASSOMODEL" Lasso - lasso.py
+“BAYESIANRIDGE” BayesianRidge - bayesian_ridge.py
+KNeighborsRegressor - kneighborregressor.py
+Kmeans - kmeans.py
+LARSLASSOR LassoLars - lars_lasso.py
+LSQLDA - least_sqaures_LDA.py
+LINEARREGRESSION LinearRegression - linear_regression.py
+NONLINSVM non linear svm linear_svm.py
+NONLINSVMSIGMOID SVC(kernel='sigmoid') - linear_svm_sigmoid.py
+PERCEPTRONNEURALNET - Perceptron - perceptron_neural_net.py
+PERCEPTRONNEURALNETNONLINEAR - perceptron_neural_net_non_linear.py
+PERCEPTRONNEURALNETNONLINEARL1 - perceptron_neural_net_l1_penalty.py
+PERCEPTRONNEURALNETNONLINEARELASTIC - perceptron_neural_net_elastic_net_penalty.py
+RIDGECROSSVALIDATION RidgeCV - ridge_cross_validation.py
+RIDGECROSSVALIDATIONNORM ridge_cross_validation_normalized.py
+KMEDIAN - kmedian.py
+RANDOMFORRESTREGMAX - RandomForestClassifier - random_forest_classifier_max.py
+PACCLASSWE - PassiveAggressiveClassifier weighted -
+ENTROPY_DECISION_TREE - EDT - entropy_decision_tree.py
+RANDOMDT - random_decision_tree.py
+KNeighborsClassifier - KNCLASS - knclass.py
+KNCLASSMINKOW - Minkowski Tree - knnclassminkow.py
+MLPNESTEROV - mlp_nesterov.py
+OrthogonalMatchingPursuit - omp.py
+PASSAGGCLASS - pac.py
+PASSAGGCLASSEARLY - pacearly.py
+RNRREG - rnr.py
+DISTRNRREG - distancernr.py
+QDANN - qda.py
+MLPCLASSALPHA
+GNB - Gaussian Niave Bayes gnb.py
+ETC - ExtraTreesClassifier etc.py
+ELNLRREG - elasticnet - elastic_net_logistic_regression.py
+GNBAYESSMOOTHING - gnb_smoothing.py
+
+
+
+
+
       """
     ######################################################################
     #

@@ -27,9 +27,12 @@ class OHE_Config(object):
         self.SVM_random_state = config_dict["SVM_random_state"]
         self.SVM_max_iterations = config_dict["SVM_max_iterations"]
         self.SVM_multi_class = config_dict["SVM_multi_class"]
-
+        self.RandomForestClassifier_max_features = config_dict["RandomForestClassifier_max_features"]
+        self.Perceptron_class_weight = config_dict["Perceptron_class_weight"]
 
         self.LR_random_state = config_dict["LR_random_state"]
+
+        self.LogisticRegression_solver = config_dict["LogisticRegression_solver"]
         self.DTC_random_state = config_dict["DTC_random_state"]
         self.RNR_radius = config_dict["RNR_radius"]
         self.Kmeans_bins = config_dict["Kmeans_bins"]

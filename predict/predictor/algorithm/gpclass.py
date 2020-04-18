@@ -34,7 +34,7 @@ class GPCLASS_OHP(OneHotPredictor):
         then returns the accuracy
         """
         kernel = 1.0 * RBF(1.0)
-        algorithm = GaussianProcessClassifier(kernel=kernel, random_state=0)
+        algorithm = GaussianProcessClassifier(random_state=0)
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)

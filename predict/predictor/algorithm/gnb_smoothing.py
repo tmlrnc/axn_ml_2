@@ -1,23 +1,23 @@
-from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.naive_bayes import GaussianNB
 
 from predict.predictor import OneHotPredictor, Commandline
 from predict.config import get_ohe_config
 
-@Commandline("ETCLASS")
-class ETC_OHP(OneHotPredictor):
+@Commandline("GNBAYESSMOOTHING")
+class GNBS_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         """
-         initializes the training and testing features and labels
+        initializes the training and testing features and labels
 
-         :param target: string - label to be predicted or classified
-         :param X_test: array(float) - testing features
-         :param X_train: array(float) - training features
-         :param y_test: array(float) - testing label
-         :param y_train: array(float) - testing label
-         """
+        :param target: string - label to be predicted or classified
+        :param X_test: array(float) - testing features
+        :param X_train: array(float) - training features
+        :param y_test: array(float) - testing label
+        :param y_train: array(float) - testing label
+        """
         super().__init__(target, X_test, X_train, y_test, y_train)
-        self.model_name = 'ETCLASS'
+        self.model_name = 'GNBAYESSMOOTHING'
 
     def predict(self):
         """
@@ -32,7 +32,7 @@ class ETC_OHP(OneHotPredictor):
 
         then returns the accuracy
         """
-        algorithm = ExtraTreesClassifier(n_estimators=100, random_state=0)
+        algorithm = GaussianNB(var_smoothing=1e-08)
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)

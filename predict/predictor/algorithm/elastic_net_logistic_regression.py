@@ -3,8 +3,8 @@ from sklearn.linear_model import LogisticRegression
 from predict.predictor import OneHotPredictor, Commandline
 from predict.config import get_ohe_config
 
-@Commandline("ELNLR")
-class Elastic_Net_LogisticRegression_OHP(OneHotPredictor):
+@Commandline("ELNLRREG")
+class ElasticNet_LogisticRegression_OHP(OneHotPredictor):
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         """
@@ -17,7 +17,7 @@ class Elastic_Net_LogisticRegression_OHP(OneHotPredictor):
         :param y_train: array(float) - testing label
         """
         super().__init__(target, X_test, X_train, y_test, y_train)
-        self.model_name = "ELNLR"
+        self.model_name = "ELNLRREG"
 
     def predict(self):
         """
@@ -32,7 +32,7 @@ class Elastic_Net_LogisticRegression_OHP(OneHotPredictor):
 
         then returns the accuracy
         """
-        algorithm = LogisticRegression(penalty='elasticnet', solver='newton-cg', random_state=get_ohe_config().LR_random_state)
+        algorithm = LogisticRegression(penalty='elasticnet',  random_state=get_ohe_config().LR_random_state)
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)
