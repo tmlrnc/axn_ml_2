@@ -150,7 +150,35 @@ python -m ohe  \
 
         return f1
 
+    @staticmethod
+    def get_classification_accuracy_MARGIN(y_pred_one_hot, y_test):
+        """
+        opens file and writes one hot encoded data
 
+        :param y_pred_one_hot: array - predicted values
+        :param y_test: array - actual values
+        :returns accuracy: float
+
+        """
+        correct = 0
+        classification_accuracy = 0
+        test_len = len(y_test)
+        y_pred_one_hot_list = list(y_pred_one_hot)
+        y_test_list = list(y_test)
+        for i in range(test_len):
+
+            _imargin = y_test_list[i]/10
+            #print(_imargin)
+            _imargin_i = int(round(_imargin))
+
+            _imargin_i_a = abs(y_pred_one_hot_list[i] - y_test_list[i])
+
+
+            if _imargin_i_a <= _imargin_i:
+                correct = correct + 1
+
+        classification_accuracy = ((correct / test_len) * 100)
+        return classification_accuracy
 
     @staticmethod
     def get_classification_accuracy(y_pred_one_hot, y_test):
@@ -182,13 +210,18 @@ python -m ohe  \
         :param y_test: array - actual values
         :returns accuracy: float
 
+
+
+
+
         """
         acc_dict = {}
 
+        acc_dict["y_pred_one_hot"] = y_pred_one_hot
+        acc_dict["y_test"] = y_test
         acc_dict["f1_score"] = OneHotPredictor.get_f1_score(y_pred_one_hot,y_test)
-        acc_dict["classification_accuracy"] = OneHotPredictor.get_classification_accuracy(y_pred_one_hot,y_test)
-        #acc_dict['precision'] = OneHotPredictor.get_precision_score(y_pred_one_hot,y_test)
-        #acc_dict['recall'] = OneHotPredictor.get_recall_score(y_pred_one_hot,y_test)
+        acc_dict["classification_accuracy"] = OneHotPredictor.get_classification_accuracy_MARGIN(y_pred_one_hot,y_test)
+
 
 
         return acc_dict
@@ -251,6 +284,7 @@ class OneHotPredictorBuilder(object):
         self.strategy = strategy
         self.training_test_split_percent = training_test_split_percent
         self.features = []
+
         self.data_frame = data_frame
         self.X_test = None
         self.X_train = None
@@ -287,9 +321,16 @@ class OneHotPredictorBuilder(object):
 
         Y_pre_shuffle = data_frame[self.target]
         train_len = int(round(Y_pre_shuffle.size * split_percent))
+
+
+
         X_pre_shuffle = data_frame[self.features]
 
-        X, Y = shuffle(X_pre_shuffle, Y_pre_shuffle, random_state=13)
+        #X, Y = shuffle(X_pre_shuffle, Y_pre_shuffle, random_state=13)
+
+        X = X_pre_shuffle
+        Y = Y_pre_shuffle
+
 
         X_train = X.iloc[:train_len]
         X_test = X.iloc[train_len:]
@@ -342,19 +383,83 @@ class Runner(object):
         self.builder = builder
         self.algorithms = algorithms
         self.results = None
+        self.predictions_list_of_dicts_of_predictions = []
+        self.predictions_list_of_dicts_of_actuals = []
+        self.my_model_headers = []
+        self.model_list = []
 
 
-    def run_and_build_predictions(self,score_list):
+    def run_and_build_predictions(self, score_list, my_file_out_predict, data_frame_ignore_frame, training_test_split_percent,ignore_list, write_actual_flag=1):
         if self.results is not None:
             return self.results
         self.results = []
+        # alg_results is a list of dictionaries, such that alg_results[0] is a dictionary for index 0
+        # It contains a dictionary with { id, actual, pred_alg_1, pred_alg_2, etc }
+        alg_results = None
+        headers = set(['id', 'actual'])
+
+        print("full_len")
+
+        print(ignore_list)
+        for ig in ignore_list:
+            myignore = ig
+        split_percent = training_test_split_percent / 100
+        full_len = data_frame_ignore_frame.size
+
+        print("full_len")
+        print(full_len)
+        train_len = int(round(full_len * split_percent))
+
+        print("train_len")
+        print(train_len)
+        data_frame_ignore_frame_X = data_frame_ignore_frame.iloc[train_len:]
+
+        print("data_frame_ignore_frame_X")
+        print(data_frame_ignore_frame_X)
+        print("data_frame_ignore_frame_X size")
+        print(data_frame_ignore_frame_X.size)
+
+        data_frame_ignore_frame_X_d = data_frame_ignore_frame_X[myignore]
+
+        data_frame_ignore_frame_X_d_list = data_frame_ignore_frame_X_d.to_list()
 
         for alg in self.algorithms:
 
             predictor = self.builder.build(alg)
 
             model_name = str(predictor.model_name)
+            headers.add(model_name)
             acc_dict = predictor.predict()
+            headers.add("UID")
+
+            self.model_list.append(model_name)
+            y_pred_one_hot = acc_dict['y_pred_one_hot']
+            print("type(y_pred_one_hot)")
+
+            print(type(y_pred_one_hot))
+            y_test = acc_dict['y_test']
+            y_test_list = y_test.tolist()
+
+            # Initialize alg_results *IF* it has not been initialized yet
+            if alg_results is None:
+                alg_results = []
+                for (act, ix) in zip(y_test_list, range(len(y_test_list))):
+                    alg_results.append({ 'id': ix, 'actual': act })
+
+                data_frame_ignore_frame_X_d_list_dict = dict(zip(data_frame_ignore_frame_X_d_list, range(len(data_frame_ignore_frame_X_d_list))))
+                for (pred, id) in data_frame_ignore_frame_X_d_list_dict.items():
+                    print(pred)
+                    print(id)
+                    alg_results[id][myignore] = pred
+
+
+            y_pred_one_hot_dict = dict(zip(y_pred_one_hot, range(len(y_pred_one_hot))))
+            for (pred, id) in y_pred_one_hot_dict.items():
+                #print(pred)
+                #print(id)
+                alg_results[id][model_name] = pred
+
+
 
             for key in acc_dict.keys():
                 if key in score_list:
@@ -363,30 +468,71 @@ class Runner(object):
                     result['score_value'] = acc_dict[key]
                     self.results.append(result)
 
-
         self.results.sort(key=lambda r: r['model_name_score_name'], reverse=False)
+
+        with open(my_file_out_predict, 'w') as io:
+            writer = csv.DictWriter(io, fieldnames=list(headers), delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            writer.writeheader()
+            writer.writerows(alg_results)
 
 
         return self.results
 
-    def write_predict_csv(self, file_out_name,target,write_header_flag=1):
+
+    def write_predict_csv(self, file_out_name_score, file_out_tableau, file_in_master, my_file_out_predict, target,write_header_flag=1):
         """
         write csv file with configured python machine learning algorithm and accuracy
         :param file_out_name: string
         """
 
+    # read my_file_out_predict
+    # read file_in_master
+    # join UID
 
+        import pandas, sys
+        import pandas as pd
+        a_file_in_master = pd.read_csv(file_in_master)
+        print("a_file_in_master")
+        print(type(a_file_in_master))
+        print(self.model_list)
+        for mymode in self.model_list:
+            mode_to_use = mymode
+
+        b_my_file_out_predict = pd.read_csv(my_file_out_predict)
+
+        merged = a_file_in_master.merge(b_my_file_out_predict, on='UID')
+
+
+
+        merged_selected = merged[['City', 'Country', 'State',mode_to_use,'actual']]
+        merged_selected['Diff'] = merged_selected[mode_to_use] - merged_selected['actual']
+
+
+        merged_selected['Diff_Percent'] = 1 - (merged_selected[mode_to_use] / merged_selected['actual'] )
+        merged_selected_renamed = merged_selected.rename(columns={'MLP': 'Predicted', 'actual': 'Actual'})
+        print("Diff_Percent")
+
+
+
+        for ind in merged_selected_renamed.index:
+            if merged_selected_renamed['Actual'][ind] == 0 :
+                merged_selected_renamed['Diff_Percent'][ind] = 0
+
+
+
+        merged_selected_renamed.to_csv(file_out_tableau, mode='a', index=False)
 
         headers = [ r['model_name_score_name'] for r in self.results ]
         headers.append("Target")
 
         values_score = [ r['score_value'] for r in self.results ]
         values_score.append(target)
-        with open(file_out_name, mode='a') as _file:
+        with open(file_out_name_score, mode='a') as _file:
             _writer = csv.writer(_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             if(write_header_flag == 1):
                 _writer.writerow(headers)
             _writer.writerow(values_score)
+
 
 
 ### Below is a bit of "magic" to make the Commandline decorator work.

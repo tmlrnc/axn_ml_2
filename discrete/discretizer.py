@@ -68,12 +68,28 @@ class Discretizer(object):
             print("head " + str(head))
             newhead.append(nh)
 
-        with open(file_out_name, mode='a') as _file:
-            _writer = csv.writer(_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            if (self.write_header_flag == 1):
-                _writer.writerow(newhead)
-            for row in self.Xt_VL_K_list:
-                _writer.writerow(row)
+
+        if(self.ss == "dbscan") :
+
+            print("dbscan")
+            print(str(type(self.Xt_VL_K_list)))
+
+            with open(file_out_name, mode='a') as _file:
+                _writer = csv.writer(_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                if (self.write_header_flag == 1):
+                    _writer.writerow(newhead)
+                for row in self.Xt_VL_K_list:
+                    _writer.writerow([row])
+
+
+        else:
+
+            with open(file_out_name, mode='a') as _file:
+                _writer = csv.writer(_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                if (self.write_header_flag == 1):
+                    _writer.writerow(newhead)
+                for row in self.Xt_VL_K_list:
+                    _writer.writerow(row)
         return drop
 
 
@@ -94,11 +110,9 @@ class Discretizer(object):
         self.csv_column_name_list = list(data_frame_all.columns)
         self.headers = self.csv_column_name_list
         my_strategy = self.discretize_strategy[0]
+        self.ss = my_strategy
         my_bins = int(self.discretize_bins[0])
 
-        #print("X " + str(X))
-        #print("my_strategy " + str(my_strategy))
-        #print("my_bins " + str(my_bins))
 
         if my_strategy == "uniform":
 
@@ -106,9 +120,10 @@ class Discretizer(object):
 
             binizer = VL_Binizer(n_bins=my_bins, encode='ordinal', strategy=my_strategy)
             binizer.fit(X)
+
+
             Xt_VL = binizer.transform(X)
-            #print("EDGES " + str(binizer.bin_edges_))
-            #print("TRANSFORMED COLUMN" + str(Xt_VL))
+
             self.Xt_VL_K_list = list(Xt_VL)
             print('UNIFORM strategy ************************************* ')
 
@@ -122,8 +137,7 @@ class Discretizer(object):
             binizer = VL_Discretizer_KMeans(n_bins=my_bins, encode='ordinal', strategy=my_strategy, edge_array=my_edge_array)
             binizer.fit(X)
             Xt_VL_K = binizer.transform(X)
-            #print("EDGES " + str(binizer.bin_edges_))
-            #print("TRANSFORMED COLUMN " + str(Xt_VL_K))
+
             self.Xt_VL_K_list = list(Xt_VL_K)
             print('analyst_supervised strategy ************************************* ')
 
@@ -133,10 +147,26 @@ class Discretizer(object):
             binizer = VL_Discretizer_KMeans(n_bins=my_bins, encode='ordinal', strategy=my_strategy)
             binizer.fit(X)
             Xt_VL_K = binizer.transform(X)
-            #print("EDGES " + str(binizer.bin_edges_))
-            #print("TRANSFORMED COLUMN " + str(Xt_VL_K))
+
             self.Xt_VL_K_list = list(Xt_VL_K)
+
+
             print('kmeans strategy ************************************* ')
+
+
+        elif my_strategy == "dbscan":
+            print('dbscan strategy ************************************* ')
+            from sklearn.cluster import DBSCAN
+            print(str(type(X)))
+
+            clustering = DBSCAN(eps=my_bins/10, min_samples=1).fit(X)
+
+
+            self.Xt_VL_K_list = list(clustering.labels_.tolist())
+
+
+
+            print('dbscan strategy ************************************* ')
 
 
         return self.data_frame, self.csv_column_name_list

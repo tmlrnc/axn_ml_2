@@ -32,7 +32,7 @@ class SVM_OHP(OneHotPredictor):
 
          then returns the accuracy
          """
-        algorithm = LinearSVC(random_state=get_ohe_config().LR_random_state,max_iter=get_ohe_config().SVM_max_iterations,multi_class=get_ohe_config().SVM_multi_class)
+        algorithm = LinearSVC(random_state=get_ohe_config().LR_random_state,max_iter=-1,multi_class=get_ohe_config().SVM_multi_class)
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)

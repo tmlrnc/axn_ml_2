@@ -32,7 +32,17 @@ class LINEAR_REGRESSION_OHP(OneHotPredictor):
          then returns the accuracy
          """
         algorithm = linear_model.LinearRegression()
+        #print("self.y_train " + str(type(self.y_train)))
+
         algorithm.fit(self.X_train, self.y_train)
+
+
+        y_pred_sk = algorithm.predict(self.X_test)
+        #print("y_pred_sk " + str(type(y_pred_sk)))
+
         y_pred = list(algorithm.predict(self.X_test))
+
+        #print(type(y_pred))
+
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)
         return self.acc

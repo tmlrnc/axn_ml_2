@@ -8,6 +8,8 @@ from sklearn.utils.validation import check_array
 from sklearn.utils.validation import check_is_fitted
 from sklearn.utils.validation import FLOAT_DTYPES
 from sklearn.cluster import KMeans
+
+from sklearn.cluster import DBSCAN
 def CheckForLess(list1, val):
     return(all(x < val for x in list1))
 from sklearn.preprocessing import OneHotEncoder
@@ -61,6 +63,26 @@ class VL_Discretizer_KMeans():
     data into the original feature space. Each value will be equal to the mean
     of the two bin edges.
 
+    DBSCAN - Density-Based Spatial Clustering of Applications with Noise.
+    Finds core samples of high density and expands clusters from them. Good for data which contains clusters of similar density.
+
+
+The maximum distance between two samples for one to be considered as in the neighborhood of the other.
+This is not a maximum bound on the distances of points within a cluster. This is the most important
+
+
+    eps: Two points are considered neighbors if the distance between the two points is below the threshold epsilon.
+    min_samples: The minimum number of neighbors a given point should have in order to be classified as a core point. It’s important to note that the point itself is included in the minimum number of samples.
+    metric: The metric to use when calculating distance between instances in a feature array (i.e. euclidean distance).
+
+The algorithm works by computing the distance between every point and all other points. We then place the points into one of three categories.
+
+Core point: A point with at least min_samples points whose distance with respect to the point is below the threshold defined by epsilon.
+
+Border point: A point that isn’t in close proximity to at least min_samples points but is close enough to one or more core point. Border points are included in the cluster of the closest core point.
+
+Noise point: Points that aren’t close enough to core points to be considered border points. Noise points are ignored. That is to say, they aren’t part of any cluster.
+
     """
 
     def __init__(self, n_bins=5, encode='onehot', strategy='quantile', edge_array=[]):
@@ -94,7 +116,7 @@ class VL_Discretizer_KMeans():
             raise ValueError("Valid options for 'encode' are {}. "
                              "Got encode={!r} instead."
                              .format(valid_encode, self.encode))
-        valid_strategy = ('uniform', 'quantile', 'kmeans',   'analyst_supervised')
+        valid_strategy = ('uniform', 'quantile', 'kmeans',  'dbscan',  'analyst_supervised')
         if self.strategy not in valid_strategy:
             raise ValueError("Valid options for 'strategy' are {}. "
                              "Got strategy={!r} instead."
@@ -141,6 +163,17 @@ class VL_Discretizer_KMeans():
                 centers.sort()
                 bin_edges[jj] = (centers[1:] + centers[:-1]) * 0.5
                 bin_edges[jj] = np.r_[col_min, bin_edges[jj], col_max]
+
+            elif self.strategy == 'dbscan':
+
+
+
+
+                # 1D k-means procedure
+                db  = DBSCAN(eps=3, min_samples=n_bins[jj])
+
+                centers = db.fit(column[:, None])
+
 
             elif self.strategy == 'analyst_supervised':
 

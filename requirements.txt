@@ -10,3 +10,7 @@ sklearn
 utils
 pandas
 flask
+pykalman
+luigi
+requests
+discrete
