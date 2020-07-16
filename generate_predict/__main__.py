@@ -18,6 +18,7 @@ def parse_command_line():
     parser.add_argument('--start_date_all')
     parser.add_argument('--end_date_all')
     parser.add_argument('--window_size')
+    parser.add_argument('--parent_dir')
     parser.add_argument(
         '--add_model',
         action='append')
@@ -54,6 +55,14 @@ def main():
     print(end_window_date_next)
     print(end_date_all_window_f)
 
+
+    parent_dir = args.parent_dir
+    if parent_dir is None:
+        print("Parent dir is not specified.")
+        quit()
+    print(f"Using parent_dir: {parent_dir}")
+
+
     while (end_window_date_next < end_date_all_window_f):
         start_window_date = start_window_date_next
         end_window_date = end_window_date_next
@@ -65,7 +74,9 @@ def main():
         directory = time_series
 
         # Parent Directory path
-        parent_dir = "/Users/tomlorenc/Sites/VL_standard/ml"
+        #parent_dir = "/Users/tomlorenc/Sites/VL_standard/ml"
+        #parent_dir = "/app"
+
 
         # Path
         path = os.path.join(parent_dir, directory)

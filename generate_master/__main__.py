@@ -2,8 +2,12 @@ from covid import downloader
 import datetime as dt
 import argparse
 from datetime import datetime, timedelta
-
-
+import requests
+import filecmp
+import logging
+import os
+import subprocess
+from subprocess import PIPE, Popen
 def parse_command_line():
     parser = argparse.ArgumentParser()
 
@@ -17,11 +21,19 @@ def parse_command_line():
     parser.add_argument('--start_date_all')
     parser.add_argument('--end_date_all')
     parser.add_argument('--window_size')
+    parser.add_argument('--parent_dir')
+
     args = parser.parse_args()
     return args
 
 
+
 def main():
+    log = logging.getLogger("logger")
+    log.setLevel(logging.INFO)
+    logging.basicConfig()
+
+    log.info("IM MASTER")
     args = parse_command_line()
     file_in = args.file_in
     start_date_all = args.start_date_all
@@ -46,6 +58,12 @@ def main():
     print(end_window_date_next)
     print(end_date_all_window_f)
 
+    parent_dir = args.parent_dir
+    if parent_dir is None:
+        print("Parent dir is not specified.")
+        quit()
+    print(f"Using parent_dir: {parent_dir}")
+
     while (end_window_date_next < end_date_all_window_f):
         start_window_date = start_window_date_next
         end_window_date = end_window_date_next
@@ -57,7 +75,9 @@ def main():
         directory = time_series
 
         # Parent Directory path
-        parent_dir = "/Users/tomlorenc/Sites/VL_standard/ml"
+        #parent_dir = "/Users/tomlorenc/Sites/VL_standard/ml"
+        #parent_dir = "/app"
+
 
         # Path
         path = os.path.join(parent_dir, directory)
@@ -90,10 +110,22 @@ def main():
         comm = "exec bash " + discrete_file_script_out_ts_path
         os.system(comm)
         comm2 = "exec bash " + ohe_file_script_out_ts_path
+        print(comm2)
+
         os.system(comm2)
 
-        comm3 = "exec bash " + predict_file_script_out_ts_path
+        comm3 = "bash " + predict_file_script_out_ts_path
+        log.info("IM MASTER")
+
+        print(comm3)
         os.system(comm3)
+
+        #p = subprocess.Popen(['bash', predict_file_script_out_ts_path], stdin=PIPE, stdout=PIPE)
+        #one_line_output2 = p2.stdout.readline()
+        #print(one_line_output2)
+        #log.info("IM MASTER" + str(predict_file_script_out_ts_path))
+        #log.info("IM MASTER" + str(one_line_output2))
+
 
         print('It took {0:0.1f} seconds'.format(time.time() - start))
 

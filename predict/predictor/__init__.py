@@ -504,7 +504,7 @@ class Runner(object):
 
 
 
-        merged_selected = merged[['City', 'Country', 'State',mode_to_use,'actual']]
+        merged_selected = merged[['Admin2', 'Country_Region', 'Province_State',mode_to_use,'actual']]
         merged_selected['Diff'] = merged_selected[mode_to_use] - merged_selected['actual']
 
 
@@ -518,7 +518,8 @@ class Runner(object):
             if merged_selected_renamed['Actual'][ind] == 0 :
                 merged_selected_renamed['Diff_Percent'][ind] = 0
 
-
+        # here is the simplist way to add the new column
+        merged_selected_renamed['Date'] = target
 
         merged_selected_renamed.to_csv(file_out_tableau, mode='a', index=False)
 

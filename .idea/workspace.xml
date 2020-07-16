@@ -2,22 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa8d1203-b8ac-4268-8c44-e2a52e439940" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app_READ.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app_RESULTS.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/data.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test_100_try.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test_ALG.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/covid_discrete_test_15_05-31-2020_06-03-2020.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/covid_ohe_test_15_05-31-2020_06-03-2020.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/covid_predict_test_15_05-31-2020_06-03-2020.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/time_series_covid19_deaths_US_V4000_v1_i_D_05-31-2020_06-03-20200.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/time_series_covid19_deaths_US_V4000_v1_i_D_05-31-2020_06-03-20201.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/time_series_covid19_deaths_US_V4000_v1_i_D_05-31-2020_06-03-20202.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/time_series_covid19_deaths_US_V4000_v1_i_D_05-31-2020_06-03-20203.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/time_series_covid19_deaths_US_V4000_v3_D_05-31-2020_06-03-2020.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/time_series_covid19_deaths_US_V4000_v3_D_05-31-2020_06-03-20200.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/time_series_covid19_deaths_US_V4000_v3_D_05-31-2020_06-03-20201.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/time_series_covid19_deaths_US_V4000_v3_D_05-31-2020_06-03-20202.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/time_series_covid19_deaths_US_V4000_v3_D_05-31-2020_06-03-20203.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/time_series_covid19_deaths_US_V4000_v3_D_P_05-31-2020_06-03-2020.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/time_series_covid19_deaths_US_V4000_v3_D_S_05-31-2020_06-03-2020.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/05-31-2020_06-03-2020/time_series_covid19_deaths_US_V4000_v3_OHE_05-31-2020_06-03-2020.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/06-15-2020-test20.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/06-15-2020.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/20200617_TableauOutputExamples4TLoML.xlsx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/covid-output-for-tableau-for-Walter-from_TLO.csv" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/discrete/__main__.py" afterPath="$PROJECT_DIR$/discrete/__main__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/discrete/binize_kmeans.py" afterPath="$PROJECT_DIR$/discrete/binize_kmeans.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/discrete/discretizer.py" afterPath="$PROJECT_DIR$/discrete/discretizer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/__main__.py" afterPath="$PROJECT_DIR$/predict/__main__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/covid.csv" afterPath="$PROJECT_DIR$/covid.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/covid_drop.csv" afterPath="$PROJECT_DIR$/covid_drop.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/covid_predict_test_15.sh" afterPath="$PROJECT_DIR$/covid_predict_test_15.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generate_discrete/__main__.py" afterPath="$PROJECT_DIR$/generate_discrete/__main__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generate_master/__main__.py" afterPath="$PROJECT_DIR$/generate_master/__main__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generate_ohe/__main__.py" afterPath="$PROJECT_DIR$/generate_ohe/__main__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generate_predict/__main__.py" afterPath="$PROJECT_DIR$/generate_predict/__main__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/__init__.py" afterPath="$PROJECT_DIR$/predict/predictor/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/linear_regression.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/linear_regression.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predict/predictor/algorithm/svm.py" afterPath="$PROJECT_DIR$/predict/predictor/algorithm/svm.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/discrete_ohe_uniform_covid_8.sh" afterPath="$PROJECT_DIR$/scripts/discrete_ohe_uniform_covid_8.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tableau-file_out_master.csv" afterPath="$PROJECT_DIR$/tableau-file_out_master.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_covid_automate_20.sh" afterPath="$PROJECT_DIR$/test_covid_automate_20.sh" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,32 +43,42 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="__main__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/predict/__main__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73">
-              <caret line="110" column="26" lean-forward="true" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__main__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/generate_discrete/__main__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="668">
-              <caret line="158" column="37" lean-forward="false" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
+            <state relative-caret-position="513">
+              <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
               <folding>
-                <element signature="e#5722#8817#0" expanded="false" />
+                <element signature="e#0#15#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="__main__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/generate_master/__main__.py">
+        <entry file="file://$PROJECT_DIR$/generate_predict/__main__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-675">
-              <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+            <state relative-caret-position="601">
+              <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="62" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_covid_automate_23.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_covid_automate_23.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="27" column="71" lean-forward="true" selection-start-line="27" selection-start-column="71" selection-end-line="27" selection-end-column="71" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_covid_automate_24.sh" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test_covid_automate_24.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="37" column="47" lean-forward="true" selection-start-line="37" selection-start-column="47" selection-end-line="37" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -63,39 +87,21 @@
       <file leaf-file-name="__main__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/generate_ohe/__main__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1770">
-              <caret line="121" column="18" lean-forward="false" selection-start-line="121" selection-start-column="18" selection-end-line="121" selection-end-column="18" />
+            <state relative-caret-position="481">
+              <caret line="43" column="32" lean-forward="false" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="__main__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/generate_predict/__main__.py">
+        <entry file="file://$PROJECT_DIR$/generate_master/__main__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1222">
-              <caret line="23" column="30" lean-forward="false" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_covid_automate_20.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test_covid_automate_20.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="24" lean-forward="false" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/predict/predictor/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="13" lean-forward="true" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="-406">
+              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -111,9 +117,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>get_noisy_categories</find>
-      <find>is_noisy</find>
-      <find>features</find>
       <find>total_count_of_all_non_noisy_records</find>
       <find>get_non_noisy_features</find>
       <find>get_smallest_sample_feature_old</find>
@@ -141,6 +144,9 @@
       <find>read</find>
       <find>map</find>
       <find>workdir</find>
+      <find>file_out_tableau</find>
+      <find>State</find>
+      <find>$PROJECT_DIR$/..</find>
     </findStrings>
     <replaceStrings>
       <replace>get_ohe_config().</replace>
@@ -152,14 +158,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/covid/generate.py" />
-        <option value="$PROJECT_DIR$/covid/generate_target.py" />
-        <option value="$PROJECT_DIR$/scripts/test_covid_uniform_4000_DIS.sh" />
-        <option value="$PROJECT_DIR$/test_covid_uniform_4000.sh" />
-        <option value="$PROJECT_DIR$/scripts/discrete_ohe_uniform_covid_8.sh" />
-        <option value="$PROJECT_DIR$/test_covid_4000_ohe.sh" />
-        <option value="$PROJECT_DIR$/covid/generate_ohe.py" />
-        <option value="$PROJECT_DIR$/discrete/generate_timeseries.py" />
         <option value="$PROJECT_DIR$/test_covid_uniform_4000_DIS.sh" />
         <option value="$PROJECT_DIR$/test_covid_read_URL.sh" />
         <option value="$PROJECT_DIR$/covid/__main__.py" />
@@ -187,7 +185,6 @@
         <option value="$PROJECT_DIR$/test_covid_automate_10.sh" />
         <option value="$PROJECT_DIR$/test_covid_automate_13.sh" />
         <option value="$PROJECT_DIR$/test_covid_automate_12.sh" />
-        <option value="$PROJECT_DIR$/generate_master/__main__.py" />
         <option value="$PROJECT_DIR$/test_covid_automate_14.sh" />
         <option value="$PROJECT_DIR$/predict/__main__.py" />
         <option value="$PROJECT_DIR$/05-31-2020_06-03-2020/covid_ohe_test_15_05-31-2020_06-03-2020.sh" />
@@ -195,22 +192,31 @@
         <option value="$PROJECT_DIR$/discrete/__main__.py" />
         <option value="$PROJECT_DIR$/05-31-2020_06-03-2020/covid_discrete_test_15_05-31-2020_06-03-2020.sh" />
         <option value="$PROJECT_DIR$/test_covid_automate_19.sh" />
-        <option value="$PROJECT_DIR$/generate_ohe/__main__.py" />
-        <option value="$PROJECT_DIR$/generate_discrete/__main__.py" />
         <option value="$PROJECT_DIR$/test_covid_automate_18.sh" />
-        <option value="$PROJECT_DIR$/generate_predict/__main__.py" />
         <option value="$PROJECT_DIR$/covid/__init__.py" />
         <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/test_covid_automate_21.sh" />
+        <option value="$PROJECT_DIR$/predict/config.py" />
         <option value="$PROJECT_DIR$/test_covid_automate_20.sh" />
         <option value="$PROJECT_DIR$/predict/predictor/__init__.py" />
+        <option value="$PROJECT_DIR$/generate_discrete/__main__.py" />
+        <option value="$PROJECT_DIR$/generate_predict/__main__.py" />
+        <option value="$PROJECT_DIR$/generate_ohe/__main__.py" />
+        <option value="$PROJECT_DIR$/generate_master/__main__.py" />
+        <option value="$PROJECT_DIR$/test_covid_automate_22.sh" />
+        <option value="$PROJECT_DIR$/Dockerfile" />
+        <option value="$PROJECT_DIR$/test_covid_automate_23.sh" />
+        <option value="$PROJECT_DIR$/newflask3.py" />
+        <option value="$PROJECT_DIR$/newflask.py" />
+        <option value="$PROJECT_DIR$/test_covid_automate_24.sh" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="1680" />
     <option name="y" value="23" />
-    <option name="width" value="1676" />
-    <option name="height" value="1057" />
+    <option name="width" value="1673" />
+    <option name="height" value="1045" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -230,14 +236,27 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="ml" type="b2602c69:ProjectViewProjectNode" />
               <item name="ml" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ml" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ml" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ml" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ml" type="462c0819:PsiDirectoryNode" />
+              <item name="covid" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ml" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ml" type="462c0819:PsiDirectoryNode" />
+              <item name="discrete" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ml" type="b2602c69:ProjectViewProjectNode" />
@@ -262,16 +281,6 @@
             <path>
               <item name="ml" type="b2602c69:ProjectViewProjectNode" />
               <item name="ml" type="462c0819:PsiDirectoryNode" />
-              <item name="ohe" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ml" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ml" type="462c0819:PsiDirectoryNode" />
-              <item name="pipeline" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ml" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ml" type="462c0819:PsiDirectoryNode" />
               <item name="predict" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -284,19 +293,21 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ohe" />
+      <recent name="$PROJECT_DIR$/ohe/predictor/algorithm" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/discrete" />
       <recent name="$PROJECT_DIR$/covid" />
       <recent name="$PROJECT_DIR$/" />
       <recent name="$PROJECT_DIR$/pipeline" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/ohe" />
-      <recent name="$PROJECT_DIR$/ohe/predictor/algorithm" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -349,24 +360,24 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1680" y="23" width="1676" height="1057" extended-state="0" />
+    <frame x="1680" y="23" width="1673" height="1045" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994923" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994923" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13663484" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16258219" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Project Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Job Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -391,72 +402,16 @@
           <url>file://$PROJECT_DIR$/ohe/predictor/algorithm/mlp.py</url>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/newflask.py</url>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="31" />
+      <option name="time" value="32" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test_covid_automate_8.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="42" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_covid_automate_4.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/06-11-2020-test.csv" />
-    <entry file="file://$PROJECT_DIR$/06-11-2020-test3.csv" />
-    <entry file="file://$PROJECT_DIR$/05-31-2020_06-03-2020/covid_ohe_test_14_05-31-2020_06-03-2020.sh" />
-    <entry file="file://$PROJECT_DIR$/05-31-2020_06-03-2020/time_series_covid19_deaths_US_V4000_v3_OHE_05-31-2020_06-03-2020.csv" />
-    <entry file="file://$PROJECT_DIR$/05-31-2020_06-03-2020/covid_predict_test_14_05-31-2020_06-03-2020.sh" />
-    <entry file="file://$PROJECT_DIR$/06-02-2020_06-05-2020/covid_discrete_test_14_06-02-2020_06-05-2020.sh" />
-    <entry file="file://$PROJECT_DIR$/05-31-2020_06-03-2020/covid_discrete_test_14_05-31-2020_06-03-2020.sh" />
-    <entry file="file://$PROJECT_DIR$/06-01-2020_06-04-2020/covid_ohe_test_14_06-01-2020_06-04-2020.sh" />
-    <entry file="file://$PROJECT_DIR$/06-01-2020_06-04-2020/covid_discrete_test_14_06-01-2020_06-04-2020.sh" />
-    <entry file="file://$PROJECT_DIR$/covid_predict_test_14.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="61" lean-forward="false" selection-start-line="12" selection-start-column="61" selection-end-line="12" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/covid_master_test_14.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="26" lean-forward="true" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/06-06-2020_06-09-2020/covid_predict_test_14_06-06-2020_06-09-2020.sh" />
-    <entry file="file://$PROJECT_DIR$/test_covid_automate_11.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="35" lean-forward="false" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/test_100_MLP.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="24" lean-forward="true" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/06-01-2020_06-04-2020/covid_predict_test_14_06-01-2020_06-04-2020.sh" />
-    <entry file="file://$PROJECT_DIR$/06-01-2020_06-04-2020/time_series_covid19_deaths_US_V4000_v3_D_P_06-01-2020_06-04-2020.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/test_100_RFR.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -465,13 +420,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/06-06-2020_06-09-2020/time_series_covid19_deaths_US_V4000_v3_D_S_06-06-2020_06-09-2020.csv" />
-    <entry file="file://$PROJECT_DIR$/test_covid_automate_10.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="11" column="26" lean-forward="false" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test_covid_automate_10.sh" />
     <entry file="file://$PROJECT_DIR$/test_covid_automate_13.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -494,13 +443,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_covid_automate_1.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="24" lean-forward="false" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test_covid_automate_1.sh" />
     <entry file="file://$PROJECT_DIR$/scripts/test_ALG_COVID_ALL.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -508,27 +451,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_covid_automate_2.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_covid_automate_3.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ohe/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="19" column="15" lean-forward="true" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test_covid_automate_2.sh" />
+    <entry file="file://$PROJECT_DIR$/test_covid_automate_3.sh" />
     <entry file="file://$PROJECT_DIR$/ohe/encoder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -543,34 +467,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/discrete/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="136" column="0" lean-forward="true" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/05-31-2020_06-03-2020/covid_predict_test_15_05-31-2020_06-03-2020.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="35" lean-forward="true" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/06-15-2020-test18.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/05-31-2020_06-03-2020/covid_ohe_test_15_05-31-2020_06-03-2020.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/05-31-2020_06-03-2020/covid_predict_test_15_05-31-2020_06-03-2020.sh" />
+    <entry file="file://$PROJECT_DIR$/06-15-2020-test18.csv" />
+    <entry file="file://$PROJECT_DIR$/05-31-2020_06-03-2020/covid_ohe_test_15_05-31-2020_06-03-2020.sh" />
     <entry file="file://$PROJECT_DIR$/test_covid_automate_18.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
@@ -578,39 +477,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/covid/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="24" column="18" lean-forward="false" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/discrete_uniform_covid_22.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/05-31-2020_06-03-2020/covid_discrete_test_15_05-31-2020_06-03-2020.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="32" lean-forward="false" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/covid/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -618,7 +488,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="31" lean-forward="true" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -626,74 +495,215 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="56" lean-forward="true" selection-start-line="4" selection-start-column="56" selection-end-line="4" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/05-31-2020_06-03-2020/covid_discrete_test_15_05-31-2020_06-03-2020.sh" />
+    <entry file="file://$PROJECT_DIR$/correlation/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generate_ohe/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="33" lean-forward="true" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ohe/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="19" column="15" lean-forward="true" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/06-05-2020_06-09-2020/covid_predict_test_15_06-05-2020_06-09-2020.sh" />
+    <entry file="file://$PROJECT_DIR$/covid_predict_test_14.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="51" lean-forward="false" selection-start-line="12" selection-start-column="51" selection-end-line="12" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/06-24-2020_06-28-2020/covid_predict_test_15_06-24-2020_06-28-2020.sh" />
+    <entry file="file://$PROJECT_DIR$/06-24-2020_06-28-2020/covid_discrete_test_15_06-24-2020_06-28-2020.sh" />
+    <entry file="file://$PROJECT_DIR$/06-24-2020_06-28-2020/covid_ohe_test_15_06-24-2020_06-28-2020.sh" />
+    <entry file="file://$PROJECT_DIR$/06-26-2020_06-30-2020/covid_predict_test_15_06-26-2020_06-30-2020.sh" />
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="27" lean-forward="false" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="165">
+          <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/generate_master/__main__.py">
+    <entry file="file://$PROJECT_DIR$/test_covid_automate_21.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-675">
-          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        <state relative-caret-position="510">
+          <caret line="34" column="60" lean-forward="true" selection-start-line="34" selection-start-column="60" selection-end-line="34" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predict/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="9" lean-forward="false" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generate_ohe/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1770">
-          <caret line="121" column="18" lean-forward="false" selection-start-line="121" selection-start-column="18" selection-end-line="121" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generate_predict/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1222">
-          <caret line="23" column="30" lean-forward="false" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generate_discrete/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="668">
-          <caret line="158" column="37" lean-forward="false" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
-          <folding>
-            <element signature="e#5722#8817#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_covid_automate_20.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="24" lean-forward="false" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+        <state relative-caret-position="422">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/predict/__main__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="110" column="26" lean-forward="true" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="26" />
+        <state relative-caret-position="678">
+          <caret line="115" column="35" lean-forward="false" selection-start-line="115" selection-start-column="35" selection-end-line="115" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/predict/predictor/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="13" lean-forward="true" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        <state relative-caret-position="97">
+          <caret line="492" column="27" lean-forward="false" selection-start-line="492" selection-start-column="27" selection-end-line="492" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/covid_master_test_15.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/covid/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="16" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#15#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/covid/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="10" column="30" lean-forward="true" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/discrete/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-142">
+          <caret line="37" column="22" lean-forward="true" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/discrete/discretizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="11" lean-forward="true" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#10#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generate_discrete/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generate_ohe/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="43" column="32" lean-forward="false" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generate_predict/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="62" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generate_master/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-406">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/newflask3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="25" column="36" lean-forward="true" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="30" lean-forward="true" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/newflask.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="54" column="46" lean-forward="true" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_covid_automate_23.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="27" column="71" lean-forward="true" selection-start-line="27" selection-start-column="71" selection-end-line="27" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_covid_automate_22.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="31" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_covid_automate_24.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="37" column="47" lean-forward="true" selection-start-line="37" selection-start-column="47" selection-end-line="37" selection-end-column="47" />
           <folding />
         </state>
       </provider>

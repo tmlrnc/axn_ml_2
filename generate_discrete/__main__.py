@@ -17,6 +17,7 @@ def parse_command_line():
     parser.add_argument('--end_date_all')
     parser.add_argument('--num_bins')
     parser.add_argument('--window_size')
+    parser.add_argument('--parent_dir')
     parser.add_argument(
         '--drop_column',
         action='append')
@@ -36,6 +37,12 @@ def main():
     num_bins = args.num_bins
     window_size = args.window_size
     drop_column = args.drop_column
+
+    parent_dir = args.parent_dir
+    if parent_dir is None:
+        print("Parent dir is not specified.")
+        quit()
+    print(f"Using parent_dir: {parent_dir}")
 
     start_date_all_window_f = datetime.strptime(start_date_all, "%m/%d/%Y")
     end_date_all_window_f = datetime.strptime(end_date_all, "%m/%d/%Y")
@@ -61,7 +68,9 @@ def main():
         directory = time_series
 
         # Parent Directory path
-        parent_dir = "/Users/tomlorenc/Sites/VL_standard/ml"
+        #parent_dir = "/Users/tomlorenc/Sites/VL_standard/ml"
+        #parent_dir = "/app"
+
 
         # Path
         path = os.path.join(parent_dir, directory)
