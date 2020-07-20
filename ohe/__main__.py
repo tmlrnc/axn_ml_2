@@ -11,11 +11,11 @@ from ohe.encoder import OneHotEncoderBuilder
 
 def parse_command_line():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--file_in')
-    parser.add_argument('--file_out')
+    parser.add_argument('--file_in', help='raw csv file input to be predicted. Must be a csv file where first row has column header names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
+    parser.add_argument('--file_out', help='csv file output encoded using one-hot one-of-K encoding scheme')
     parser.add_argument(
         '--ignore',
-        action='append')
+        action='append', help='columns of data to NOT be encoded or discrtizeed - remove from processing without removing from raw data because they might be usseful to know latrer - like first name')
     args = parser.parse_args()
     return args
 

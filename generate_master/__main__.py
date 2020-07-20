@@ -8,20 +8,114 @@ import logging
 import os
 import subprocess
 from subprocess import PIPE, Popen
+
+description = \
+"""
+VoterLabs Inc. 
+Master Control
+
+  LOAD CSV DATA FROM YOUR COMPUTER 
+
+Must be a csv file where first row has column header names. 
+Must include time series date columns - MM/DD/YY (7/3/20)
+Must include targeted date or will automatically predict last date in series.
+Must include as much data of cause of time series as you can - more data equals better predictions 
+
+creates all scripts and excecutes them
+
+  READ FILE_IN_RAW.CSV
+  GET COLUMN HEADERS
+  FOR EACH COLUMN NOT IN IGNORE LIST :
+  GET ALL CATEGORIES = UNIQUE COLUMN VALUES
+  GENERATE ONE HOT ENCODING HEADER
+  ENCODE EACH ROW WITH 1 or 0 FOR EACH HEADER
+  
+  Then split into test and training sets such that:
+  Training data set—a subset to train a model.
+  Test data set—a subset to test the trained model.
+  Test set MUST meet the following two conditions:
+  Is large enough to yield statistically meaningful results.
+  Is representative of the data set as a whole. 
+  Don't pick a test set with different characteristics than the training set.
+  Then we train models using Supervised learning.
+  Supervised learning consists in learning the link between two datasets: 
+  the observed data X and an external variable y that we are trying to predict, called “target”
+  Y is a 1D array of length n_samples.
+  All VL models use a fit(X, y) method to fit the model and a predict(X) method that, given unlabeled observations X, returns the predicted target y.
+
+Model doc definition 
+
+"RFR"                             RandomForestRegressor           -          random_forest_regression.py
+  ^                                     ^                                              ^ 
+  ^                                     ^                                              ^
+  ^                                     ^                                              ^ 
+initials of the model              full name of model                        file name of model 
+to be added to 
+predictor parameter 
+
+
+"RFR" RandomForestRegressor - random_forest_regression.py
+"LR" LogisticRegression - logistic_regression.py 
+"MLP" MLP Regressor - mlp_regression.py
+"SVM" Linear SVC - svm.py
+"NUSVM" Nu SVC - nu_svm.py
+"BFRA" Brute Force Radius - brute_force_radius.py
+"NUSVMSIG" NU SVM sigmoid - nu_svm_sigmoid.py
+"LSQLDA" Least Squares LDA - least_sqaures_LDA.py
+"MULTICLASSLR" MULTI CLASS_Logistic Regression - multi_class_logistic_regression.py
+"RIDGEREGRESSION" RIDGE REGRESSION - ridge_regression.py
+"LASSOMODEL" Lasso - lasso.py
+“BAYESIANRIDGE” BayesianRidge - bayesian_ridge.py
+"KNeighborsRegressor" KNeighborsRegressor - kneighborregressor.py
+"Kmeans" Kmeans - kmeans.py
+"LARSLASSOR" LassoLars - lars_lasso.py
+"LSQLDA" least_sqaures_LDA.py
+"LINEARREGRESSION" Linear Regression - linear_regression.py
+"NONLINSVM" non linear svm - linear_svm.py
+"NONLINSVMSIGMOID" SVC(kernel='sigmoid') - linear_svm_sigmoid.py
+"PERCEPTRONNEURALNET"  Perceptron - perceptron_neural_net.py
+"PERCEPTRONNEURALNETNONLINEAR" Perceptron Non Linear - perceptron_neural_net_non_linear.py
+"PERCEPTRONNEURALNETNONLINEARL1"  Perceptron Non Linear 1 - perceptron_neural_net_l1_penalty.py
+"PERCEPTRONNEURALNETNONLINEARELASTIC - perceptron_neural_net_elastic_net_penalty.py
+"RIDGECROSSVALIDATION" RidgeCV - ridge_cross_validation.py
+"RIDGECROSSVALIDATIONNORM" RidgeCV Norm -  ridge_cross_validation_normalized.py
+"KMEDIAN"  KMEDIAN - kmedian.py
+"RANDOMFORRESTREGMAX"  RandomForestClassifier - random_forest_classifier_max.py
+"PACCLASSWE"  PassiveAggressiveClassifier weighted - passiveaggressiveclassifier.py
+"ENTROPY_DECISION_TREE" EDT - entropy_decision_tree.py
+"RANDOMDT" random decision tree - random_decision_tree.py
+"KNeighborsClassifier"  KNCLASS - knclass.py
+"KNCLASSMINKOW"  Minkowski Tree - knnclassminkow.py
+"MLPNESTEROV" mlp nesterov - mlp_nesterov.py
+"OrthogonalMatchingPursuit" Orthogonal Matching Pursuit - omp.py
+"PASSAGGCLASS" PASSIVE AGGREESISVE CLASSIFICATION - pac.py
+"PASSAGGCLASSEARLY" PASSIVE AGGREESISVE CLASSIFICATION  - pacearly.py
+"RNRREG" regional regression - rnr.py
+"DISTRNRREG" distance regression - distancernr.py
+"QDANN" quadradic aggressor - qda.py
+"MLPCLASSALPHA" mlp aggressor - mlpapha.py
+"GNB" - Gaussian Niave Bayes - gnb.py
+"ETC" - ExtraTreesClassifier - etc.py
+"ELNLRREG" - elastic net - elastic_net_logistic_regression.py
+"GNBAYESSMOOTHING" guassian niave bayes smoothing - gnb_smoothing.py
+
+      """.strip()
+
 def parse_command_line():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=description)
 
 
-    parser.add_argument('--file_in')
-    parser.add_argument('--master_file_script_out')
-    parser.add_argument('--ohe_file_script_out')
-    parser.add_argument('--predict_file_script_out')
-    parser.add_argument('--discrete_file_script_out')
+    parser.add_argument('--file_in', help='raw csv file input to be predicted. Must be a csv file where first row has column header names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
+    parser.add_argument('--master_file_script_out', help='master shell script for full automation')
+    parser.add_argument('--ohe_file_script_out', help='shell script for one hot encoding')
+    parser.add_argument('--predict_file_script_out', help='shell script for prediction')
+    parser.add_argument('--discrete_file_script_out', help='shell script for one hot discretized')
 
-    parser.add_argument('--start_date_all')
-    parser.add_argument('--end_date_all')
-    parser.add_argument('--window_size')
-    parser.add_argument('--parent_dir')
+    parser.add_argument('--start_date_all', help='start of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/3/20')
+    parser.add_argument('--end_date_all', help='end of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/22/20 ')
+    parser.add_argument('--window_size', help='number of time series increments per window - this is an integet like 4. This is the sliding window method for framing a time series dataset the increments are days')
+    parser.add_argument('--parent_dir', help='beginning of docker file system - like /app')
+
 
     args = parser.parse_args()
     return args

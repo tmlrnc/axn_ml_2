@@ -6,21 +6,47 @@ from datetime import date
 
 def diff_dates(date1, date2):
     return abs(date2-date1).days
-
+description = \
+"""
+VoterLabs Inc. 
+Master Control
+creates all scripts and excecutes them using this process:
+  READ FILE_IN_RAW.CSV
+  GET COLUMN HEADERS
+  FOR EACH COLUMN NOT IN IGNORE LIST :
+  GET ALL CATEGORIES = UNIQUE COLUMN VALUES
+  GENERATE ONE HOT ENCODING HEADER
+  ENCODE EACH ROW WITH 1 or 0 FOR EACH HEADER
+  Then split into test and training sets such that:
+  Training data set—a subset to train a model.
+  Test data set—a subset to test the trained model.
+  Test set MUST meet the following two conditions:
+  Is large enough to yield statistically meaningful results.
+  Is representative of the data set as a whole. 
+  Don't pick a test set with different characteristics than the training set.
+  Then we train models using Supervised learning.
+  Supervised learning consists in learning the link between two datasets: 
+  the observed data X and an external variable y that we are trying to predict, called “target”
+  Y is a 1D array of length n_samples.
+  All VL models use a fit(X, y) method to fit the model and a predict(X) method that, given unlabeled observations X, returns the predicted targets y.
+  
+  
+      """.strip()
 def parse_command_line():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--file_in')
-    parser.add_argument('--file_out_discrete')
-    parser.add_argument('--file_out')
-    parser.add_argument('--discrete_file_script_out')
-    parser.add_argument('--start_date_all')
-    parser.add_argument('--end_date_all')
-    parser.add_argument('--num_bins')
-    parser.add_argument('--window_size')
-    parser.add_argument('--parent_dir')
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument('--file_in', help='raw csv file input to be predicted. Must be a csv file where first row has column header names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
+    parser.add_argument('--file_out_discrete', help='raw csv file input to be discretized')
+    parser.add_argument('--file_out', help='raw csv file input to be discretized')
+    parser.add_argument('--discrete_file_script_out', help='discretized script make for each time series data directory')
+    parser.add_argument('--num_bins', help='these are the number of bins to make for all disctrization - like 4000')
+    parser.add_argument('--start_date_all', help='start of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/3/20')
+    parser.add_argument('--end_date_all', help='end of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/22/20 ')
+    parser.add_argument('--window_size', help='number of time series increments per window - this is an integet like 4. This is the sliding window method for framing a time series dataset the increments are days')
+    parser.add_argument('--parent_dir', help='beginning of docker file system - like /app')
+
     parser.add_argument(
         '--drop_column',
-        action='append')
+        action='append', help='drop column from discreteize process - BUT not from encoding or prediction')
 
     args = parser.parse_args()
     return args

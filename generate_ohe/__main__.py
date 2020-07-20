@@ -3,20 +3,51 @@ import datetime as dt
 import argparse
 from datetime import datetime, timedelta
 
+description = \
+"""
+VoterLabs Inc. 
+    features are encoded using a one-hot ‘one-of-K’ encoding scheme.
+    This creates a binary column for each category and returns a sparse matrix or dense array
+    the encoder derives the categories based on the unique values in each feature.
+
+     when features are categorical.
+     For example a person could have features
+     ["male", "female"],
+     ["from Europe", "from US", "from Asia"],
+     ["uses Firefox", "uses Chrome", "uses Safari", "uses Internet Explorer"].
+     Such features can be efficiently coded as integers,
+     for instance ["male", "from US", "uses Internet Explorer"] could be expressed as [0, 1, 3]
+     while ["female", "from Asia", "uses Chrome"] would be [1, 2, 1].
+
+    READ FILE_IN_RAW.CSV
+    
+  LOAD CSV DATA FROM YOUR COMPUTER 
+
+Must be a csv file where first row has column header names. 
+Must include time series date columns - MM/DD/YY (7/3/20)
+Must include targeted date or will automatically predict last date in series.
+Must include as much data of cause of time series as you can - more data equals better predictions 
+
+    GET COLUMN HEADERS
+    FOR EACH COLUMN NOT IN IGNORE LIST :
+    GET ALL CATEGORIES = UNIQUE COLUMN VALUES
+    GENERATE ONE HOT ENCODING HEADER
+    ENCODE EACH ROW WITH 1 or 0 FOR EACH HEADER
+      """.strip()
 
 def parse_command_line():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--file_in')
-    parser.add_argument('--file_out')
-    parser.add_argument('--ohe_file_script_out')
-    parser.add_argument('--start_date_all')
-    parser.add_argument('--end_date_all')
-    parser.add_argument('--window_size')
-    parser.add_argument('--parent_dir')
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument('--file_in', help='raw csv file input to be predicted. Must be a csv file where first row has column header names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
+    parser.add_argument('--file_out', help='csv file output encoded using one-hot one-of-K encoding scheme')
+    parser.add_argument('--ohe_file_script_out', help='ohe output script for each time splt directory of data')
+    parser.add_argument('--start_date_all', help='start of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/3/20')
+    parser.add_argument('--end_date_all', help='end of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/22/20 ')
+    parser.add_argument('--window_size', help='number of time series increments per window - this is an integet like 4. This is the sliding window method for framing a time series dataset the increments are days')
+    parser.add_argument('--parent_dir', help='beginning of docker file system - like /app')
 
     parser.add_argument(
         '--ignore',
-        action='append')
+        action='append', help='columns of data to NOT be encoded or discretized - remove from processing without removing from raw data because they might be usseful to know latrer - like first name')
     args = parser.parse_args()
     return args
 
