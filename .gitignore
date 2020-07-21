@@ -106,3 +106,6 @@ venv.bak/
 
 
 csvs/
+
+#Jenkins python environemnt
+.python_env

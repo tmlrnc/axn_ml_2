@@ -1,0 +1,83 @@
+pipeline {
+    agent any
+
+    environment {
+        TAG_NAME = 'ml-build:' + "${env.BRANCH_NAME.replaceAll('/', '-')}"
+        TEST_TAG_NAME = 'ml-build:' + "${env.BRANCH_NAME.replaceAll('/', '-')}" + '-test'
+    }
+
+    stages {
+        stage('Prebuild') {
+            steps {
+		        echo 'Prebuild...'
+                checkout scm
+                sh """
+                    bash jenkins/prebuild.sh
+                """
+            }
+        }
+
+        stage('Lint') {
+            steps {
+                echo 'Linting...'
+                sh """
+                    bash jenkins/lint.sh
+                """
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                sh """
+                    bash jenkins/build.sh
+                """
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                sh """
+                    bash jenkins/test.sh
+                """
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                sh """
+                    bash jenkins/deploy.sh
+                """
+            }
+        }
+    }
+
+    post {
+        failure {
+            script {
+                def BLAME = sh (
+                    returnStdout: true,
+                    script: 'bash scripts/bash-utils/blame.sh'
+                )
+                slackSend(color: '#FF0000',
+                          channel: 'jenkins',
+                          message: "Build failed on `ml` `${env.BRANCH_NAME}`, blaming ${BLAME}")
+            }
+        }
+
+        fixed {
+            script {
+                def BLAME = sh (
+                    returnStdout: true,
+                    script: 'bash scripts/bash-utils/blame.sh'
+                )
+                slackSend(color: '#00FF00',
+                          channel: 'jenkins',
+                          message: "Build fixed on `ml` `${env.BRANCH_NAME}`, thanks ${BLAME}")
+            }
+        }
+
+    }
+}
