@@ -32,8 +32,8 @@ class RandomForest_OHP(OneHotPredictor):
 
         then returns the accuracy
         """
-        algorithm = RandomForestClassifier(n_estimators=get_ohe_config().RF_n_estimators,
-                                        max_depth=get_ohe_config().RF_max_depth,max_features=get_ohe_config().RandomForestClassifier_max_features)
+        algorithm = RandomForestClassifier(n_estimators=get_ohe_config().rf_estimators,
+                                        max_depth=get_ohe_config().rf_max_depth,max_features=get_ohe_config().RandomForestClassifier_max_features)
 
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))

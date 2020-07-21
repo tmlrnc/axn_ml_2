@@ -36,7 +36,7 @@ class RandomForestRegression_OHP(OneHotPredictor):
 
         then returns the accuracy
         """
-        algorithm = RandomForestRegressor(n_estimators=get_ohe_config().RFR_n_estimators,
+        algorithm = RandomForestRegressor(n_estimators=get_ohe_config().r_n_estimators,
                                         max_depth=get_ohe_config().RFR_max_depth,max_features='sqrt')
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))

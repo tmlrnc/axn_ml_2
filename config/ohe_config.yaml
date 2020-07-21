@@ -1,6 +1,6 @@
-RF_n_estimators: 25
-RF_max_depth: 10
-RFR_n_estimators: 50
+rf_estimators: 25
+rf_max_depth: 10
+r_n_estimators: 50
 RFR_max_depth: 20
 SVM_random_state: 0
 SVM_max_iterations: 10000000

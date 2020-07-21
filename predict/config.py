@@ -20,9 +20,9 @@ class OHE_Config(object):
             except yaml.YAMLError as exc:
                 print(exc)
 
-        self.RF_n_estimators = config_dict["RF_n_estimators"]
-        self.RF_max_depth = config_dict["RF_max_depth"]
-        self.RFR_n_estimators = config_dict["RFR_n_estimators"]
+        self.rf_estimators = config_dict["rf_estimators"]
+        self.rf_max_depth = config_dict["rf_max_depth"]
+        self.r_n_estimators = config_dict["r_n_estimators"]
         self.RFR_max_depth = config_dict["RFR_max_depth"]
         self.SVM_random_state = config_dict["SVM_random_state"]
         self.SVM_max_iterations = config_dict["SVM_max_iterations"]
