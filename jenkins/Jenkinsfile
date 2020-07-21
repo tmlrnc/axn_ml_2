@@ -59,7 +59,7 @@ pipeline {
             script {
                 def BLAME = sh (
                     returnStdout: true,
-                    script: 'bash scripts/bash-utils/blame.sh'
+                    script: 'bash utils/bash-utils/blame.sh'
                 )
                 slackSend(color: '#FF0000',
                           channel: 'jenkins',
@@ -71,7 +71,7 @@ pipeline {
             script {
                 def BLAME = sh (
                     returnStdout: true,
-                    script: 'bash scripts/bash-utils/blame.sh'
+                    script: 'bash utils/bash-utils/blame.sh'
                 )
                 slackSend(color: '#00FF00',
                           channel: 'jenkins',
