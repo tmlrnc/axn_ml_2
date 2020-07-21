@@ -1,3 +1,6 @@
 [submodule "docker-env"]
 	path = docker-env
 	url = git@github.com:VoterLabsInc/docker-env.git
+[submodule "utils/bash-utils"]
+	path = utils/bash-utils
+	url = git@github.com:VoterLabsInc/bash-utils.git
