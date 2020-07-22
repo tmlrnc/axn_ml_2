@@ -31,7 +31,7 @@ class KMeans_OHP(OneHotPredictor):
 
         then returns the accuracy
         """
-        algorithm = KMeans(n_clusters=get_ohe_config().Kmeans_bins, random_state=0)
+        algorithm = KMeans(n_clusters=get_ohe_config().kmeans_bins, random_state=0)
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)

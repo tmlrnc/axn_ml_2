@@ -1,124 +1,155 @@
-import argparse
+"""
+To make ml models more powerful on continuous data
+VL uses discretization (also known as binning).
+We discretize the feature and one-hot encode the transformed data.
+Note that if the bins are not reasonably wide,
+there would appear to be a substantially increased risk of overfitting,
+so the discretizer parameters should usually be tuned under cross validation.
+After discretization, linear regression and decision tree make exactly the same prediction.
+As features are constant within each bin, any model must
+predict the same value for all points within a bin.
+Compared with the result before discretization,
+linear model become much more flexible while decision tree gets much less flexible.
+Note that binning features generally has no
+beneficial effect for tree-based models,
+as these models can learn to split up the data anywhere.
 
-from discrete.vl_kmeans_kmedian import K_Means, normalizer
-from discrete.binize import VL_Binizer
-from discrete.binize_kmeans import VL_Discretizer_KMeans
+Bin continuous data into intervals.
+Parameters
+----------
+n_bins : int or array-like, shape (n_features,) (default=5)
+    The number of bins to produce. Raises ValueError if ``n_bins < 2``.
+
+encode : {'onehot', 'onehot-dense', 'ordinal'}, (default='onehot')
+    Method used to encode the transformed result.
+
+    onehot
+        Encode the transformed result with one-hot encoding
+        and return a sparse matrix. Ignored features are always
+        stacked to the right.
+    onehot-dense
+        Encode the transformed result with one-hot encoding
+        and return a dense array. Ignored features are always
+        stacked to the right.
+    ordinal
+        Return the bin identifier encoded as an integer value.
+
+strategy : {'uniform', 'quantile', 'kmeans'}, (default='quantile')
+    Strategy used to define the widths of the bins.
+
+    uniform
+        All bins in each feature have identical widths.
+    quantile
+        All bins in each feature have the same number of points.
+    kmeans
+        Values in each bin have the same nearest center of a 1D k-means
+        cluster.
+
+
+n_bins_ : int array, shape (n_features,)
+    Number of bins per feature. Bins whose width are too small
+    (i.e., <= 1e-8) are removed with a warning.
+
+bin_edges_ : array of arrays, shape (n_features, )
+    The edges of each bin. Contain arrays of varying shapes ``(n_bins_, )``
+    Ignored features will have empty arrays.
+
+
+
+Sometimes it may be useful to convert the data back into the original
+feature space. The ``inverse_transform`` function converts the binned
+data into the original feature space. Each value will be equal to the mean
+of the two bin edges.
+
+DBSCAN - Density-Based Spatial Clustering of Applications with Noise.
+Finds core samples of high density and expands clusters from them.
+Good for data which contains clusters of similar density.
+
+
+The maximum distance between two samples for one to be considered as in the neighborhood of the other.
+This is not a maximum bound on the distances of points within a cluster. This is the most important
+
+
+eps: Two points are considered neighbors if the distance between the two points is below the threshold epsilon.
+min_samples: The minimum number of neighbors a given point should have in order to be classified as a core point.
+It’s important to note that the point itself is included in the minimum number of samples.
+metric: The metric to use when calculating distance between instances in a feature array (i.e. euclidean distance).
+
+The algorithm works by computing the distance between every point and all other points.
+We then place the points into one of three categories.
+
+Core point: A point with at least min_samples points whose distance
+with respect to the point is below the threshold defined by epsilon.
+
+Border point: A point that isn’t in close proximity to at least min_samples points but is close enough to one or more core point.
+Border points are included in the cluster of the closest core point.
+
+Noise point: Points that aren’t close enough to core points to be considered border points. Noise points are ignored.
+That is to say, they aren’t part of any cluster.
+
+
+"""
+
 import csv
 
-import pandas
-import pandas as pd
-import numpy
-import numpy as np
-
-
-from ohe.encoder import OneHotEncoderBuilder
-from discrete.discretizer import DiscretizerBuilder
-
-
-def parse_command_line():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--file_in')
-    parser.add_argument('--file_out_ohe')
-    parser.add_argument('--file_out_discrete')
-    parser.add_argument('--file_out_ohe_dis')
-
-    parser.add_argument(
-        '--drop',
-        action='append')
-    parser.add_argument('--file_out')
-    parser.add_argument('--dicretize', nargs='+',  action='append')
-
-
-
-    args = parser.parse_args()
-    return args
 
 def main():
     """
-  READ FILE_IN_RAW.CSV
-  GET COLUMN HEADERS
-  FOR EACH COLUMN NOT IN IGNORE LIST :
-  GET ALL CATEGORIES = UNIQUE COLUMN VALUES
-  GENERATE ONE HOT ENCODING HEADER
-  ENCODE EACH ROW WITH 1 or 0 FOR EACH HEADER
+transform ts
 
       """
     ######################################################################
     #
     # read run commands
     #
-    args = parse_command_line()
-    file_in_name = args.file_in
-    file_out_discrete = args.file_out_discrete
-    file_out = args.file_out
+    # pylint: disable=consider-iterating-dictionary
+    # pylint: disable=too-many-locals
 
-    file_out_ohe_dis = args.file_out_ohe_dis
-    vl_dicretize_list_many = args.dicretize
 
-    ######################################################################
-    #
-    # Discretize
-    #
     print("Discretize --- START ")
-    file_in_name_org = file_in_name
-    file_out_org = file_out
-
-
-
-    #import random
-    #for i in range(10000):
-    #    print(str(random.random()) + ",")
-    #exit()
-
-    df = pandas.read_csv(file_in_name_org).fillna(value=0)
-
-    import csv
     filename = 'covid_joe7.csv'
     outfile = 'covid_joe7_pivot.csv'
     headers = []
     headerset = set()
     regions = {}
-    with open(filename) as io:
-        reader = csv.DictReader(io)
-        for r in reader:
-            print(r)
-            region = r['Country']
-            date = r['\ufeffDate']
+    with open(filename) as io_my:
+        reader = csv.DictReader(io_my)
+        for r_my in reader:
+            print(r_my)
+            region = r_my['Country']
+            date = r_my['\ufeffDate']
             if region not in regions:
                 regions[region] = {}
-            regions[region][date] = {'confirmed': r['confirmed'],
-                                     'deaths': r['deaths'],
-                                     'recovered': r['recovered']
+            regions[region][date] = {'confirmed': r_my['confirmed'],
+                                     'deaths': r_my['deaths'],
+                                     'recovered': r_my['recovered']
                                      }
     records = []
     for region in regions.keys():
-        r = {}
-        r['Country'] = region
+        r_my = {}
+        r_my['Country'] = region
         for date, data in regions[region].items():
             confirmed = date + '_confirmed'
             deaths = date + '_deaths'
             recovered = date + '_recovered'
-            r[confirmed] = data['confirmed']
-            r[deaths] = data['deaths']
-            r[recovered] = data['recovered']
-            for h in [confirmed, deaths, recovered]:
-                if h in headerset:
+            r_my[confirmed] = data['confirmed']
+            r_my[deaths] = data['deaths']
+            r_my[recovered] = data['recovered']
+            for h_my in [confirmed, deaths, recovered]:
+                if h_my in headerset:
                     continue
-                headers.append(h)
-                headerset.add(h)
-        records.append(r)
+                headers.append(h_my)
+                headerset.add(h_my)
+        records.append(r_my)
     headers.sort(reverse=True)
     headers = ['Country'] + headers
-    with open(outfile, 'w') as io:
-        writer = csv.DictWriter(io, fieldnames=headers)
+    with open(outfile, 'w') as io_my:
+        writer = csv.DictWriter(io_my, fieldnames=headers)
         writer.writeheader()
         writer.writerows(records)
 
     print("Discretize --- END ")
 
 
-
 if __name__ == '__main__':
     main()
-
-

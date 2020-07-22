@@ -1,12 +1,9 @@
 import yaml
 
-class OHE_Config(object):
+class OHE_Config():
     """
-
   reads config yaml file into config dictionary data object
   to drive the scikit learn machine learning algorithm
-
-
       """
     ohe_config = None
 
@@ -23,37 +20,31 @@ class OHE_Config(object):
         self.rf_estimators = config_dict["rf_estimators"]
         self.rf_max_depth = config_dict["rf_max_depth"]
         self.r_n_estimators = config_dict["r_n_estimators"]
-        self.RFR_max_depth = config_dict["RFR_max_depth"]
-        self.SVM_random_state = config_dict["SVM_random_state"]
-        self.SVM_max_iterations = config_dict["SVM_max_iterations"]
-        self.SVM_multi_class = config_dict["SVM_multi_class"]
-        self.RandomForestClassifier_max_features = config_dict["RandomForestClassifier_max_features"]
-        self.Perceptron_class_weight = config_dict["Perceptron_class_weight"]
-
-        self.LR_random_state = config_dict["LR_random_state"]
-
-        self.LogisticRegression_solver = config_dict["LogisticRegression_solver"]
-        self.DTC_random_state = config_dict["DTC_random_state"]
-        self.RNR_radius = config_dict["RNR_radius"]
-        self.Kmeans_bins = config_dict["Kmeans_bins"]
-        self.KNeighborsClassifier_NN = config_dict["KNeighborsClassifier_NN"]
-
-
-        self.RNN_window_size = config_dict["RNN_window_size"]
-        self.RNN_n = config_dict["RNN_n"]
-        self.RNN_epochs = config_dict["RNN_epochs"]
-        self.RNN_learning_rate = config_dict["RNN_learning_rate"]
-
-        self.MLP_solver = config_dict["MLP_solver"]
-        self.MLP_random_state = config_dict["MLP_random_state"]
-        self.MLP_layers = config_dict["MLP_layers"]
-        self.MLP_neurons = config_dict["MLP_neurons"]
-        self.MLP_alpha = config_dict["MLP_alpha"]
-
+        self.r_max_depth = config_dict["r_max_depth"]
+        self.s_random_state = config_dict["s_random_state"]
+        self.s_max_iterations = config_dict["s_max_iterations"]
+        self.s_multi_class = config_dict["s_multi_class"]
+        self.rfc_max_features = config_dict["rfc_max_features"]
+        self.perceptron_class_weight = config_dict["perceptron_class_weight"]
+        self.lr_random_state = config_dict["lr_random_state"]
+        self.logisticregression_solver = config_dict["logisticregression_solver"]
+        self.dtc_random_state = config_dict["dtc_random_state"]
+        self.rnr_radius = config_dict["rnr_radius"]
+        self.kmeans_bins = config_dict["kmeans_bins"]
+        self.kneighbors_classifiernn = config_dict["kneighbors_classifiernn"]
+        self.rnn_window_size = config_dict["rnn_window_size"]
+        self.rnn_n = config_dict["rnn_n"]
+        self.rnn_epochs = config_dict["rnn_epochs"]
+        self.rnn_learning_rate = config_dict["rnn_learning_rate"]
+        self.mlp_solver = config_dict["mlp_solver"]
+        self.MLP_random_state = config_dict["mlp_random_state"]
+        self.MLP_layers = config_dict["mlp_layers"]
+        self.MLP_neurons = config_dict["mlp_neurons"]
+        self.MLP_alpha = config_dict["mlp_alpha"]
         OHE_Config.ohe_config = self
 
 def get_ohe_config():
-    if OHE_Config.ohe_config == None:
+    if OHE_Config.ohe_config is None:
         raise Exception("OHE Config has not been initialized, call init_ohe_config first.")
     return OHE_Config.ohe_config
 

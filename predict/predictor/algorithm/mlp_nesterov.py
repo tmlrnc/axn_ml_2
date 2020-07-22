@@ -11,7 +11,7 @@ class MLPClassifier_NESTEROV_OHP(OneHotPredictor):
         self.model_name = 'MLPNESTEROV'
 
     def predict(self):
-        algorithm = MLPClassifier(solver=get_ohe_config().MLP_solver, alpha=get_ohe_config().MLP_alpha,max_iter=400,
+        algorithm = MLPClassifier(solver=get_ohe_config().mlp_solver, alpha=get_ohe_config().MLP_alpha,max_iter=400,
                                  hidden_layer_sizes=(get_ohe_config().MLP_layers, get_ohe_config().MLP_neurons),
                                  random_state=get_ohe_config().MLP_random_state)
         algorithm.fit(self.X_train, self.y_train)

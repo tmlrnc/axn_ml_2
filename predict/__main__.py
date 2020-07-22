@@ -9,8 +9,8 @@ import numpy
 
 from predict.predictor import OneHotPredictorBuilder, Runner, get_algorithm_from_string
 description = \
-        """
-        VoterLabs Inc. 
+    """
+        VoterLabs Inc.
 
 
   READ FILE_IN_RAW.CSV
@@ -19,32 +19,32 @@ description = \
   GET ALL CATEGORIES = UNIQUE COLUMN VALUES
   GENERATE ONE HOT ENCODING HEADER
   ENCODE EACH ROW WITH 1 or 0 FOR EACH HEADER
-  
-  Then split into test and training sets such that: Training data set—a subset to train a model. Test data set—a subset to test the trained model. 
+
+  Then split into test and training sets such that: Training data set—a subset to train a model. Test data set—a subset to test the trained model.
   Test set MUST meet the following two conditions:
   Is large enough to yield statistically meaningful results.
-  Is representative of the data set as a whole. 
+  Is representative of the data set as a whole.
   Don't pick a test set with different characteristics than the training set.
   Then we train models using Supervised learning.
-  Supervised learning consists in learning the link between two datasets: 
+  Supervised learning consists in learning the link between two datasets:
   the observed data X and an external variable y that we are trying to predict, called “target”
   Y is a 1D array of length n_samples.
   All VL models use a fit(X, y) method to fit the model and a predict(X) method that, given unlabeled observations X, returns the predicted labels y.
   a regressor model is a set of methods intended for regression in which the target value is expected to be a linear combination of the features.
 
-Model doc definition 
+Model doc definition
 
 "RFR"                             RandomForestRegressor           -          random_forest_regression.py
-  ^                                     ^                                              ^ 
   ^                                     ^                                              ^
-  ^                                     ^                                              ^ 
-initials of the model              full name of model                        file name of model 
-to be added to 
-predictor parameter 
+  ^                                     ^                                              ^
+  ^                                     ^                                              ^
+initials of the model              full name of model                        file name of model
+to be added to
+predictor parameter
 
 
 "RFR" RandomForestRegressor - random_forest_regression.py
-"LR" LogisticRegression - logistic_regression.py 
+"LR" LogisticRegression - logistic_regression.py
 "MLP" MLP Regressor - mlp_regression.py
 "SVM" Linear SVC - svm.py
 "NUSVM" Nu SVC - nu_svm.py
@@ -93,26 +93,45 @@ predictor parameter
 
               """.strip()
 
+
 def parse_command_line():
     parser = argparse.ArgumentParser(description=description)
-    parser.add_argument('--file_in', help='raw csv file input to be predicted. Must be a csv file where first row has column header names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
-    parser.add_argument('--file_in_master', help='raw csv file input to be mastered')
-    parser.add_argument('--file_out_predict', help='predicted output verus actual')
-    parser.add_argument('--file_out_tableau', help='tableau formated prediction outputs: Location | Act |Pred | Date')
+    parser.add_argument(
+        '--file_in',
+        help='raw csv file input to be predicted. Must be a csv file where first row has column header names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
+    parser.add_argument(
+        '--file_in_master',
+        help='raw csv file input to be mastered')
+    parser.add_argument(
+        '--file_out_predict',
+        help='predicted output verus actual')
+    parser.add_argument(
+        '--file_out_tableau',
+        help='tableau formated prediction outputs: Location | Act |Pred | Date')
     parser.add_argument('--file_out_scores', help='tabelau formteed')
     parser.add_argument('--strategy', help='predict startegy')
-    parser.add_argument('--training_test_split_percent', type=int, help='Then split into test and training sets such that: Training data set—a subset to train a model. Test data set—a subset to test the trained model.')
-    parser.add_argument('--file_in_config', help='model config that holds the hyperparametrs of algorthms like number of iterations')
-    parser.add_argument('--target', help='column name to be targeted for prediction it can be categorical or continuous data')
+    parser.add_argument(
+        '--training_test_split_percent',
+        type=int,
+        help='Then split into test and training sets such that: Training data set—a subset to train a model. Test data set—a subset to test the trained model.')
+    parser.add_argument(
+        '--file_in_config',
+        help='model config that holds the hyperparametrs of algorthms like number of iterations')
+    parser.add_argument(
+        '--target',
+        help='column name to be targeted for prediction it can be categorical or continuous data')
     parser.add_argument(
         '--predictor',
-        action='append', help='the initals of the machine learning algortihm you wish to include in the optimization process - the initals are in the description')
+        action='append',
+        help='the initals of the machine learning algortihm you wish to include in the optimization process - the initals are in the description')
     parser.add_argument(
         '--score',
-        action='append', help='output file scores the models - scores being accuracy, recall, precision - True Positive , False Positive, False Negative, True Negative for Confusion Matrix ')
+        action='append',
+        help='output file scores the models - scores being accuracy, recall, precision - True Positive , False Positive, False Negative, True Negative for Confusion Matrix ')
     parser.add_argument(
         '--ignore',
-        action='append', help='columns of data to NOT be encoded or discretized - remove from processing without removing from raw data because they might be usseful to know latrer - like first name')
+        action='append',
+        help='columns of data to NOT be encoded or discretized - remove from processing without removing from raw data because they might be usseful to know latrer - like first name')
     args = parser.parse_args()
     return args
 
@@ -182,8 +201,6 @@ GNBAYESSMOOTHING - gnb_smoothing.py
     # read run commands
     #
 
-
-
     args = parse_command_line()
     file_in_name = args.file_in
     file_in_master = args.file_in_master
@@ -201,7 +218,8 @@ GNBAYESSMOOTHING - gnb_smoothing.py
         ignore_list.append(ignore)
     init_ohe_config(file_in_config)
     new_target = args.target
-    algorithms = set( get_algorithm_from_string(p.strip().upper()) for p in args.predictor)
+    algorithms = set(get_algorithm_from_string(p.strip().upper())
+                     for p in args.predictor)
     ######################################################################
 
     print("Predict Scoring --- START ")
@@ -210,7 +228,6 @@ GNBAYESSMOOTHING - gnb_smoothing.py
     # Predict Scoring
     #
     #data_frame = pandas.read_csv(file_in_name).fillna(value=0)
-
 
     print("self.ignore_list " + str(ignore_list))
     data_frame_all = pandas.read_csv(file_in_name).fillna(value=0)
@@ -226,27 +243,39 @@ GNBAYESSMOOTHING - gnb_smoothing.py
 
     print(data_frame_ignore_frame)
 
-
     # print("self.data_frame_ignore_frame_list " + str(self.data_frame_ignore_frame_list))
 
     feature_name_list = list(data_frame_org.columns)
     write_header_flag = 1
     write_actual_flag = 1
-    ohp_builder = OneHotPredictorBuilder(new_target, training_test_split_percent, data_frame_org, strategy)
+    ohp_builder = OneHotPredictorBuilder(
+        new_target,
+        training_test_split_percent,
+        data_frame_org,
+        strategy)
     features = [f for f in feature_name_list if f != new_target]
     print("features: " + str(list(features)))
 
     for f in features:
         ohp_builder.add_feature(f)
     runner = Runner(ohp_builder, algorithms)
-    runner.run_and_build_predictions(score_list,file_out_predict,  data_frame_ignore_frame, training_test_split_percent, ignore_list, write_actual_flag)
-    runner.write_predict_csv(file_out_scores, file_out_tableau, file_in_master,file_out_predict, new_target,write_header_flag)
-
+    runner.run_and_build_predictions(
+        score_list,
+        file_out_predict,
+        data_frame_ignore_frame,
+        training_test_split_percent,
+        ignore_list,
+        write_actual_flag)
+    runner.write_predict_csv(
+        file_out_scores,
+        file_out_tableau,
+        file_in_master,
+        file_out_predict,
+        new_target,
+        write_header_flag)
 
     print("Predict Scoring --- END ")
 
 
 if __name__ == '__main__':
     main()
-
-

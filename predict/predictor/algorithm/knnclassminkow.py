@@ -31,7 +31,7 @@ class KNCLASSMIN_OHP(OneHotPredictor):
 
         then returns the accuracy
         """
-        algorithm = KNeighborsClassifier(n_neighbors=get_ohe_config().KNeighborsClassifier_NN,metric='minkowski')
+        algorithm = KNeighborsClassifier(n_neighbors=get_ohe_config().kneighbors_classifiernn,metric='minkowski')
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)
