@@ -29,11 +29,11 @@ With different results, you'll likely have different centroids and slightly
 different dataset points in each cluster.
 
 """
-import utils
+from collections import defaultdict
+import random
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
-import random
-from collections import defaultdict
+import utils
 
 
 class Kmeans:
@@ -69,12 +69,16 @@ and slightly different dataset points in each cluster.
 
       """
 
+    # pylint: disable=no-member
+
     def __init__(self, k=4, tol=0.001, max_iter=300):
 
         self.k = k
 
         self.tol = tol
         self.max_iter = max_iter
+        self.centroids = {}
+        self.classifications = {}
 
     def fit(self, data):
         """
@@ -94,6 +98,10 @@ and slightly different dataset points in each cluster.
         self
         """
         # pylint: disable=too-many-locals
+        # pylint: disable=redefined-outer-name
+        # pylint: disable=too-many-instance-attributes
+
+
         # edge_array must defauilt to []
         self.centroids = {}
 
@@ -123,9 +131,9 @@ and slightly different dataset points in each cluster.
 
             optimized = True
 
-            for c in self.centroids:
-                original_centroid = prev_centroids[c]
-                current_centroid = self.centroids[c]
+            for c_my in self.centroids:
+                original_centroid = prev_centroids[c_my]
+                current_centroid = self.centroids[c_my]
                 if np.sum((current_centroid - original_centroid) /
                           original_centroid * 100.0) > self.tol:
                     print("ITER " + str(np.sum((current_centroid -
@@ -136,17 +144,25 @@ and slightly different dataset points in each cluster.
                 break
 
     def predict(self, data):
+        """
+        prediction entry point where linear algebra is used to measure group distance
+        located groups - of dataset points.
+        """
         distances = [np.linalg.norm(data - self.centroids[centroid])
                      for centroid in self.centroids]
         classification = distances.index(min(distances))
         return classification
 
 
-class KMeans_assign(object):
+class KmeansAssign():
     """
     Calculations associated with K-Means clustering on a set of n-dimensional data points to find clusters - closely
     located groups - of dataset points.
     """
+    # pylint: disable=useless-return
+    # pylint: disable=too-many-instance-attributes
+    # pylint: disable=unused-variable
+
 
     def __init__(
             self,
@@ -326,12 +342,36 @@ normalizer = MinMaxScaler()
 
 
 class Kmedians:
+    """
+    Calculations associated with K-Means clustering on a set of n-dimensional data points to find clusters - closely
+    located groups - of dataset points.
+    """
+    # pylint: disable=useless-return
+    # pylint: disable=too-many-instance-attributes
+    # pylint: disable=invalid-name
+    # pylint: disable=no-member
 
     def __init__(self, k):
         self.k = k
         self.medians = []
 
     def fit(self, X):
+        """
+        Fit the estimator.
+
+        Parameters
+        ----------
+        X : numeric array-like, shape (n_samples, n_features)
+            Data to be discretized.
+
+        y : None
+            Ignored. This parameter exists only for compatibility with
+            :class:`sklearn.pipeline.Pipeline`.
+
+        Returns
+        -------
+        self
+        """
         N, D = X.shape
         y = np.ones(N)
 
@@ -362,13 +402,20 @@ class Kmedians:
         self.medians = medians
 
     def predict(self, X):
+        """
+        prediction entry point where linear algebra is used to measure group distance
+        located groups - of dataset points.
+        """
         medians = self.medians
         dist2 = utils.euclidean_dist_squared(X, medians)
         dist2[np.isnan(dist2)] = np.inf
         return np.argmin(dist2, axis=1)
 
     def error(self, X):
-        N, D = X.shape
+        """
+        error entry point where linear algebra is used to measure group distance
+        located groups - of dataset points.
+        """
         medians = self.medians
         closest_median_indexes = self.predict(X)
 

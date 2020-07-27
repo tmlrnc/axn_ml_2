@@ -14,7 +14,6 @@ EOF
 function lint {
     pylint covid
     pylint discrete
-    pylint feature_sample
     pylint generate_discrete
     pylint generate_master
     pylint generate_ohe

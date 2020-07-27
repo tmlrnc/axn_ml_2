@@ -13,7 +13,7 @@ import csv
 import pandas as pd
 from sklearn.cluster import DBSCAN
 from discrete.binize import VlBinizer
-from discrete.binize_kmeans import VL_Discretizer_KMeans
+from discrete.binize_kmeans import VlDiscretizerKmeans
 
 
 class Discretizer():
@@ -152,7 +152,7 @@ depending on the sparse parameter the encoder derives the categories based on th
             for e_a in self.edge_array_list:
                 my_edge_array.append(float(e_a))
 
-            binizer = VL_Discretizer_KMeans(
+            binizer = VlDiscretizerKmeans(
                 n_bins=my_bins,
                 encode='ordinal',
                 strategy=my_strategy,
@@ -166,7 +166,7 @@ depending on the sparse parameter the encoder derives the categories based on th
         elif my_strategy == "kmeans":
             print('kmeans strategy ************************************* ')
 
-            binizer = VL_Discretizer_KMeans(
+            binizer = VlDiscretizerKmeans(
                 n_bins=my_bins, encode='ordinal', strategy=my_strategy)
             binizer.fit(x_my)
             xt_vl_k = binizer.transform(x_my)

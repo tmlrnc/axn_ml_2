@@ -191,6 +191,8 @@ That is to say, they aren’t part of any cluster.
     # pylint: disable=singleton-comparison
     # pylint: disable=no-member
     # pylint: disable=attribute-defined-outside-init
+    # pylint: disable=duplicate-code
+
 
     def __init__(
             self,
@@ -348,13 +350,11 @@ That is to say, they aren’t part of any cluster.
             Data in the binned space.
         """
         check_is_fitted(self)
-
         x_myt = check_array(x_my, copy=True, dtype=FLOAT_DTYPES)
         n_features = self.n_bins_.shape[0]
         if x_myt.shape[1] != n_features:
-            raise ValueError("Incorrect number of features. Expecting {}, "
+            raise ValueError("Incorrect number of {}, "
                              "received {}.".format(n_features, x_myt.shape[1]))
-
         bin_edges = self.bin_edges_
         for jj in range(x_myt.shape[1]):
 
