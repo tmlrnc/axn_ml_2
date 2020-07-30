@@ -1,13 +1,14 @@
-from covid import downloader
-import datetime as dt
+"""
+generates the master scripts
+"""
+# pylint: disable=invalid-name
+
+
 import argparse
 from datetime import datetime, timedelta
-import requests
-import filecmp
 import logging
 import os
-import subprocess
-from subprocess import PIPE, Popen
+import time
 
 description = \
     """
@@ -103,11 +104,17 @@ predictor parameter
 
 
 def parse_command_line():
+    """
+    reads the command line args
+    """
+    # pylint: disable=invalid-name
+
     parser = argparse.ArgumentParser(description=description)
 
     parser.add_argument(
         '--file_in',
-        help='raw csv file input to be predicted. Must be a csv file where first row has column header names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
+        help='raw csv file input to be predicted. Must be a csv file where first row has '
+             'column header names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
     parser.add_argument('--master_file_script_out',
                         help='master shell script for full automation')
     parser.add_argument(
@@ -128,7 +135,8 @@ def parse_command_line():
         help='end of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/22/20 ')
     parser.add_argument(
         '--window_size',
-        help='number of time series increments per window - this is an integet like 4. This is the sliding window method for framing a time series dataset the increments are days')
+        help='number of time series increments per window - '
+             'this is an integet like 4. This is the sliding window method for framing a time series dataset the increments are days')
     parser.add_argument(
         '--parent_dir',
         help='beginning of docker file system - like /app')
@@ -138,18 +146,26 @@ def parse_command_line():
 
 
 def main():
+    """
+    runs the master module
+    """
+    # pylint: disable=invalid-name
+    # pylint: disable=too-many-locals
+    # pylint: disable=consider-using-sys-exit
+    # pylint: disable=unused-variable
+    # pylint: disable=too-many-statements
+
+
     log = logging.getLogger("logger")
     log.setLevel(logging.INFO)
     logging.basicConfig()
 
     log.info("IM MASTER")
     args = parse_command_line()
-    file_in = args.file_in
     start_date_all = args.start_date_all
     end_date_all = args.end_date_all
     discrete_file_script_out = args.discrete_file_script_out
 
-    master_file_script_out = args.master_file_script_out
     predict_file_script_out = args.predict_file_script_out
 
     window_size = args.window_size
@@ -174,13 +190,12 @@ def main():
         quit()
     print(f"Using parent_dir: {parent_dir}")
 
-    while (end_window_date_next < end_date_all_window_f):
+    while end_window_date_next < end_date_all_window_f:
         start_window_date = start_window_date_next
         end_window_date = end_window_date_next
         time_series = start_window_date.strftime(
             "%m-%d-%Y") + "_" + end_window_date.strftime("%m-%d-%Y")
 
-        import os
 
         # Directory
         directory = time_series
@@ -213,9 +228,7 @@ def main():
 
         start_date_window_f = start_window_date
         end_date_window_f = end_window_date
-        import time
         start = time.time()
-        import os
 
         comm = "exec bash " + discrete_file_script_out_ts_path
         os.system(comm)

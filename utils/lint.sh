@@ -19,7 +19,6 @@ function lint {
     pylint generate_ohe
     pylint generate_predict
     pylint ohe
-    pylint pipeline
     pylint predict
 }
 

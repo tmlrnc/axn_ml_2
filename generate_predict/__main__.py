@@ -1,5 +1,10 @@
-from covid import downloader
-import datetime as dt
+"""
+generates the master scripts
+"""
+# pylint: disable=invalid-name
+
+import os
+
 import argparse
 from datetime import datetime, timedelta
 description = \
@@ -90,13 +95,18 @@ predictor parameter
 
 
 def parse_command_line():
+    """
+    reads the command line args
+    """
+    # pylint: disable=invalid-name
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument(
         '--target',
         help='column name to be targeted for prediction it can be categorical or continuous data')
     parser.add_argument(
         '--file_out_scores',
-        help='output file scores the models - scores being accuracy, recall, precision - True Positive , False Positive, False Negative, True Negative for Confusion Matrix ')
+        help='output file scores the models - scores being accuracy, recall, precision - True Positive , '
+             'False Positive, False Negative, True Negative for Confusion Matrix ')
     parser.add_argument(
         '--file_out_predict',
         help='predicted output versus actual')
@@ -112,7 +122,8 @@ def parse_command_line():
 
     parser.add_argument(
         '--file_in',
-        help='raw csv file input to be predicted. Must be a csv file where first row has column header names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
+        help='raw csv file input to be predicted. Must be a csv file where first row has column header names. '
+             'Must include time series date columns - like MM/DD/YY (7/3/20) ')
     parser.add_argument(
         '--predict_file_script_out',
         help='shell script for each time series sliced directory of data that creates predictions')
@@ -124,7 +135,8 @@ def parse_command_line():
         help='end of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/22/20 ')
     parser.add_argument(
         '--window_size',
-        help='number of time series increments per window - this is an integet like 4. This is the sliding window method for framing a time series dataset the increments are days')
+        help='number of time series increments per window - this is an integet like 4. '
+             'This is the sliding window method for framing a time series dataset the increments are days')
     parser.add_argument(
         '--parent_dir',
         help='beginning of docker file system - like /app')
@@ -138,6 +150,14 @@ def parse_command_line():
 
 
 def main():
+    """
+    runs the predict module
+    """
+    # pylint: disable=invalid-name
+    # pylint: disable=too-many-locals
+    # pylint: disable=consider-using-sys-exit
+    # pylint: disable=unused-variable
+    # pylint: disable=too-many-statements
     args = parse_command_line()
     file_in = args.file_in
     target = args.target
@@ -172,13 +192,12 @@ def main():
         quit()
     print(f"Using parent_dir: {parent_dir}")
 
-    while (end_window_date_next < end_date_all_window_f):
+    while end_window_date_next < end_date_all_window_f:
         start_window_date = start_window_date_next
         end_window_date = end_window_date_next
         time_series = start_window_date.strftime(
             "%m-%d-%Y") + "_" + end_window_date.strftime("%m-%d-%Y")
 
-        import os
 
         # Directory
         directory = time_series

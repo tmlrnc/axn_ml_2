@@ -1,13 +1,15 @@
+"""
+reads config yaml file into config dictionary data object
+to drive the scikit learn machine learning algorithm
+"""
+# pylint: disable=too-many-locals
+# pylint: disable=invalid-name
+# pylint: disable=too-many-statements
 import argparse
-
-from predict.config import init_ohe_config
-import csv
-
-import pandas
 import pandas as pd
-import numpy
-
+from predict.config import init_ohe_config
 from predict.predictor import OneHotPredictorBuilder, Runner, get_algorithm_from_string
+
 description = \
     """
         VoterLabs Inc.
@@ -95,10 +97,15 @@ predictor parameter
 
 
 def parse_command_line():
+    """
+    reads the command line args
+    """
+    # pylint: disable=invalid-name
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument(
         '--file_in',
-        help='raw csv file input to be predicted. Must be a csv file where first row has column header names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
+        help='raw csv file input to be predicted. Must be a csv file where first row has column header names. '
+             'Must include time series date columns - like MM/DD/YY (7/3/20) ')
     parser.add_argument(
         '--file_in_master',
         help='raw csv file input to be mastered')
@@ -113,7 +120,8 @@ def parse_command_line():
     parser.add_argument(
         '--training_test_split_percent',
         type=int,
-        help='Then split into test and training sets such that: Training data set—a subset to train a model. Test data set—a subset to test the trained model.')
+        help='Then split into test and training sets such that: Training data set—a subset to train a model. '
+             'Test data set—a subset to test the trained model.')
     parser.add_argument(
         '--file_in_config',
         help='model config that holds the hyperparametrs of algorthms like number of iterations')
@@ -127,11 +135,13 @@ def parse_command_line():
     parser.add_argument(
         '--score',
         action='append',
-        help='output file scores the models - scores being accuracy, recall, precision - True Positive , False Positive, False Negative, True Negative for Confusion Matrix ')
+        help='output file scores the models - scores being accuracy, recall, precision - True Positive , '
+             'False Positive, False Negative, True Negative for Confusion Matrix ')
     parser.add_argument(
         '--ignore',
         action='append',
-        help='columns of data to NOT be encoded or discretized - remove from processing without removing from raw data because they might be usseful to know latrer - like first name')
+        help='columns of data to NOT be encoded or discretized - remove from processing without '
+             'removing from raw data because they might be usseful to know latrer - like first name')
     args = parser.parse_args()
     return args
 
@@ -230,7 +240,7 @@ GNBAYESSMOOTHING - gnb_smoothing.py
     #data_frame = pandas.read_csv(file_in_name).fillna(value=0)
 
     print("self.ignore_list " + str(ignore_list))
-    data_frame_all = pandas.read_csv(file_in_name).fillna(value=0)
+    data_frame_all = pd.read_csv(file_in_name).fillna(value=0)
 
     data_frame_org = data_frame_all
 

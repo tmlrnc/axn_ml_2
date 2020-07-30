@@ -1,7 +1,10 @@
-from covid import downloader
-import datetime as dt
+"""
+generates the ohe scripts
+"""
+# pylint: disable=invalid-name
 import argparse
 from datetime import datetime, timedelta
+import os
 
 description = \
     """
@@ -37,10 +40,15 @@ Must include as much data of cause of time series as you can - more data equals 
 
 
 def parse_command_line():
+    """
+    reads the command line args
+    """
+    # pylint: disable=invalid-name
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument(
         '--file_in',
-        help='raw csv file input to be predicted. Must be a csv file where first row has column header names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
+        help='raw csv file input to be predicted. Must be a csv file where first row has column header names. '
+             'Must include time series date columns - like MM/DD/YY (7/3/20) ')
     parser.add_argument(
         '--file_out',
         help='csv file output encoded using one-hot one-of-K encoding scheme')
@@ -55,7 +63,8 @@ def parse_command_line():
         help='end of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/22/20 ')
     parser.add_argument(
         '--window_size',
-        help='number of time series increments per window - this is an integet like 4. This is the sliding window method for framing a time series dataset the increments are days')
+        help='number of time series increments per window - this is an integet like 4. '
+             'This is the sliding window method for framing a time series dataset the increments are days')
     parser.add_argument(
         '--parent_dir',
         help='beginning of docker file system - like /app')
@@ -63,12 +72,21 @@ def parse_command_line():
     parser.add_argument(
         '--ignore',
         action='append',
-        help='columns of data to NOT be encoded or discretized - remove from processing without removing from raw data because they might be usseful to know latrer - like first name')
+        help='columns of data to NOT be encoded or discretized - remove from processing without removing '
+             'from raw data because they might be usseful to know latrer - like first name')
     args = parser.parse_args()
     return args
 
 
 def main():
+    """
+    runs the master module
+    """
+    # pylint: disable=invalid-name
+    # pylint: disable=too-many-locals
+    # pylint: disable=consider-using-sys-exit
+    # pylint: disable=unused-variable
+    # pylint: disable=too-many-statements
     args = parse_command_line()
     file_in = args.file_in
     file_out = args.file_out
@@ -95,14 +113,13 @@ def main():
         quit()
     print(f"Using parent_dir: {parent_dir}")
 
-    while (end_window_date_next < end_date_all_window_f):
+    while end_window_date_next < end_date_all_window_f:
 
         start_window_date = start_window_date_next
         end_window_date = end_window_date_next
         time_series = start_window_date.strftime(
             "%m-%d-%Y") + "_" + end_window_date.strftime("%m-%d-%Y")
 
-        import os
 
         # Directory
         directory = time_series

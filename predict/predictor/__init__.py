@@ -1,3 +1,14 @@
+"""
+reads config yaml file into config dictionary data object
+to drive the scikit learn machine learning algorithm
+"""
+# pylint: disable=too-many-locals
+# pylint: disable=invalid-name
+# pylint: disable=too-many-statements
+# pylint: disable=too-many-arguments
+# pylint: disable=unreachable
+# pylint: disable=too-many-instance-attributes
+
 import csv
 import sys
 import importlib
@@ -5,9 +16,9 @@ import pkgutil
 from abc import ABC, abstractmethod
 from sklearn.preprocessing import OneHotEncoder as sk_OneHotEncoder
 from sklearn.metrics import f1_score
-import string
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
+
 
 class OneHotPredictor(ABC):
     """
@@ -97,7 +108,11 @@ python -m ohe  \
         """
         recall = 0
         try:
-            recall = recall_score(y_test, y_pred_one_hot, average='micro', zero_division=1)
+            recall = recall_score(
+                y_test,
+                y_pred_one_hot,
+                average='micro',
+                zero_division=1)
         except ValueError:
             print('Caught ValueError')
             return 0
@@ -146,8 +161,6 @@ python -m ohe  \
             print('Caught ValueError')
             return 0
 
-
-
         return f1
 
     @staticmethod
@@ -167,12 +180,11 @@ python -m ohe  \
         y_test_list = list(y_test)
         for i in range(test_len):
 
-            _imargin = y_test_list[i]/10
-            #print(_imargin)
+            _imargin = y_test_list[i] / 10
+            # print(_imargin)
             _imargin_i = int(round(_imargin))
 
             _imargin_i_a = abs(y_pred_one_hot_list[i] - y_test_list[i])
-
 
             if _imargin_i_a <= _imargin_i:
                 correct = correct + 1
@@ -219,10 +231,10 @@ python -m ohe  \
 
         acc_dict["y_pred_one_hot"] = y_pred_one_hot
         acc_dict["y_test"] = y_test
-        acc_dict["f1_score"] = OneHotPredictor.get_f1_score(y_pred_one_hot,y_test)
-        acc_dict["classification_accuracy"] = OneHotPredictor.get_classification_accuracy_MARGIN(y_pred_one_hot,y_test)
-
-
+        acc_dict["f1_score"] = OneHotPredictor.get_f1_score(
+            y_pred_one_hot, y_test)
+        acc_dict["classification_accuracy"] = OneHotPredictor.get_classification_accuracy_MARGIN(
+            y_pred_one_hot, y_test)
 
         return acc_dict
 
@@ -246,10 +258,13 @@ python -m ohe  \
 
     @abstractmethod
     def predict(self):
+        """
+        will be used for special cases
+        """
         raise Exception("Not yet implemented.")
-        pass
 
-class OneHotPredictorBuilder(object):
+
+class OneHotPredictorBuilder():
     """
     reads the data frame and splits into training and test vectors
     using the splpit percentage from the command line
@@ -269,7 +284,12 @@ class OneHotPredictorBuilder(object):
 
      """
 
-    def __init__(self, target, training_test_split_percent, data_frame,strategy):
+    def __init__(
+            self,
+            target,
+            training_test_split_percent,
+            data_frame,
+            strategy):
         """
         initializes
         :param target: string
@@ -278,7 +298,7 @@ class OneHotPredictorBuilder(object):
 
 
           """
-        if target == None:
+        if target is None:
             raise Exception("target cannot be none")
         self.target = target
         self.strategy = strategy
@@ -300,7 +320,8 @@ class OneHotPredictorBuilder(object):
         if self.X_test is not None:
             raise Exception("Cannot add features after building predictor")
         if feature == self.target:
-            raise Exception("Cannot have target as feature, cyclical prediction.")
+            raise Exception(
+                "Cannot have target as feature, cyclical prediction.")
         self.features.append(feature)
         return self
 
@@ -313,16 +334,12 @@ class OneHotPredictorBuilder(object):
           :returns accuracy: float
 
           """
-        from sklearn.utils import shuffle
         if self.X_test is not None:
             return
         split_percent = self.training_test_split_percent / 100
 
-
         Y_pre_shuffle = data_frame[self.target]
         train_len = int(round(Y_pre_shuffle.size * split_percent))
-
-
 
         X_pre_shuffle = data_frame[self.features]
 
@@ -330,7 +347,6 @@ class OneHotPredictorBuilder(object):
 
         X = X_pre_shuffle
         Y = Y_pre_shuffle
-
 
         X_train = X.iloc[:train_len]
         X_test = X.iloc[train_len:]
@@ -343,7 +359,6 @@ class OneHotPredictorBuilder(object):
         else:
             self.X_train = X_train
             self.X_test = X_test
-
 
         self.y_train = Y.iloc[:train_len]
         self.y_test = Y.iloc[train_len:]
@@ -362,7 +377,7 @@ class OneHotPredictorBuilder(object):
                            self.y_train)
 
 
-class Runner(object):
+class Runner():
     """
 
     class pulls together builder object that has data frame and all algorithm from command line
@@ -373,6 +388,11 @@ class Runner(object):
     left most predictors is optimal
 
     """
+
+    # pylint: disable=redefined-builtin
+    # pylint: disable=unused-argument
+    # pylint: disable=redefined-outer-name
+    # pylint: disable=import-outside-toplevel
 
     def __init__(self, builder, algorithms):
         """
@@ -388,13 +408,25 @@ class Runner(object):
         self.my_model_headers = []
         self.model_list = []
 
+    def run_and_build_predictions(
+            self,
+            score_list,
+            my_file_out_predict,
+            data_frame_ignore_frame,
+            training_test_split_percent,
+            ignore_list,
+            write_actual_flag=1):
+        """
 
-    def run_and_build_predictions(self, score_list, my_file_out_predict, data_frame_ignore_frame, training_test_split_percent,ignore_list, write_actual_flag=1):
+        :param builder: class that reads data and encodes it for use in algorithms
+        :param algorithms: library of scikit learn machine learning models
+        """
         if self.results is not None:
             return self.results
         self.results = []
         # alg_results is a list of dictionaries, such that alg_results[0] is a dictionary for index 0
-        # It contains a dictionary with { id, actual, pred_alg_1, pred_alg_2, etc }
+        # It contains a dictionary with { id, actual, pred_alg_1, pred_alg_2,
+        # etc }
         alg_results = None
         headers = set(['id', 'actual'])
 
@@ -444,22 +476,21 @@ class Runner(object):
             if alg_results is None:
                 alg_results = []
                 for (act, ix) in zip(y_test_list, range(len(y_test_list))):
-                    alg_results.append({ 'id': ix, 'actual': act })
+                    alg_results.append({'id': ix, 'actual': act})
 
-                data_frame_ignore_frame_X_d_list_dict = dict(zip(data_frame_ignore_frame_X_d_list, range(len(data_frame_ignore_frame_X_d_list))))
+                data_frame_ignore_frame_X_d_list_dict = dict(zip(
+                    data_frame_ignore_frame_X_d_list, range(len(data_frame_ignore_frame_X_d_list))))
                 for (pred, id) in data_frame_ignore_frame_X_d_list_dict.items():
                     print(pred)
                     print(id)
                     alg_results[id][myignore] = pred
 
-
-            y_pred_one_hot_dict = dict(zip(y_pred_one_hot, range(len(y_pred_one_hot))))
+            y_pred_one_hot_dict = dict(
+                zip(y_pred_one_hot, range(len(y_pred_one_hot))))
             for (pred, id) in y_pred_one_hot_dict.items():
-                #print(pred)
-                #print(id)
+                # print(pred)
+                # print(id)
                 alg_results[id][model_name] = pred
-
-
 
             for key in acc_dict.keys():
                 if key in score_list:
@@ -468,18 +499,30 @@ class Runner(object):
                     result['score_value'] = acc_dict[key]
                     self.results.append(result)
 
-        self.results.sort(key=lambda r: r['model_name_score_name'], reverse=False)
+        self.results.sort(
+            key=lambda r: r['model_name_score_name'],
+            reverse=False)
 
         with open(my_file_out_predict, 'w') as io:
-            writer = csv.DictWriter(io, fieldnames=list(headers), delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            writer = csv.DictWriter(
+                io,
+                fieldnames=list(headers),
+                delimiter=',',
+                quotechar='"',
+                quoting=csv.QUOTE_MINIMAL)
             writer.writeheader()
             writer.writerows(alg_results)
 
-
         return self.results
 
-
-    def write_predict_csv(self, file_out_name_score, file_out_tableau, file_in_master, my_file_out_predict, target,write_header_flag=1):
+    def write_predict_csv(
+            self,
+            file_out_name_score,
+            file_out_tableau,
+            file_in_master,
+            my_file_out_predict,
+            target,
+            write_header_flag=1):
         """
         write csv file with configured python machine learning algorithm and accuracy
         :param file_out_name: string
@@ -489,7 +532,7 @@ class Runner(object):
     # read file_in_master
     # join UID
 
-        import pandas, sys
+
         import pandas as pd
         a_file_in_master = pd.read_csv(file_in_master)
         print("a_file_in_master")
@@ -502,20 +545,22 @@ class Runner(object):
 
         merged = a_file_in_master.merge(b_my_file_out_predict, on='UID')
 
+        merged_selected = merged[['Admin2',
+                                  'Country_Region',
+                                  'Province_State',
+                                  mode_to_use,
+                                  'actual']]
+        merged_selected['Diff'] = merged_selected[mode_to_use] - \
+            merged_selected['actual']
 
-
-        merged_selected = merged[['Admin2', 'Country_Region', 'Province_State',mode_to_use,'actual']]
-        merged_selected['Diff'] = merged_selected[mode_to_use] - merged_selected['actual']
-
-
-        merged_selected['Diff_Percent'] = 1 - (merged_selected[mode_to_use] / merged_selected['actual'] )
-        merged_selected_renamed = merged_selected.rename(columns={'MLP': 'Predicted', 'actual': 'Actual'})
+        merged_selected['Diff_Percent'] = 1 - \
+            (merged_selected[mode_to_use] / merged_selected['actual'])
+        merged_selected_renamed = merged_selected.rename(
+            columns={'MLP': 'Predicted', 'actual': 'Actual'})
         print("Diff_Percent")
 
-
-
         for ind in merged_selected_renamed.index:
-            if merged_selected_renamed['Actual'][ind] == 0 :
+            if merged_selected_renamed['Actual'][ind] == 0:
                 merged_selected_renamed['Diff_Percent'][ind] = 0
 
         # here is the simplist way to add the new column
@@ -523,37 +568,49 @@ class Runner(object):
 
         merged_selected_renamed.to_csv(file_out_tableau, mode='a', index=False)
 
-        headers = [ r['model_name_score_name'] for r in self.results ]
+        headers = [r['model_name_score_name'] for r in self.results]
         headers.append("Target")
 
-        values_score = [ r['score_value'] for r in self.results ]
+        values_score = [r['score_value'] for r in self.results]
         values_score.append(target)
         with open(file_out_name_score, mode='a') as _file:
-            _writer = csv.writer(_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            if(write_header_flag == 1):
+            _writer = csv.writer(
+                _file,
+                delimiter=',',
+                quotechar='"',
+                quoting=csv.QUOTE_MINIMAL)
+            if write_header_flag == 1:
                 _writer.writerow(headers)
             _writer.writerow(values_score)
 
 
+# Below is a bit of "magic" to make the Commandline decorator work.
+__algorithm_lookup = {}
 
-### Below is a bit of "magic" to make the Commandline decorator work.
-
-__algorithm_lookup =  {}
 
 def Commandline(arg_name, **kwargs):
     """
     Decorator for OneHotPredictor classes.
     Given a subclass of OneHotPredictor, add it to the algorithm lookup table
     """
+    # pylint: disable=unused-argument
+
     if arg_name in __algorithm_lookup:
-        raise Exception(f"Duplicate Commandline argument definition for {arg_name} found.")
+        raise Exception(
+            f"Duplicate Commandline argument definition for {arg_name} found.")
 
     def wrap(klass):
         __algorithm_lookup[arg_name] = klass
         return klass
     return wrap
 
+
 def get_algorithm_from_string(command_line_arg):
+    """
+
+     :param builder: class that reads data and encodes it for use in algorithms
+     :param algorithms: library of scikit learn machine learning models
+     """
     if command_line_arg not in __algorithm_lookup:
         raise Exception(f"No algorithm found for {command_line_arg}.")
     return __algorithm_lookup[command_line_arg]
@@ -571,6 +628,6 @@ def __import_submodules(package_name):
         for loader, name, is_pkg in pkgutil.walk_packages(package.__path__)
     }
 
+
 # Loads all of the algorithm classes from this packages
-import predict.predictor.algorithm
 __import_submodules('predict.predictor.algorithm')
