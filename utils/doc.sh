@@ -6,6 +6,7 @@ Used for generating documentation for the project
 
 Usage:
   $CMD generate - Runs pydoc over all modules
+  $CMD doc_url - Print out the URL for the deployed S3 bucket
   $CMD deploy - Using aws-cli, deploys documentation to an S3 bucket
   $CMD prune - Using aws-cli, delete all buckets starting with vl-ml-doc- that do not have a matching branch on the remote repository.
 
@@ -26,31 +27,40 @@ function generate {
     pdoc3 --html --force predict
 }
 
-# Deploys generated content to an AWS bucket
-function deploy {
+function doc_url {
+    echo "http://$(get_bucket_name).s3-website-us-east-1.amazonaws.com/"
+}
+
+function get_bucket_name {
     if [ -z $BUCKET_NAME ]; then
 	BUCKET_NAME=$(git branch | grep '*' | awk '{print $2}')
     fi
-    BUCKET_NAME="vl-ml-doc-$(echo $BUCKET_NAME | sed 's/origin\///g')"
-    BUCKET_NAME="$(echo $BUCKET_NAME | sed 's/[\/_]/-/g')"
-    echo "Bucket name is $BUCKET_NAME"
+    BN="vl-ml-doc-$(echo $BUCKET_NAME | sed 's/origin\///g')"
+    BN="$(echo $BUCKET_NAME | sed 's/[\/_]/-/g')"
+    echo "$BN"
+}
+
+# Deploys generated content to an AWS bucket
+function deploy {
+    BN="$(get_bucket_name)"
+    echo "Bucket name is $BN"
 
     ## DO BUILD
-    is_bucket_created="$(aws s3 ls | grep $BUCKET_NAME)" || true
+    is_bucket_created="$(aws s3 ls | grep $BN)" || true
     if [ ! -z "$is_bucket_created" ]; then
 	echo "Bucket exists, removing old bucket."
-	aws s3 rb s3://$BUCKET_NAME --force
+	aws s3 rb s3://$BN --force
     fi
     echo "Creating bucket."
-    aws s3api create-bucket --acl public-read --bucket "$BUCKET_NAME" --region us-east-1
+    aws s3api create-bucket --acl public-read --bucket "$BN" --region us-east-1
     echo "Setting bucket to be a static website."
-    aws s3api put-bucket-website --bucket $BUCKET_NAME \
+    aws s3api put-bucket-website --bucket $BN \
 	--website-configuration "{\"IndexDocument\": {\"Suffix\": \"index.html\"}, \"ErrorDocument\": {\"Key\": \"index.html\"}}"
 
     echo "Copying html files."
     # Copies/syncs over the the compiled files making them public for the static website
-    aws s3 sync html/ s3://$BUCKET_NAME --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
-    echo "http://$BUCKET_NAME.s3-website-us-east-1.amazonaws.com/"
+    aws s3 sync html/ s3://$BN --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
+    echo "http://$BN.s3-website-us-east-1.amazonaws.com/"
 }
 
 function prune {
@@ -75,6 +85,7 @@ ACTION=$1
 
 case "$ACTION" in
     generate) generate;;
+    doc_url) doc_url;;
     deploy) deploy;;
     prune) prune;;
   *)
