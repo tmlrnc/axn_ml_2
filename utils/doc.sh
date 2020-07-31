@@ -36,7 +36,7 @@ function get_bucket_name {
 	BUCKET_NAME=$(git branch | grep '*' | awk '{print $2}')
     fi
     BN="vl-ml-doc-$(echo $BUCKET_NAME | sed 's/origin\///g')"
-    BN="$(echo $BUCKET_NAME | sed 's/[\/_]/-/g')"
+    BN="$(echo $BN | sed 's/[\/_]/-/g')"
     echo "$BN"
 }
 
