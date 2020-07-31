@@ -1,25 +1,25 @@
-RF_n_estimators: 25
-RF_max_depth: 10
-RFR_n_estimators: 50
-RFR_max_depth: 20
-SVM_random_state: 0
-SVM_max_iterations: 10000000
-SVM_multi_class: crammer_singer
-LR_random_state: 0
-DTC_random_state: 0
-RNN_window_size: 2
-RNN_n : 10
-RNN_epochs : 100
-RNN_learning_rate : 0.01
-MLP_solver : lbfgs
-MLP_random_state : 1
-MLP_layers : 5
-MLP_neurons : 2
-MLP_alpha : 0.0001
-RNR_radius: 1.0
-Kmeans_bins : 3
-KNeighborsClassifier_NN : 3
-Perceptron_class_weight: balanced
-RandomForestClassifier_max_features : sqrt
-LogisticRegression_solver : newton-cg
+rf_estimators: 25
+rf_max_depth: 10
+r_n_estimators: 50
+r_max_depth: 20
+s_random_state: 0
+s_max_iterations: 10000000
+s_multi_class: crammer_singer
+lr_random_state: 0
+dtc_random_state: 0
+rnn_window_size: 2
+rnn_n : 10
+rnn_epochs : 100
+rnn_learning_rate : 0.01
+mlp_solver : lbfgs
+mlp_random_state : 1
+mlp_layers : 5
+mlp_neurons : 2
+mlp_alpha : 0.0001
+rnr_radius: 1.0
+kmeans_bins : 3
+kneighbors_classifiernn : 3
+perceptron_class_weight: balanced
+rfc_max_features : sqrt
+logisticregression_solver : newton-cg
 KNeighborsClassifier_algorithm : ball_tree

@@ -1,11 +1,14 @@
-from covid import downloader
-import datetime as dt
+"""
+generates the ohe scripts
+"""
+# pylint: disable=invalid-name
 import argparse
 from datetime import datetime, timedelta
+import os
 
 description = \
-"""
-VoterLabs Inc. 
+    """
+VoterLabs Inc.
     features are encoded using a one-hot ‘one-of-K’ encoding scheme.
     This creates a binary column for each category and returns a sparse matrix or dense array
     the encoder derives the categories based on the unique values in each feature.
@@ -20,13 +23,13 @@ VoterLabs Inc.
      while ["female", "from Asia", "uses Chrome"] would be [1, 2, 1].
 
     READ FILE_IN_RAW.CSV
-    
-  LOAD CSV DATA FROM YOUR COMPUTER 
 
-Must be a csv file where first row has column header names. 
+  LOAD CSV DATA FROM YOUR COMPUTER
+
+Must be a csv file where first row has column header names.
 Must include time series date columns - MM/DD/YY (7/3/20)
 Must include targeted date or will automatically predict last date in series.
-Must include as much data of cause of time series as you can - more data equals better predictions 
+Must include as much data of cause of time series as you can - more data equals better predictions
 
     GET COLUMN HEADERS
     FOR EACH COLUMN NOT IN IGNORE LIST :
@@ -35,26 +38,55 @@ Must include as much data of cause of time series as you can - more data equals 
     ENCODE EACH ROW WITH 1 or 0 FOR EACH HEADER
       """.strip()
 
+
 def parse_command_line():
+    """
+    reads the command line args
+    """
+    # pylint: disable=invalid-name
     parser = argparse.ArgumentParser(description=description)
-    parser.add_argument('--file_in', help='raw csv file input to be predicted. Must be a csv file where first row has column header names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
-    parser.add_argument('--file_out', help='csv file output encoded using one-hot one-of-K encoding scheme')
-    parser.add_argument('--ohe_file_script_out', help='ohe output script for each time splt directory of data')
-    parser.add_argument('--start_date_all', help='start of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/3/20')
-    parser.add_argument('--end_date_all', help='end of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/22/20 ')
-    parser.add_argument('--window_size', help='number of time series increments per window - this is an integet like 4. This is the sliding window method for framing a time series dataset the increments are days')
-    parser.add_argument('--parent_dir', help='beginning of docker file system - like /app')
+    parser.add_argument(
+        '--file_in',
+        help='raw csv file input to be predicted. Must be a csv file where first row has column header names. '
+             'Must include time series date columns - like MM/DD/YY (7/3/20) ')
+    parser.add_argument(
+        '--file_out',
+        help='csv file output encoded using one-hot one-of-K encoding scheme')
+    parser.add_argument(
+        '--ohe_file_script_out',
+        help='ohe output script for each time splt directory of data')
+    parser.add_argument(
+        '--start_date_all',
+        help='start of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/3/20')
+    parser.add_argument(
+        '--end_date_all',
+        help='end of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/22/20 ')
+    parser.add_argument(
+        '--window_size',
+        help='number of time series increments per window - this is an integet like 4. '
+             'This is the sliding window method for framing a time series dataset the increments are days')
+    parser.add_argument(
+        '--parent_dir',
+        help='beginning of docker file system - like /app')
 
     parser.add_argument(
         '--ignore',
-        action='append', help='columns of data to NOT be encoded or discretized - remove from processing without removing from raw data because they might be usseful to know latrer - like first name')
+        action='append',
+        help='columns of data to NOT be encoded or discretized - remove from processing without removing '
+             'from raw data because they might be usseful to know latrer - like first name')
     args = parser.parse_args()
     return args
 
 
-
-
 def main():
+    """
+    runs the master module
+    """
+    # pylint: disable=invalid-name
+    # pylint: disable=too-many-locals
+    # pylint: disable=consider-using-sys-exit
+    # pylint: disable=unused-variable
+    # pylint: disable=too-many-statements
     args = parse_command_line()
     file_in = args.file_in
     file_out = args.file_out
@@ -67,13 +99,13 @@ def main():
     end_date_all_window_f = datetime.strptime(end_date_all, "%m/%d/%Y")
 
     start_window_date_next = start_date_all_window_f
-    end_window_date_next = start_date_all_window_f + timedelta(days=int(window_size))
+    end_window_date_next = start_date_all_window_f + \
+        timedelta(days=int(window_size))
     print("start_window_date_next ")
     print(start_window_date_next)
     print("end_window_date_next ")
     print(end_window_date_next)
     print(end_date_all_window_f)
-
 
     parent_dir = args.parent_dir
     if parent_dir is None:
@@ -81,15 +113,13 @@ def main():
         quit()
     print(f"Using parent_dir: {parent_dir}")
 
-
-    while (end_window_date_next < end_date_all_window_f):
+    while end_window_date_next < end_date_all_window_f:
 
         start_window_date = start_window_date_next
         end_window_date = end_window_date_next
-        time_series = start_window_date.strftime("%m-%d-%Y") + "_" + end_window_date.strftime("%m-%d-%Y")
+        time_series = start_window_date.strftime(
+            "%m-%d-%Y") + "_" + end_window_date.strftime("%m-%d-%Y")
 
-
-        import os
 
         # Directory
         directory = time_series
@@ -97,7 +127,6 @@ def main():
         # Parent Directory path
         #parent_dir = "/Users/tomlorenc/Sites/VL_standard/ml"
         #parent_dir = "/app"
-
 
         # Path
         path = os.path.join(parent_dir, directory)
@@ -115,14 +144,14 @@ def main():
 
         ignore_options = "\\\n".join(f"  --ignore   {i}" for i in my_ignores)
 
-
         dates = []
         while end_date_window_f >= start_date_window_f:
             dates.append(start_date_window_f)
             start_date_window_f = start_date_window_f + timedelta(days=1)
 
-        options = "\\\n".join(f"  --ignore   {d.strftime('%m/%d/%Y')}_DISCRETE" for d in dates)
-        no = options.replace("/", "\/")
+        options = "\\\n".join(
+            f"  --ignore   {d.strftime('%m/%d/%Y')}_DISCRETE" for d in dates)
+        no = options.replace("/", r"\/")
         no2 = no.replace("2020", "20")
         no3 = no2.replace("03", "3")
         no4 = no3.replace("04", "4")
@@ -151,11 +180,9 @@ def main():
 
         """.strip()
 
-
         tssh = "_" + time_series + ".sh"
         discrete_file_script_out_ts = ohe_file_script_out.replace(".sh", tssh)
         discrete_file_script_out_ts_path = path + "/" + discrete_file_script_out_ts
-
 
         print("discrete_file_script_out_ts_path ")
         print(discrete_file_script_out_ts_path)
@@ -163,14 +190,10 @@ def main():
         discrete_text_file = open(discrete_file_script_out_ts_path, "w")
         discrete_text_file.write(template)
 
-
         start_window_date_next = start_window_date_next + timedelta(days=1)
-        end_window_date_next = start_window_date_next + timedelta(days=int(window_size))
-
-
+        end_window_date_next = start_window_date_next + \
+            timedelta(days=int(window_size))
 
 
 if __name__ == '__main__':
     main()
-
-

@@ -1,9 +1,17 @@
+"""
+ features are encoded using a one-hot ‘one-of-K’ encoding scheme.
+    This creates a binary column for each category and returns a sparse matrix or dense array
+    the encoder derives the categories based on the unique values in each feature.
+    """
+# pylint: disable=invalid-name
+
 import csv
 from sklearn.preprocessing import OneHotEncoder
 import pandas
 import numpy as np
 
-class OneHotEncoder(object):
+
+class VLOneHotEncoder():
     """
     features are encoded using a one-hot ‘one-of-K’ encoding scheme.
     This creates a binary column for each category and returns a sparse matrix or dense array
@@ -25,7 +33,13 @@ class OneHotEncoder(object):
     GENERATE ONE HOT ENCODING HEADER
     ENCODE EACH ROW WITH 1 or 0 FOR EACH HEADER
     """
-    def __init__(self, file_in,ignore_list_in):
+
+    # pylint: disable=too-many-instance-attributes
+
+    # pylint: disable=no-value-for-parameter
+    # pylint: disable=attribute-defined-outside-init
+
+    def __init__(self, file_in, ignore_list_in):
         """
         opens file and writes one hot encoded data
 
@@ -36,12 +50,11 @@ class OneHotEncoder(object):
         self.ignore_list = ignore_list_in
 
         print("self.ignore_list " + str(self.ignore_list))
-        self.data_frame_all = pandas.read_csv(file_in).fillna(value = 0)
+        self.data_frame_all = pandas.read_csv(file_in).fillna(value=0)
 
         self.data_frame = self.data_frame_all
 
         self.data_frame = self.data_frame_all.drop(self.ignore_list, 1)
-
 
         self.data_frame_ignore_frame = self.data_frame_all[self.ignore_list]
         #print("self.data_frame_ignore_frame " + str(self.data_frame_ignore_frame))
@@ -54,13 +67,11 @@ class OneHotEncoder(object):
 
         #print("self.data_frame_ignore_frame_list " + str(self.data_frame_ignore_frame_list))
 
-
         self.csv_column_name_list = list(self.data_frame.columns)
         self.encoded = False
 
-        return
 
-    def write_ohe_csv(self,file_out_name):
+    def write_ohe_csv(self, file_out_name):
         """
         opens file and writes one hot encoded data
 
@@ -71,7 +82,7 @@ class OneHotEncoder(object):
             writer = csv.writer(f)
             myarr = np.array(self.ignore_list)
 
-            arr_flat = np.append(self.header,myarr)
+            arr_flat = np.append(self.header, myarr)
 
             new_header = arr_flat.tolist()
 
@@ -85,7 +96,6 @@ class OneHotEncoder(object):
                 writer.writerow(new_row)
                 i = i + 1
 
-
     def one_hot_encode(self):
         """
          runs OneHotEncoder() function on class data
@@ -97,7 +107,6 @@ class OneHotEncoder(object):
         if self.encoded:
             return self.data_frame, self.csv_column_name_list
 
-        from sklearn.preprocessing import OneHotEncoder
         self.enc = OneHotEncoder(handle_unknown='ignore')
 
         #print("one_hot_encode-- --- START ")
@@ -105,29 +114,29 @@ class OneHotEncoder(object):
         self.enc.fit(self.data_frame)
         self.X_train_one_hot = self.enc.transform(self.data_frame)
 
-
-
         self.header = self.enc.get_feature_names(self.csv_column_name_list)
 
         self.ndarray = self.X_train_one_hot.toarray()
-
-
 
         self.listOflist = self.ndarray.tolist()
         self.encoded = True
         return self.data_frame, self.csv_column_name_list
 
 
+class OneHotEncoderBuilder():
+    """
+    opens file and writes one hot encoded data
 
+    :param file_out_name: Name of File to Write to
+    """
 
-class OneHotEncoderBuilder(object):
     def __init__(self, filename):
         """
         opens file and writes one hot encoded data
 
         :param filename: string : input data file
         """
-        if filename == None:
+        if filename is None:
             raise Exception("Filename cannot be none")
         self.filename = filename
         self.ignore_list = []
@@ -148,4 +157,4 @@ class OneHotEncoderBuilder(object):
         :returns OneHotEncoder: class
 
         """
-        return OneHotEncoder(self.filename, self.ignore_list)
+        return VLOneHotEncoder(self.filename, self.ignore_list)

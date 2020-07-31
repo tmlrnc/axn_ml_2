@@ -11,7 +11,7 @@ class MLPClassifier2_OHP(OneHotPredictor):
         self.model_name = 'MLPCLASS'
 
     def predict(self):
-        algorithm = MLPClassifier(solver=get_ohe_config().MLP_solver, alpha=get_ohe_config().MLP_alpha,
+        algorithm = MLPClassifier(solver=get_ohe_config().mlp_solver, alpha=get_ohe_config().MLP_alpha,
                                  hidden_layer_sizes=(get_ohe_config().MLP_layers, get_ohe_config().MLP_neurons),
                                  random_state=get_ohe_config().MLP_random_state)
         algorithm.fit(self.X_train, self.y_train)

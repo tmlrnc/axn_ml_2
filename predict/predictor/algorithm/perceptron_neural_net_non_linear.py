@@ -31,7 +31,7 @@ class PERCEPTRON_NEURAL_NET_OHP(OneHotPredictor):
 
          then returns the accuracy
          """
-        algorithm = Perceptron(tol=1e-3, random_state=0,class_weight=get_ohe_config().Perceptron_class_weight)
+        algorithm = Perceptron(tol=1e-3, random_state=0,class_weight=get_ohe_config().perceptron_class_weight)
 
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))

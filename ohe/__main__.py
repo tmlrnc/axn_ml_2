@@ -1,25 +1,35 @@
+"""
+generates the master scripts
+"""
+# pylint: disable=invalid-name
+
+
 import argparse
 
-import csv
-
-import pandas
-import pandas as pd
-import numpy
 
 from ohe.encoder import OneHotEncoderBuilder
 
 
 def parse_command_line():
+    """
+    reads the command line args
+    """
+    # pylint: disable=invalid-name
     parser = argparse.ArgumentParser()
-    parser.add_argument('--file_in', help='raw csv file input to be predicted. Must be a csv file where first row has column header names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
-    parser.add_argument('--file_out', help='csv file output encoded using one-hot one-of-K encoding scheme')
+    parser.add_argument(
+        '--file_in',
+        help='raw csv file input to be predicted. Must be a csv file where first row has column header '
+             'names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
+    parser.add_argument(
+        '--file_out',
+        help='csv file output encoded using one-hot one-of-K encoding scheme')
     parser.add_argument(
         '--ignore',
-        action='append', help='columns of data to NOT be encoded or discrtizeed - remove from processing without removing from raw data because they might be usseful to know latrer - like first name')
+        action='append',
+        help='columns of data to NOT be encoded or discrtizeed - remove from processing without '
+             'removing from raw data because they might be usseful to know latrer - like first name')
     args = parser.parse_args()
     return args
-
-
 
 
 def main():
@@ -39,8 +49,6 @@ def main():
     args = parse_command_line()
     file_in_name = args.file_in
     file_out = args.file_out
-
-
 
     ######################################################################
 
@@ -62,11 +70,5 @@ def main():
     print("OneHotEncoder --- END ")
 
 
-
-
-
-
 if __name__ == '__main__':
     main()
-
-

@@ -32,7 +32,7 @@ class RNREG_OHP(OneHotPredictor):
 
          then returns the accuracy
          """
-        algorithm = RadiusNeighborsRegressor(radius=get_ohe_config().RNR_radius)
+        algorithm = RadiusNeighborsRegressor(radius=get_ohe_config().rnr_radius)
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)

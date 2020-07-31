@@ -12,16 +12,13 @@ Environment Variables:
 EOF
 
 function lint {
-    pylint correlation
     pylint covid
     pylint discrete
-    pylint feature_sample
     pylint generate_discrete
     pylint generate_master
     pylint generate_ohe
     pylint generate_predict
     pylint ohe
-    pylint pipeline
     pylint predict
 }
 

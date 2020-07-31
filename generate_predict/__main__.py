@@ -1,47 +1,52 @@
-from covid import downloader
-import datetime as dt
+"""
+generates the master scripts
+"""
+# pylint: disable=invalid-name
+
+import os
+
 import argparse
 from datetime import datetime, timedelta
 description = \
-"""
-VoterLabs Inc. 
+    """
+VoterLabs Inc.
 creates predict script
 VL uses the sliding window time series method for Univariate and Multivariate data and multi-step forecasting
-Univariate Time Series: These are datasets where only a single variable is observed at each time, such as covid deaths per day each hour. 
+Univariate Time Series: These are datasets where only a single variable is observed at each time, such as covid deaths per day each hour.
 Multivariate Time Series: These are datasets where two or more variables are observed at each time.
 
   READ FILE_IN_RAW.CSV
-  LOAD CSV DATA FROM YOUR COMPUTER 
+  LOAD CSV DATA FROM YOUR COMPUTER
 
-Must be a csv file where first row has column header names. 
+Must be a csv file where first row has column header names.
 Must include time series date columns - like MM/DD/YY (7/3/20)
 Must include targeted date or will automatically predict last date in series.
-Must include as much data of cause of time series as you can - more data equals better predictions 
+Must include as much data of cause of time series as you can - more data equals better predictions
 
-  
+
   GET COLUMN HEADERS
   FOR EACH COLUMN NOT IN IGNORE LIST :
   GET ALL CATEGORIES = UNIQUE COLUMN VALUES
   GENERATE ONE HOT ENCODING for each HEADER COLUMN VALUE THAT IS CATEGORY BASED like CITY name
   ENCODE EACH ROW WITH 1 or 0 FOR EACH HEADER
-  GENERATE discrete ENCODING for each HEADER COLUMN VALUE THAT IS CONTINUOUS BASED like sales 
-  Send the X,Y training and test splits of the encoded data into the models 
-  Then compare actual to predicted values 
-  
+  GENERATE discrete ENCODING for each HEADER COLUMN VALUE THAT IS CONTINUOUS BASED like sales
+  Send the X,Y training and test splits of the encoded data into the models
+  Then compare actual to predicted values
 
-Model doc definition 
+
+Model doc definition
 
 "RFR"                             RandomForestRegressor           -          random_forest_regression.py
-  ^                                     ^                                              ^ 
   ^                                     ^                                              ^
-  ^                                     ^                                              ^ 
-initials of the model              full name of model                        file name of model 
-to be added to 
-predictor parameter 
+  ^                                     ^                                              ^
+  ^                                     ^                                              ^
+initials of the model              full name of model                        file name of model
+to be added to
+predictor parameter
 
 
 "RFR" RandomForestRegressor - random_forest_regression.py
-"LR" LogisticRegression - logistic_regression.py 
+"LR" LogisticRegression - logistic_regression.py
 "MLP" MLP Regressor - mlp_regression.py
 "SVM" Linear SVC - svm.py
 "NUSVM" Nu SVC - nu_svm.py
@@ -88,30 +93,71 @@ predictor parameter
 
       """.strip()
 
-def parse_command_line():
-    parser = argparse.ArgumentParser(description=description)
-    parser.add_argument('--target', help='column name to be targeted for prediction it can be categorical or continuous data')
-    parser.add_argument('--file_out_scores', help='output file scores the models - scores being accuracy, recall, precision - True Positive , False Positive, False Negative, True Negative for Confusion Matrix ')
-    parser.add_argument('--file_out_predict', help='predicted output versus actual')
-    parser.add_argument('--ignore', help='columns to not use in encoding or predictions')
-    parser.add_argument('--file_out_tableau', help='tableau formated prediction outputs: Location | Act |Pred | Date')
-    parser.add_argument('--file_in_master', help='raw csv file input to be mastered - Must be a csv file where first row has column header names.')
 
-    parser.add_argument('--file_in', help='raw csv file input to be predicted. Must be a csv file where first row has column header names. Must include time series date columns - like MM/DD/YY (7/3/20) ')
-    parser.add_argument('--predict_file_script_out', help='shell script for each time series sliced directory of data that creates predictions')
-    parser.add_argument('--start_date_all', help='start of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/3/20')
-    parser.add_argument('--end_date_all', help='end of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/22/20 ')
-    parser.add_argument('--window_size', help='number of time series increments per window - this is an integet like 4. This is the sliding window method for framing a time series dataset the increments are days')
-    parser.add_argument('--parent_dir', help='beginning of docker file system - like /app')
+def parse_command_line():
+    """
+    reads the command line args
+    """
+    # pylint: disable=invalid-name
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument(
+        '--target',
+        help='column name to be targeted for prediction it can be categorical or continuous data')
+    parser.add_argument(
+        '--file_out_scores',
+        help='output file scores the models - scores being accuracy, recall, precision - True Positive , '
+             'False Positive, False Negative, True Negative for Confusion Matrix ')
+    parser.add_argument(
+        '--file_out_predict',
+        help='predicted output versus actual')
+    parser.add_argument(
+        '--ignore',
+        help='columns to not use in encoding or predictions')
+    parser.add_argument(
+        '--file_out_tableau',
+        help='tableau formated prediction outputs: Location | Act |Pred | Date')
+    parser.add_argument(
+        '--file_in_master',
+        help='raw csv file input to be mastered - Must be a csv file where first row has column header names.')
+
+    parser.add_argument(
+        '--file_in',
+        help='raw csv file input to be predicted. Must be a csv file where first row has column header names. '
+             'Must include time series date columns - like MM/DD/YY (7/3/20) ')
+    parser.add_argument(
+        '--predict_file_script_out',
+        help='shell script for each time series sliced directory of data that creates predictions')
+    parser.add_argument(
+        '--start_date_all',
+        help='start of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/3/20')
+    parser.add_argument(
+        '--end_date_all',
+        help='end of time series window - each step is a day each column must be a date in format MM/DD/YY - like 7/22/20 ')
+    parser.add_argument(
+        '--window_size',
+        help='number of time series increments per window - this is an integet like 4. '
+             'This is the sliding window method for framing a time series dataset the increments are days')
+    parser.add_argument(
+        '--parent_dir',
+        help='beginning of docker file system - like /app')
 
     parser.add_argument(
         '--add_model',
-        action='append', help='names of the models to be tried - names of models are in description')
+        action='append',
+        help='names of the models to be tried - names of models are in description')
     args = parser.parse_args()
     return args
 
 
 def main():
+    """
+    runs the predict module
+    """
+    # pylint: disable=invalid-name
+    # pylint: disable=too-many-locals
+    # pylint: disable=consider-using-sys-exit
+    # pylint: disable=unused-variable
+    # pylint: disable=too-many-statements
     args = parse_command_line()
     file_in = args.file_in
     target = args.target
@@ -128,18 +174,17 @@ def main():
 
     window_size = args.window_size
 
-
     start_date_all_window_f = datetime.strptime(start_date_all, "%m/%d/%Y")
     end_date_all_window_f = datetime.strptime(end_date_all, "%m/%d/%Y")
 
     start_window_date_next = start_date_all_window_f
-    end_window_date_next = start_date_all_window_f + timedelta(days=int(window_size))
+    end_window_date_next = start_date_all_window_f + \
+        timedelta(days=int(window_size))
     print("start_window_date_next ")
     print(start_window_date_next)
     print("end_window_date_next ")
     print(end_window_date_next)
     print(end_date_all_window_f)
-
 
     parent_dir = args.parent_dir
     if parent_dir is None:
@@ -147,13 +192,12 @@ def main():
         quit()
     print(f"Using parent_dir: {parent_dir}")
 
-
-    while (end_window_date_next < end_date_all_window_f):
+    while end_window_date_next < end_date_all_window_f:
         start_window_date = start_window_date_next
         end_window_date = end_window_date_next
-        time_series = start_window_date.strftime("%m-%d-%Y") + "_" + end_window_date.strftime("%m-%d-%Y")
+        time_series = start_window_date.strftime(
+            "%m-%d-%Y") + "_" + end_window_date.strftime("%m-%d-%Y")
 
-        import os
 
         # Directory
         directory = time_series
@@ -161,7 +205,6 @@ def main():
         # Parent Directory path
         #parent_dir = "/Users/tomlorenc/Sites/VL_standard/ml"
         #parent_dir = "/app"
-
 
         # Path
         path = os.path.join(parent_dir, directory)
@@ -189,10 +232,10 @@ def main():
 
         model_options = "\\\n".join(f"  --predictor   {m}" for m in models)
 
-
         dates = [end_window_date]
-        options = "\\\n".join(f"  --target   {d.strftime('%m/%d/%Y')}_DISCRETE" for d in dates)
-        no = options.replace("/", "\/")
+        options = "\\\n".join(
+            f"  --target   {d.strftime('%m/%d/%Y')}_DISCRETE" for d in dates)
+        no = options.replace("/", r"\/")
         no2 = no.replace("2020", "20")
         no3 = no2.replace("03", "3")
         no4 = no3.replace("04", "4")
@@ -222,10 +265,9 @@ def main():
                     --file_out_scores {file_out_scores_path} \\
         --file_out_tableau {file_out_tableau} \\
           --file_out_predict {file_out_predict_ts_path}
-    
-    
-        """.strip()
 
+
+        """.strip()
 
         print(template)
 
@@ -234,9 +276,9 @@ def main():
         discrete_text_file.write(template)
 
         tssh = "_" + time_series + ".sh"
-        predict_file_script_out_ts = predict_file_script_out.replace(".sh", tssh)
+        predict_file_script_out_ts = predict_file_script_out.replace(
+            ".sh", tssh)
         predict_file_script_out_ts_path = path + "/" + predict_file_script_out_ts
-
 
         print("predict_file_script_out_ts_path ")
         print(predict_file_script_out_ts_path)
@@ -244,12 +286,10 @@ def main():
         discrete_text_file = open(predict_file_script_out_ts_path, "w")
         discrete_text_file.write(template)
 
-
         start_window_date_next = start_window_date_next + timedelta(days=1)
-        end_window_date_next = start_window_date_next + timedelta(days=int(window_size))
+        end_window_date_next = start_window_date_next + \
+            timedelta(days=int(window_size))
 
 
 if __name__ == '__main__':
     main()
-
-

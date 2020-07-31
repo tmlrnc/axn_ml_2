@@ -32,7 +32,7 @@ class ElasticNet_LogisticRegression_OHP(OneHotPredictor):
 
         then returns the accuracy
         """
-        algorithm = LogisticRegression(penalty='elasticnet',  random_state=get_ohe_config().LR_random_state)
+        algorithm = LogisticRegression(penalty='elasticnet',  random_state=get_ohe_config().lr_random_state)
         algorithm.fit(self.X_train, self.y_train)
         y_pred = list(algorithm.predict(self.X_test))
         self.acc = OneHotPredictor.get_accuracy(y_pred, self.y_test)
