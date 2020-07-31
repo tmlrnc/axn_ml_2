@@ -18,7 +18,7 @@ from sklearn.preprocessing import OneHotEncoder as sk_OneHotEncoder
 from sklearn.metrics import f1_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
-
+import predict.predictor.algorithm
 
 class OneHotPredictor(ABC):
     """

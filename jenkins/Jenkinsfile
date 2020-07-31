@@ -4,6 +4,7 @@ pipeline {
     environment {
         TAG_NAME = 'ml-build:' + "${env.BRANCH_NAME.replaceAll('/', '-')}"
         TEST_TAG_NAME = 'ml-build:' + "${env.BRANCH_NAME.replaceAll('/', '-')}" + '-test'
+	BRANCH_NAME = "${env.BRANCH_NAME.replaceAll('/', '-')}"
     }
 
     stages {
@@ -16,6 +17,16 @@ pipeline {
                 """
             }
         }
+
+	stage('Documentation') {
+	    steps {
+		echo 'Generating Documentation'
+		sh """
+                  BRANCH_NAME="${BRANCH_NAME}" \
+                  bash jenkins/documentation.sh
+                """
+	    }
+	}
 
         stage('Lint') {
             steps {

@@ -109,3 +109,12 @@ csvs/
 
 #Jenkins python environemnt
 .python_env
+
+# Don't add local activate (it is a symlink)
+activate
+
+# Don't add locally generated doc files. This should be done by Jenkins.
+html/
+
+# Emacs temp files
+*[~$]
