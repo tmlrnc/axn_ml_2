@@ -63,6 +63,16 @@ pipeline {
                 """
             }
         }
+
+	stage('Cleanup') {
+	    steps {
+		echo 'Performing cleanup...'
+		sh """
+                  BRANCH_NAME="${BRANCH_NAME}" \
+                  bash jenkins/cleanup.sh
+                """
+	    }
+	}
     }
 
     post {
