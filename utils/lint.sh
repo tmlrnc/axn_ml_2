@@ -12,14 +12,13 @@ Environment Variables:
 EOF
 
 function lint {
-    pylint covid
-    pylint discrete
-    pylint generate_discrete
-    pylint generate_master
-    pylint generate_ohe
-    pylint generate_predict
-    pylint ohe
-    pylint predict
+    pylint axn/ml/discrete
+    pylint axn/ml/market_basket_analysis
+    pylint axn/ml/ohe
+    pylint axn/ml/predict
+    pylint axn/ml/time_series
+
+
 }
 
 ACTION=$1

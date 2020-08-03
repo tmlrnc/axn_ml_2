@@ -17,14 +17,8 @@ EOF
 
 # Generates documentation for each module
 function generate {
-    pdoc3 --html --force covid
-    pdoc3 --html --force discrete
-    pdoc3 --html --force generate_discrete
-    pdoc3 --html --force generate_master
-    pdoc3 --html --force generate_ohe
-    pdoc3 --html --force generate_predict
-    pdoc3 --html --force ohe
-    pdoc3 --html --force predict
+    pdoc3 --html --force axn
+
 }
 
 function doc_url {
