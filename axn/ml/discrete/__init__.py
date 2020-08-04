@@ -17,6 +17,22 @@ as these models can learn to split up the data anywhere.
 Bin continuous data into intervals.
 Parameters
 ----------
+file_in : file
+    raw csv file input to be discretize
+
+file_out : file
+    output file of discretize process where continous data in transformed into bins used for models
+
+drop_column : string
+    drop column from discreteize process
+
+
+dicretize : string
+    discretization strategy - uniform, quantile analyst_supervised kmeans
+
+ignore : string
+    columns of data to NOT be encoded or discretized
+
 n_bins : int or array-like, shape (n_features,) (default=5)
     The number of bins to produce. Raises ValueError if ``n_bins < 2``.
 
