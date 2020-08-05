@@ -1,4 +1,8 @@
 """
+Discretizer Module
+
+<img src="images/dis.png" alt="DIS">
+
 To make ml models more powerful on continuous data
 VL uses discretization (also known as binning).
 We discretize the feature and one-hot encode the transformed data.
@@ -15,8 +19,10 @@ beneficial effect for tree-based models,
 as these models can learn to split up the data anywhere.
 
 Bin continuous data into intervals.
+
 Parameters
 ----------
+
 file_in : file
     raw csv file input to be discretize
 
@@ -25,6 +31,7 @@ file_out : file
 
 drop_column : string
     drop column from discreteize process
+
 
 
 dicretize : string
@@ -104,6 +111,45 @@ Noise point: Points that aren’t close enough to core points to be considered b
 That is to say, they aren’t part of any cluster.
 
 
+Returns:
+----------
+    csv file output with continous data inn bins.
+
+
+Example 1. CSV Files:
+---------------------
+python -m discrete  \
+
+
+  --file_in csvs/sales.csv \
+
+
+
+
+  --file_out_ohe csvs/sales_dis.csv \
+
+
+  --ignore id
+
+
+  --ignore item
+
+
+
+Example 1 - Data Input CSV File:
+----------------------------
+<img src="images/sales.png" alt="OHE" width="600" height="300">
+
+
+Example 1 - One Hot Encoded CSV File:
+-----------------------------
+<img src="images/sales_dis.png" alt="OHE" width="600" height="300">
+
+
+
+
+
+
 """
 # pylint: disable=invalid-name
 # pylint: disable=too-many-locals
@@ -169,12 +215,43 @@ def parse_command_line():
 
 def main():
     """
-  READ FILE_IN_RAW.CSV
-  GET COLUMN HEADERS
-  FOR EACH COLUMN NOT IN IGNORE LIST :
-  GET ALL CATEGORIES = UNIQUE COLUMN VALUES
-  GENERATE ONE HOT ENCODING HEADER
-  ENCODE EACH ROW WITH 1 or 0 FOR EACH HEADER
+
+
+Step 1
+----------
+    READ FILE_IN_RAW.CSV
+
+
+Step 2
+----------
+    GET COLUMN HEADERS
+
+
+
+Step 3
+----------
+    FOR EACH COLUMN NOT IN IGNORE LIST
+
+
+
+
+Step 4
+----------
+    GET ALL CATEGORIES = UNIQUE COLUMN VALUES
+
+
+
+Step 5
+----------
+    GET COLUMN HEADERS
+
+
+
+Step 6
+----------
+    DISCRTTIZE EACH ROW INTO BIN
+
+
 
       """
     ######################################################################
