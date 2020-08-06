@@ -1,5 +1,7 @@
 """
 
+K_Means Clustering
+
 K_Means Clustering is an unsupervised machine learning method that segments similar data points into groups.
 
 It's considered unsupervised because there's no ground truth value to predict.
@@ -7,10 +9,20 @@ Instead, we're trying to create structure/meaning from the data.
 
 K-Means Clustering Explanation
 
+ Step 1
+----------
 
 1) Assign k value as the number of desired clusters.
 
+
+ Step 2
+----------
+
 2) Randomly assign centroids of clusters from points in our dataset.
+
+
+ Step 3
+----------
 
 3) Assign each dataset point to the nearest centroid based on the Euclidean distance metric; this creates clusters.
 
@@ -18,7 +30,15 @@ K-Means Clustering Explanation
 If you walked three blocks North and four blocks West,
 your Euclidean distance is five blocks.
 
+
+ Step 4
+----------
+
 4) Move centroids to the mean value of the clustered dataset points.
+
+
+ Step 5
+----------
 
 5) Iterate/repeat steps 3-4 until centroids don't move or we reach our
 maximum number of iterations allowed (called convergence).

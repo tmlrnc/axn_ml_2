@@ -351,7 +351,7 @@ Step 5
 
 Step 6
 ----------
-    DISCRTTIZE or OHE EACH ROW INTO BIN
+    DISCRETIZE or OHE EACH ROW INTO BIN
 
 
 

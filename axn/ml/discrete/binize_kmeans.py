@@ -1,4 +1,6 @@
 """
+Binizer
+
 To make ml models more powerful on continuous data
 VL uses discretization (also known as binning).
 We discretize the feature and one-hot encode the transformed data.

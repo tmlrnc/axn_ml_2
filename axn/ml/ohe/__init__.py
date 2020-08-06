@@ -1,5 +1,43 @@
 """
-generates the master scripts
+
+One Hot Encoder
+
+ Step 1
+----------
+    READ FILE_IN_RAW.CSV
+    reads config yaml file into config dictionary data object
+    to drive the scikit learn machine learning algorithm
+
+
+Step 2
+----------
+    GET COLUMN HEADERS
+
+
+
+Step 3
+----------
+    FOR EACH COLUMN NOT IN IGNORE LIST
+
+
+
+
+Step 4
+----------
+    GET ALL CATEGORIES = UNIQUE COLUMN VALUES
+
+
+
+Step 5
+----------
+    GET COLUMN HEADERS
+
+
+
+Step 6
+----------
+    OHE EACH ROW INTO 1,0
+
 """
 # pylint: disable=invalid-name
 # pylint: disable=import-error

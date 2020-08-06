@@ -1,4 +1,6 @@
 """
+Discreteizer
+
 Encode categorical features as a one-hot numeric array.
 
 The input to this transformer should be an array-like of integers or strings,
