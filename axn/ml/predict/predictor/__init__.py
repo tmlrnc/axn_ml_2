@@ -1,6 +1,114 @@
 """
-reads config yaml file into config dictionary data object
-to drive the scikit learn machine learning algorithm
+AUTOMATED MACHINE LEARNING  PROCESS
+
+<img src="images/class.png" alt="DIS">
+
+
+Step 1 Data Read
+----------
+Data Read from CSV or URL or API to local CSV
+CSV columns are features and target column
+Read File
+Read API
+The quantity & quality of your data dictate how accurate our model is. Datasets: for test datasets and for generating datasets with
+specific properties for investigating model behavior
+Read URL to CSV
+
+
+
+Step 2 Data Preparation
+----------
+Data Preparation
+Maximum Density -is there enough data?
+Maximum Variance - standard normally distributed Gaussian data: with zero mean and unit variance.
+Maximum Diversity - is it not all the same?
+Minimum Noise - is it not all random ?
+Normalize - If a feature has a variance that is orders of magnitude larger than others, it might dominate the objective function and make the
+estimator unable to learn from other features correctly as expected.
+Scale - Remove the mean value of each feature, then scale it by dividing non-constant features by their standard deviation.
+Complexity - scaling features to lie between a given minimum and maximum value, often between zero and one, or so that the maximum absolute value of each feature is scaled to unit size
+Anomaly Detection and Elimination Novelty detection - compute mean and standard deviation and verify Non exponential
+Feature Extraction For defining attributes of data. - find true meaning of data
+Feature Definition: identify predictive attributes from which to create supervised models.
+Dimensionality Reduction: for reducing the number of attributes in data for summarization, visualization and feature selection such as Principal component analysis.
+Genie Data Feature Selection and Dimensionality Reduction We start with preparing the data. Given a set of features F = { cases, population, density, age,
+current health conditions, medical resources available,  ,…, fi ,…, fn } the GNY Feature Selection’s goal is to find a
+subset of features that maximizes GNY models ability to classify patterns.The product of GNY’s Feature Selection will maximize our predictability scoring functions
+(F1, accuracy, recall, precision) for subsequent algorithm analysis and prediction. The GNY Feature Selection algorithms also perform data mapping and transformation. However, this can only be performed with subsets of the entire group of input variables. This process is referred to Dimensionality Reduction. Dimensionality Reduction is essential because it is computationally intractable to search the whole selection of possible feature subsets so GNY uses approximations of the optimal subset. GNY uses efficient search-heuristics and machine learning to create these approximations and optimal subsets.
+Principal Component Analysis - The eigenvectors and eigenvalues of a covariance matrix are the principal components – the eigenvectors determine the directions of the new feature space, and the eigenvalues determine their magnitude. The goal PCA is to reduce the dimensionality of the original feature space by projecting it onto a smaller subspace, where the eigenvectors will form the axes, So how many principal components are we going to choose for our new feature subspace? Genie users the explained variance, calculated from the eigenvalue, which tells us how much information (variance) can be attributed to each of the principal components. So for the two variables shown below x1 = age and x2 = gender we are able to reduce them to a component axes that maximizes the variance – data for each variable. With LDA for example we would maximize the component for data separation.
+Neural Net Automated Feature selection - performed by genie’s recurrent neural networks in conjunction with its L1-regularization.
+Genie implements this using the weight decay technique with the corresponding protocol. This genie feature selection technique is a part of our neural network pruning and contrasting process. The network self-selects features from the metadata by using its backpropagation learning algorithm to weight and bias the features most needed.
+
+Data Anonymizer Genie removes personal identity data and assigns a universal Genie ID that keeps behavior behind the numbers unchanged.
+Genie also randomly samples numerical variables from probability distributions of personal data. Genie further anonymizes personal numerical data by finding one feature that is the most important, uses our best-fit distribution, then randomly samples these values. Once Genie has this variable simulated, we use Cholesky decomposition to add multiple correlated columns to our data. Genie’s proprietary Cholesky decomposition is derived from financial Monte Carlo methods to simulate systems with multiple correlated variables.
+Data Historical Classifiers
+Read Historical Neural Net Data Classifier Layer Node Weights and Biases
+Genie uses a high number of hidden nodes; the number of unknown weights approaches the number of training equations; therefore Genie solves this problem by introducing and saving a new hidden layer which reduces the total number of nodes. Genie reads historical classifiers back and adjusts the weights and biases, so that we optimize the cost function. Genie adjusts the whole neural network, so that the output value is optimized. This is how we tell the net that it performed poorly or well. We keep trying to optimize the cost function by running through new observations from our dataset. To update the network, we calculate gradients, which are small updates to individual weights in each saved layer.
+Data Encode Classifier  Data Discretize Continuous
+Every data feature column you want to ignore you must mark with ignore flag
+For each continuous data feature column that you do not ignore. YOU MUST discretize it using one of 4 methods
+One Hot Encode the transformed result with one-hot encoding and return a sparse matrix. Ignored features are always stacked to the right.
+One Hot-dense - Encode the transformed result with one-hot encoding and return a dense array. Ignored features are always stacked to the right
+Ordinal Return the bin identifier encoded as an integer value.
+Strategy used to define the widths of the bins.
+Uniform All bins in each feature have identical widths.
+Quantile All bins in each feature have the same number of points.
+K Means Values in each bin have the same nearest center of a 1D k-means cluster.
+For every category One Hot Encodes the features you do not ignore.
+Feature Selection for Predictive Power
+Target Section
+Model Integration
+Translate Models from Python to NodeJS
+Integrated Models into Genie Distributed
+10 are done
+
+
+
+Step 3 Model Selection
+----------
+Model Selection
+Clustering: for grouping unlabeled data such as KMeans
+Regression - Predicting a continuous-valued attribute associated with an object.
+Classifiers Identifying which category an object belongs to. Classification is the step in the record linkage
+process where record pairs are classified into matches, non-matches and possible matches. Classification algorithms can be supervised or unsupervised (with or without training data).
+Cross Validation: for estimating the performance of supervised models on unseen data.
+Ensemble methods: for combining the predictions of multiple supervised models.
+Manifold Learning: For summarizing and depicting complex multi-dimensional data.
+Supervised Models: a vast array not limited to generalized linear models, discriminant analysis, naive Bayes,
+lazy methods, neural networks, support vector machines and decision trees.
+
+
+Step 4 Train the Models
+----------
+Train the Models
+Split Feature Data into Feature Training and Feature Test Sets
+Train Models with Feature Training Data Set
+Run Model Predictions with Feature Test Data Set
+Measure Models - Predicted Target Value vs Actual Target Value
+Accuracy
+Precision
+Recall
+Confusion Matrix
+True Positive - Pred Pos and Act Pos
+True Negative
+False Positive
+False Negative
+Optimize Models in a Feedback Iterative Loop
+Optimize Model Hyperparameter
+Optimize Feature Selection
+Save Historical Classifiers
+
+
+
+Step 5 Test Results
+----------
+OUTPUT: BEST MODEL WITH BEST DATA that BEST predictive Results in csv
+
+The quantity & quality of your data dictate how accurate our model is. Datasets: for test datasets and for
+generating datasets with specific properties for investigating model behavior.
+
+
+
 """
 # pylint: disable=too-many-locals
 # pylint: disable=invalid-name
@@ -381,6 +489,9 @@ class OneHotPredictorBuilder():
 
 class Runner():
     """
+
+
+    <img src="images/ml.png" alt="DIS">
 
     class pulls together builder object that has data frame and all algorithm from command line
     and algorithm directory
