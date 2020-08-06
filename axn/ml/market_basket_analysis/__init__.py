@@ -84,6 +84,66 @@ how to optimize for key metrics such as long term retention and engagement.
 The agent was able to answer this question: what hour do I send each user a message in order to raise engagement.
 It automates new strategies.
 
+Parameters:
+----------
+    file_in: file
+        csv file of sales
+
+
+    file_out_name: file
+        scores
+
+
+Support:
+----------
+Support is the relative frequency that the rules show up.
+In many instances, you may want to look for high support in order to make sure it is a useful relationship.
+However, there may be instances where a low support is useful if you are trying to find “hidden” relationships.
+
+Confidence:
+----------
+Confidence is a measure of the reliability of the rule.
+A confidence of .5 in the above example would mean that in 50% of the cases where Diaper and Gum were purchased,
+the purchase also included Beer and Chips. For product recommendation, a 50% confidence may be perfectly acceptable.
+
+<img src="images/conf.png" alt="OHE" width="600" height="300">
+
+
+Lift:
+----------
+Lift is the ratio of the observed support to that expected if the two rules were independent.
+The basic rule of thumb is that a lift value close to 1 means the rules were completely independent.
+Lift values > 1 are generally more “interesting” and could be indicative of a useful rule pattern.
+List > 6 is a HIT
+
+<img src="images/lift.png" alt="OHE" width="600" height="300">
+
+
+
+Example 1. CSV Files:
+---------------------
+python -m market_basket_analysis  \
+
+
+  --file_in csvs/sales.csv \
+
+
+
+
+  --file_out_ohe csvs/sales_mba.csv
+
+
+
+
+Example 1 - Data Input CSV File:
+----------------------------
+<img src="images/in.png" alt="OHE" width="600" height="300">
+
+
+Example 1 - Market Basket Analysis Output CSV File:
+-----------------------------
+<img src="images/out.png" alt="OHE" width="600" height="300">
+
 
 """
 # pylint: disable=unused-variable

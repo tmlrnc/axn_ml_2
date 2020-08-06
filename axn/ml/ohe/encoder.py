@@ -1,9 +1,114 @@
 """
- features are encoded using a one-hot ‘one-of-K’ encoding scheme.
-    This creates a binary column for each category and returns a sparse matrix or dense array
-    the encoder derives the categories based on the unique values in each feature.
-    """
-# pylint: disable=invalid-name
+One Hot Encoder Module
+
+
+Machine learning algorithms cannot work with categorical data directly.
+Categorical data must be converted to numbers.
+This module encodes categorical features as a one-hot numeric array.
+A one hot encoding is a representation of categorical variables as binary vectors.
+This first requires that the categorical values be mapped to integer values.
+Then, each integer value is represented as a binary vector that is all zero values
+except the index of the integer, which is marked with a 1.
+
+The input to this module should be a csv file where each column feature is a category as a string like
+"United States, Canada" or "Male, Female"
+
+Then we take the string and convert to array of integers
+denoting the values taken on by categorical (discrete) features.
+
+Like
+"United States, Canada" becomes (1,2)
+"Male, Female" becomes (3,4)
+
+The features are encoded using a one-hot aka ‘one-of-K’ or ‘dummy’ encoding scheme.
+This creates a binary column for each category and returns a sparse matrix or dense array (depending on the sparse parameter)
+
+
+Like
+"United States, Canada" becomes (1,2) that encodes to (001, 010)
+"Male, Female" becomes (3,4) that encodes to (100, 101)
+
+
+By default, the encoder derives the categories based on the unique values in each feature.
+Alternatively, you can also specify the categories manually.
+
+This encoding is needed for feeding categorical data to many scikit-learn estimators, notably linear models and SVMs with the standard kernels.
+
+
+Parameters
+----------
+file_in: file
+    raw csv file input to be predicted. Must be a csv file where first row has column header
+file_out: file
+    csv file output encoded using one-hot one-of-K encoding scheme
+ignore: string
+    columns of data to NOT be encoded
+
+
+Returns:
+----------
+    csv file output encoded using one-hot one-of-K encoding scheme.
+
+
+Example 1:
+----------
+python -m ohe  \
+
+
+  --file_in csvs/C102_PLUS_D.csv \
+
+
+  --file_out_ohe csvs/C102_PLUS_D_OHE.csv \
+
+
+
+  --file_out_predict csvs/C102_PLUS_D_OHE_PREDICT.csv \
+
+
+
+  --file_in_config config/ohe_config_RUN1.yaml \
+
+
+
+  --ignore deaths_DISCRETE \
+
+
+
+  --ignore deaths \
+
+
+
+  --target STATUS
+
+
+
+
+Example 2:
+----------
+python -m ohe  \
+
+
+  --file_in csvs/covid.csv \
+
+
+  --file_out_ohe csvs/covid_ohe.csv \
+
+
+
+  --ignore deaths_DISCRETE \
+
+
+
+  --ignore deaths
+
+
+
+
+
+
+
+
+"""
 
 import csv
 from sklearn.preprocessing import OneHotEncoder
@@ -13,29 +118,50 @@ import numpy as np
 
 class VLOneHotEncoder():
     """
-    features are encoded using a one-hot ‘one-of-K’ encoding scheme.
-    This creates a binary column for each category and returns a sparse matrix or dense array
-    the encoder derives the categories based on the unique values in each feature.
+    return one hot encoded follwing these steps:
 
-     when features are categorical.
-     For example a person could have features
-     ["male", "female"],
-     ["from Europe", "from US", "from Asia"],
-     ["uses Firefox", "uses Chrome", "uses Safari", "uses Internet Explorer"].
-     Such features can be efficiently coded as integers,
-     for instance ["male", "from US", "uses Internet Explorer"] could be expressed as [0, 1, 3]
-     while ["female", "from Asia", "uses Chrome"] would be [1, 2, 1].
 
+Step 1
+----------
     READ FILE_IN_RAW.CSV
+
+
+Step 2
+----------
     GET COLUMN HEADERS
-    FOR EACH COLUMN NOT IN IGNORE LIST :
+
+
+
+Step 3
+----------
+    FOR EACH COLUMN NOT IN IGNORE LIST
+
+
+
+
+Step 4
+----------
     GET ALL CATEGORIES = UNIQUE COLUMN VALUES
-    GENERATE ONE HOT ENCODING HEADER
+
+
+
+Step 5
+----------
+    GET COLUMN HEADERS
+
+
+
+Step 6
+----------
     ENCODE EACH ROW WITH 1 or 0 FOR EACH HEADER
-    """
+
+
+
+
+
+      """
 
     # pylint: disable=too-many-instance-attributes
-
     # pylint: disable=no-value-for-parameter
     # pylint: disable=attribute-defined-outside-init
 
@@ -75,11 +201,22 @@ class VLOneHotEncoder():
         """
         opens file and writes one hot encoded data
 
-        :param file_out_name: Name of File to Write to
+
+Parameters:
+----------
+file_out_name: file
+     Name of File to Write encoded categories to
+
+
+Returns:
+----------
+    csv file output encoded using one-hot one-of-K encoding scheme
+
+
         """
 
-        with open(file_out_name, "w") as f:
-            writer = csv.writer(f)
+        with open(file_out_name, "w") as myfile:
+            writer = csv.writer(myfile)
             myarr = np.array(self.ignore_list)
 
             arr_flat = np.append(self.header, myarr)
@@ -88,9 +225,8 @@ class VLOneHotEncoder():
 
             writer.writerow(new_header)
             i = 0
-            print(type(self.listOflist))
 
-            for row in self.listOflist:
+            for row in self.list_of_list:
                 row_int = [int(i) for i in row]
                 new_row = row_int + self.data_frame_ignore_frame_list[i]
                 writer.writerow(new_row)
@@ -98,12 +234,21 @@ class VLOneHotEncoder():
 
     def one_hot_encode(self):
         """
-         runs OneHotEncoder() function on class data
+        opens file and writes one hot encoded data
 
-        :returns data_frame: array
-        :returns csv_column_name_list: array
 
-         """
+Parameters:
+----------
+self: self
+     self
+
+
+Returns:
+----------
+    csv file output encoded using one-hot one-of-K encoding scheme
+
+
+        """
         if self.encoded:
             return self.data_frame, self.csv_column_name_list
 
@@ -112,13 +257,13 @@ class VLOneHotEncoder():
         #print("one_hot_encode-- --- START ")
 
         self.enc.fit(self.data_frame)
-        self.X_train_one_hot = self.enc.transform(self.data_frame)
+        self.x_train_one_hot = self.enc.transform(self.data_frame)
 
         self.header = self.enc.get_feature_names(self.csv_column_name_list)
 
-        self.ndarray = self.X_train_one_hot.toarray()
+        self.ndarray = self.x_train_one_hot.toarray()
 
-        self.listOflist = self.ndarray.tolist()
+        self.list_of_list = self.ndarray.tolist()
         self.encoded = True
         return self.data_frame, self.csv_column_name_list
 
@@ -127,14 +272,36 @@ class OneHotEncoderBuilder():
     """
     opens file and writes one hot encoded data
 
-    :param file_out_name: Name of File to Write to
+
+Parameters:
+----------
+file_out_name: file
+    Name of File to Write encoded categories to
+
+
+Returns:
+----------
+csv file output encoded using one-hot one-of-K encoding scheme
+
+
     """
 
     def __init__(self, filename):
         """
         opens file and writes one hot encoded data
 
-        :param filename: string : input data file
+
+Parameters:
+----------
+    file_out_name: file
+        Name of File to Write encoded categories to
+
+
+Returns:
+----------
+    csv file output encoded using one-hot one-of-K encoding scheme
+
+
         """
         if filename is None:
             raise Exception("Filename cannot be none")
@@ -145,7 +312,18 @@ class OneHotEncoderBuilder():
         """
         constructs ignore list
 
-        :param ignore: string : one feature string on list
+
+Parameters:
+----------
+    ignore: string
+        constructs ignore list
+
+
+Returns:
+----------
+    constructs ignore list
+
+
         """
         self.ignore_list.append(ignore)
         return self
@@ -154,7 +332,16 @@ class OneHotEncoderBuilder():
         """
         builds OHE class
 
-        :returns OneHotEncoder: class
+Parameters:
+----------
+        self: self
+            self
+
+
+Returns:
+----------
+        builds OHE class
+
 
         """
         return VLOneHotEncoder(self.filename, self.ignore_list)
