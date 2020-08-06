@@ -59,8 +59,10 @@ Step 9
 ----------
     The observed data X and an external variable y that we are trying to predict, called “target”
     Y is a 1D array of length n_samples.
-    All VL models use a fit(X, y) method to fit the model and a predict(X) method that, given unlabeled observations X, returns the predicted labels y.
-    a regressor model is a set of methods intended for regression in which the target value is expected to be a linear combination of the features.
+    All VL models use a fit(X, y) method to fit the model and a predict(X) method that,
+    given unlabeled observations X, returns the predicted labels y.
+    a regressor model is a set of methods intended for regression in which the
+    target value is expected to be a linear combination of the features.
 
 
 
@@ -171,7 +173,9 @@ Example 1 - One Hot Encoded CSV File:
 """
 # pylint: disable=too-many-locals
 # pylint: disable=invalid-name
+# pylint: disable=trailing-whitespace
 # pylint: disable=too-many-statements
+# pylint: disable=line-too-long
 
 
 import argparse
@@ -186,7 +190,8 @@ description = \
 
 
 
-  Then split into test and training sets such that: Training data set—a subset to train a model. Test data set—a subset to test the trained model.
+  Then split into test and training sets such that: Training data set—a subset to train a model. 
+  Test data set—a subset to test the trained model.
   Test set MUST meet the following two conditions:
   Is large enough to yield statistically meaningful results.
   Is representative of the data set as a whole.
@@ -195,8 +200,11 @@ description = \
   Supervised learning consists in learning the link between two datasets:
   the observed data X and an external variable y that we are trying to predict, called “target”
   Y is a 1D array of length n_samples.
-  All VL models use a fit(X, y) method to fit the model and a predict(X) method that, given unlabeled observations X, returns the predicted labels y.
-  a regressor model is a set of methods intended for regression in which the target value is expected to be a linear combination of the features.
+  All VL models use a fit(X, y) method to fit the model and a predict(X) method that, 
+  given unlabeled observations X, returns the predicted labels y.
+  
+  a regressor model is a set of methods intended for regression in which the target 
+  value is expected to be a linear combination of the features.
 
 Model doc definition
 
@@ -372,8 +380,10 @@ Step 9
 ----------
     The observed data X and an external variable y that we are trying to predict, called “target”
     Y is a 1D array of length n_samples.
-    All VL models use a fit(X, y) method to fit the model and a predict(X) method that, given unlabeled observations X, returns the predicted labels y.
-    a regressor model is a set of methods intended for regression in which the target value is expected to be a linear combination of the features.
+    All VL models use a fit(X, y) method to fit the model and a predict(X) method that,
+    given unlabeled observations X, returns the predicted labels y.
+    a regressor model is a set of methods intended for regression in which the target value is
+    expected to be a linear combination of the features.
 
 
 

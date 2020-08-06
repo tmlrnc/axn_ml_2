@@ -26,24 +26,50 @@ Minimum Noise - is it not all random ?
 Normalize - If a feature has a variance that is orders of magnitude larger than others, it might dominate the objective function and make the
 estimator unable to learn from other features correctly as expected.
 Scale - Remove the mean value of each feature, then scale it by dividing non-constant features by their standard deviation.
-Complexity - scaling features to lie between a given minimum and maximum value, often between zero and one, or so that the maximum absolute value of each feature is scaled to unit size
+Complexity - scaling features to lie between a given minimum and maximum value, often between zero and one,
+or so that the maximum absolute value of each feature is scaled to unit size
 Anomaly Detection and Elimination Novelty detection - compute mean and standard deviation and verify Non exponential
 Feature Extraction For defining attributes of data. - find true meaning of data
 Feature Definition: identify predictive attributes from which to create supervised models.
-Dimensionality Reduction: for reducing the number of attributes in data for summarization, visualization and feature selection such as Principal component analysis.
-Genie Data Feature Selection and Dimensionality Reduction We start with preparing the data. Given a set of features F = { cases, population, density, age,
+Dimensionality Reduction: for reducing the number of attributes in data for summarization, visualization and
+feature selection such as Principal component analysis.
+Genie Data Feature Selection and Dimensionality Reduction We start with preparing the data. Given a set of
+features F = { cases, population, density, age,
 current health conditions, medical resources available,  ,…, fi ,…, fn } the GNY Feature Selection’s goal is to find a
-subset of features that maximizes GNY models ability to classify patterns.The product of GNY’s Feature Selection will maximize our predictability scoring functions
-(F1, accuracy, recall, precision) for subsequent algorithm analysis and prediction. The GNY Feature Selection algorithms also perform data mapping and transformation. However, this can only be performed with subsets of the entire group of input variables. This process is referred to Dimensionality Reduction. Dimensionality Reduction is essential because it is computationally intractable to search the whole selection of possible feature subsets so GNY uses approximations of the optimal subset. GNY uses efficient search-heuristics and machine learning to create these approximations and optimal subsets.
-Principal Component Analysis - The eigenvectors and eigenvalues of a covariance matrix are the principal components – the eigenvectors determine the directions of the new feature space, and the eigenvalues determine their magnitude. The goal PCA is to reduce the dimensionality of the original feature space by projecting it onto a smaller subspace, where the eigenvectors will form the axes, So how many principal components are we going to choose for our new feature subspace? Genie users the explained variance, calculated from the eigenvalue, which tells us how much information (variance) can be attributed to each of the principal components. So for the two variables shown below x1 = age and x2 = gender we are able to reduce them to a component axes that maximizes the variance – data for each variable. With LDA for example we would maximize the component for data separation.
+subset of features that maximizes GNY models ability to classify patterns.The product of
+GNY’s Feature Selection will maximize our predictability scoring functions
+(F1, accuracy, recall, precision) for subsequent algorithm analysis and prediction.
+The GNY Feature Selection algorithms also perform data mapping and transformation.
+However, this can only be performed with subsets of the entire group of input variables. This process is referred to
+Dimensionality Reduction. Dimensionality Reduction is essential because it is computationally intractable to search the
+whole selection of possible feature subsets so GNY uses approximations of the optimal subset.
+GNY uses efficient search-heuristics and machine learning to create these approximations and optimal subsets.
+Principal Component Analysis - The eigenvectors and eigenvalues of a covariance matrix are the principal components –
+the eigenvectors determine the directions of the new feature space, and the eigenvalues determine their magnitude.
+The goal PCA is to reduce the dimensionality of the original feature space by projecting it onto a smaller subspace,
+where the eigenvectors will form the axes, So how many principal components are we going to choose for our new feature subspace?
+Genie users the explained variance, calculated from the eigenvalue, which tells us how much information (variance)
+can be attributed to each of the principal components. So for the two variables shown below x1 = age and x2 = gender
+we are able to reduce them to a component axes that maximizes the variance – data for each variable. With LDA for example we
+would maximize the component for data separation.
 Neural Net Automated Feature selection - performed by genie’s recurrent neural networks in conjunction with its L1-regularization.
-Genie implements this using the weight decay technique with the corresponding protocol. This genie feature selection technique is a part of our neural network pruning and contrasting process. The network self-selects features from the metadata by using its backpropagation learning algorithm to weight and bias the features most needed.
+Genie implements this using the weight decay technique with the corresponding protocol. This genie feature selection technique
+is a part of our neural network pruning and contrasting process. The network self-selects features from the metadata by using its
+backpropagation learning algorithm to weight and bias the features most needed.
 
 Data Anonymizer Genie removes personal identity data and assigns a universal Genie ID that keeps behavior behind the numbers unchanged.
-Genie also randomly samples numerical variables from probability distributions of personal data. Genie further anonymizes personal numerical data by finding one feature that is the most important, uses our best-fit distribution, then randomly samples these values. Once Genie has this variable simulated, we use Cholesky decomposition to add multiple correlated columns to our data. Genie’s proprietary Cholesky decomposition is derived from financial Monte Carlo methods to simulate systems with multiple correlated variables.
+Genie also randomly samples numerical variables from probability distributions of personal data. Genie further anonymizes personal
+numerical data by finding one feature that is the most important, uses our best-fit distribution, then randomly samples these values.
+Once Genie has this variable simulated, we use Cholesky decomposition to add multiple correlated columns to our data.
+Genie’s proprietary Cholesky decomposition is derived from financial Monte Carlo methods to simulate systems with multiple correlated variables.
 Data Historical Classifiers
 Read Historical Neural Net Data Classifier Layer Node Weights and Biases
-Genie uses a high number of hidden nodes; the number of unknown weights approaches the number of training equations; therefore Genie solves this problem by introducing and saving a new hidden layer which reduces the total number of nodes. Genie reads historical classifiers back and adjusts the weights and biases, so that we optimize the cost function. Genie adjusts the whole neural network, so that the output value is optimized. This is how we tell the net that it performed poorly or well. We keep trying to optimize the cost function by running through new observations from our dataset. To update the network, we calculate gradients, which are small updates to individual weights in each saved layer.
+Genie uses a high number of hidden nodes; the number of unknown weights approaches the number of training equations;
+therefore Genie solves this problem by introducing and saving a new hidden layer which reduces the total number of nodes.
+Genie reads historical classifiers back and adjusts the weights and biases, so that we optimize the cost function.
+Genie adjusts the whole neural network, so that the output value is optimized. This is how we tell the net that it performed poorly or well.
+We keep trying to optimize the cost function by running through new observations from our dataset. To update the network, we calculate gradients,
+which are small updates to individual weights in each saved layer.
 Data Encode Classifier  Data Discretize Continuous
 Every data feature column you want to ignore you must mark with ignore flag
 For each continuous data feature column that you do not ignore. YOU MUST discretize it using one of 4 methods
@@ -70,7 +96,8 @@ Model Selection
 Clustering: for grouping unlabeled data such as KMeans
 Regression - Predicting a continuous-valued attribute associated with an object.
 Classifiers Identifying which category an object belongs to. Classification is the step in the record linkage
-process where record pairs are classified into matches, non-matches and possible matches. Classification algorithms can be supervised or unsupervised (with or without training data).
+process where record pairs are classified into matches, non-matches and possible matches.
+Classification algorithms can be supervised or unsupervised (with or without training data).
 Cross Validation: for estimating the performance of supervised models on unseen data.
 Ensemble methods: for combining the predictions of multiple supervised models.
 Manifold Learning: For summarizing and depicting complex multi-dimensional data.
