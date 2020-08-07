@@ -1,4 +1,12 @@
 """
+AdaBoost Classifier
+
+An AdaBoost classifier is a meta-estimator that begins by fitting a classifier on the original
+dataset and then fits additional copies of the
+classifier on the same dataset but where the weights of incorrectly classified instances are
+adjusted such that subsequent classifiers focus more on difficult cases.
+
+
  trains the scikit-learn  python machine learning algorithm library function
  https://scikit-learn.org
 
@@ -26,6 +34,26 @@ def algorithm(): return AdaBoostClassifier(n_estimators=100, random_state=0)
 
 @Commandline("ADA")
 class ADA_OHP(SimplePredictor):
+    """
+    AdaBoost Classifier
+
+    An AdaBoost classifier is a meta-estimator that begins by fitting a classifier on the original
+    dataset and then fits additional copies of the
+    classifier on the same dataset but where the weights of incorrectly classified instances are
+    adjusted such that subsequent classifiers focus more on difficult cases.
+
+
+     trains the scikit-learn  python machine learning algorithm library function
+     https://scikit-learn.org
+
+     then passes the trained algorithm the features set and returns the
+     predicted y test values form, the function
+
+     then compares the y_test values from scikit-learn predicted to
+     y_test values passed in
+
+     then returns the accuracy
+     """
 
     def __init__(self, target, X_test, X_train, y_test, y_train):
         """

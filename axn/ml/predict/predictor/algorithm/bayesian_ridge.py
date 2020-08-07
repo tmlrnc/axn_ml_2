@@ -1,6 +1,37 @@
 """
- trains the scikit-learn  python machine learning algorithm library function
+Bayesian RIDGE REGRESSION
+
+<img src="images/bay.png" alt="OHE">
+
+In general, when fitting a curve with a polynomial by Bayesian ridge regression, the selection of initial values of the
+regularization parameters (alpha, lambda) may be important. This is because the regularization parameters are determined
+by an iterative procedure that depends on initial values.
+In this example, the sinusoid is approximated by a polynomial using different pairs of initial values.
+When starting from the default values (alpha_init = 1.90, lambda_init = 1.), the bias of the resulting curve is large,
+and the variance is small. So, lambda_init should be relatively small (1.e-3) so as to reduce the bias.
+Also, by evaluating log marginal likelihood (L) of these models, we can determine which one is better.
+It can be concluded that the model with larger L is more likely.
+
+Parameters
+----------
+X_test: array
+    testing features
+
+X_train: array
+    training features
+
+y_test: array
+    testing label
+
+y_train: array
+    testing label
+
+Returns:
+----------
+    target: array - label to be predicted or classified
+
  https://scikit-learn.org
+
 
  then passes the trained algorithm the features set and returns the
  predicted y test values form, the function

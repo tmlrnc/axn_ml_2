@@ -1,4 +1,9 @@
 """
+BALL TREE
+
+n_samples is the number of points in the data set, and n_features is the dimension of the parameter space.
+Note: if X is a C-contiguous array of doubles then data will not be copied. Otherwise, an internal copy will be made.
+
  trains the scikit-learn  python machine learning algorithm library function
  https://scikit-learn.org
 

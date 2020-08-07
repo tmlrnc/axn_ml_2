@@ -1,4 +1,12 @@
 """
+ARD REGRESSION
+
+An ARD REGRESSION is a meta-estimator that begins by fitting a classifier on the original
+dataset and then fits additional copies of the
+classifier on the same dataset but where the weights of incorrectly classified instances are
+adjusted such that subsequent classifiers focus more on difficult cases.
+
+
  trains the scikit-learn  python machine learning algorithm library function
  https://scikit-learn.org
 
@@ -9,6 +17,7 @@
  y_test values passed in
 
  then returns the accuracy
+
  """
 # pylint: disable=duplicate-code
 # pylint: disable=missing-function-docstring
