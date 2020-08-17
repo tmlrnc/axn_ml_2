@@ -28,6 +28,7 @@ def parse_command_line():
     return args
 
 
+
 def main():
     """
 Market Basket Analysis
@@ -43,42 +44,18 @@ that purchased diapers and also purchased beer in the same transaction.
       """
     # pylint: disable=duplicate-code
 
-    ######################################################################
-    #
-    # read run commands
-    #
     args = parse_command_line()
     file_in_name2 = args.file_in
     file_out_name2 = args.file_out
-
-    ######################################################################
-
-    #
-    #
-    # pylint: disable=duplicate-code
-
-    print("MBA --- START ")
-
-
-    #file_in_name2 = "/Users/tomlorenc/Downloads/Final_Dagger_Data_V9.csv"
-    #file_out_name2 = "/Users/tomlorenc/Downloads/Final_Dagger_Data_V9_MBA.csv"
-
     df2 = pd.read_csv(file_in_name2)
+    #print(df2.head())
 
-    frequent_itemsets2 = apriori(df2, min_support=0.07, use_colnames=True)
-    print("frequent_itemsets2 ... ")
-    print(frequent_itemsets2)
-    rules = association_rules(frequent_itemsets2, metric="lift", min_threshold=1)
-    print(rules.head())
-
-    rules["antecedents"] = rules["antecedents"].apply(lambda x: ', '.join(list(x))).astype("unicode")
-    rules["consequents"] = rules["consequents"].apply(lambda x: ', '.join(list(x))).astype("unicode")
+    df3 = df2.dropna(axis=0, how='any')
+    #sampleDF['housing'] = sampleDF['housing'].apply(lambda x: 0 if x == 'no' else 1)
 
 
-    #for index, row in rules.iterrows():
-    #    print("antecedents : " + str(row['antecedents']), "consequents : " + str(row['consequents']), str(row['support']), str(row['confidence']), str(row['lift']))
+    df3.to_csv(file_out_name2)
 
-    rules.to_csv(file_out_name2)
     print("MBA --- END ")
 
 if __name__ == '__main__':
