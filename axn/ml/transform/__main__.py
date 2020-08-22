@@ -49,7 +49,9 @@ that purchased diapers and also purchased beer in the same transaction.
     file_out_name2 = args.file_out
     df2 = pd.read_csv(file_in_name2)
 
-    df2['axn_PsySoc_Prog'] = df2['axn_PsySoc_Prog'].apply(lambda x: 0 if x < 6 else 1)
+    df2['axn_CnsmBhvr_ArtsCul'] = df2['axn_CnsmBhvr_ArtsCul'].apply(lambda x: 0 if x < 6 else 1)
+    df2['axn_CnsmBhvr_HealthWell'] = df2['axn_CnsmBhvr_HealthWell'].apply(lambda x: 0 if x < 6 else 1)
+    df2['axn_CnsmBhvr_DIY'] = df2['axn_CnsmBhvr_DIY'].apply(lambda x: 0 if x < 6 else 1)
 
 
     df2.to_csv(file_out_name2)

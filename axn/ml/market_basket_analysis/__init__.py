@@ -1,7 +1,65 @@
 """
-Market Basket Analysis
+Market Basket Analysis for Association Rules
 
-<img src="images/market.png" alt="DIS">
+<img src="images/ar2.png" alt="DIS">
+
+
+
+Step 1
+----------
+    READ FILE_IN_RAW.CSV
+    Drop all rows that have blanks
+
+    python -m dropblank --file_in RAW.csv      --file_out RAW_NO_BLANKS.csv
+
+
+
+
+
+
+
+Step 2
+----------
+    Transform floats to integer categories
+
+    python -m transform --file_in RAW_NO_BLANKS.csv      --file_out RAW_NO_BLANKS_TRANSFORM.csv
+
+
+
+Step 3
+----------
+    One hot encode all strings and integers to categories
+
+    python -m ohe --file_in RAW_NO_BLANKS_TRANSFORM.csv      --file_out RAW_NO_BLANKS_TRANSFORM_OHE.csv --ignore ID
+
+
+
+Step 4
+----------
+    Calculate apriori frequency item sets for all consequents of all antecedents
+
+    python -m market_basket_analysis --file_in RAW_NO_BLANKS_TRANSFORM_OHE.csv --file_out RAW_NO_BLANKS_TRANSFORM_OHE_RESULTS.csv
+
+
+
+
+Step 5
+----------
+   Calculate association rules: support, confidence, lift for all consequents of all antecedents
+
+
+
+
+Step 6
+----------
+    Sort by consequents then by antecedents then by Confidence
+
+
+
+Step 7
+----------
+   Write CSV report
+
 
 
 
@@ -84,14 +142,33 @@ how to optimize for key metrics such as long term retention and engagement.
 The agent was able to answer this question: what hour do I send each user a message in order to raise engagement.
 It automates new strategies.
 
-Parameters:
+
+<img src="images/fi.png" alt="DIS">
+
+
+
+
+<img src="images/ar.png" alt="DIS">
+
+
+<img src="images/scl.png" alt="DIS">
+
+
+<img src="images/rules.png" alt="DIS">
+
+Steps and Parameters:
 ----------
-    file_in: file
-        csv file of sales
+
+ python -m dropblank --file_in RAW.csv      --file_out RAW_NO_BLANKS.csv
 
 
-    file_out_name: file
-        scores
+ python -m transform --file_in RAW_NO_BLANKS.csv      --file_out RAW_NO_BLANKS_TRANSFORM.csv
+
+
+ python -m ohe --file_in RAW_NO_BLANKS_TRANSFORM.csv      --file_out RAW_NO_BLANKS_TRANSFORM_OHE.csv --ignore ID
+
+
+  python -m market_basket_analysis --file_in RAW_NO_BLANKS_TRANSFORM_OHE.csv --file_out RAW_NO_BLANKS_TRANSFORM_OHE_RESULTS.csv
 
 
 Support:
@@ -143,6 +220,20 @@ Example 1 - Data Input CSV File:
 Example 1 - Market Basket Analysis Output CSV File:
 -----------------------------
 <img src="images/out.png" alt="OHE" width="600" height="300">
+
+
+
+
+
+
+Example 2 - Data Input CSV File:
+----------------------------
+<img src="images/2in.png" alt="OHE" width="600" height="300">
+
+
+Example 2 - Market Basket Analysis Output CSV File:
+-----------------------------
+<img src="images/2out.png" alt="OHE" width="600" height="300">
 
 
 """
