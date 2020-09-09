@@ -73,7 +73,7 @@ CONFIDENCE is likeliness of occurrence of Consequent Given the Antecedent
     import numpy as np
 
 
-    consequent = 'JewelryCoverqage_Y'
+    consequent = 'JewelryCoverqage'
     total_num_consequent = 0
     #support
     allrows = []
