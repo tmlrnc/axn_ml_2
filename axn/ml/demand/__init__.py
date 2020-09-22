@@ -1,95 +1,7 @@
 """
-Market Basket Analysis for Association Rules
+Market Basket Analysis
 
-<img src="images/ar2.png" alt="DIS">
-
-
-
-Step 1
-----------
-    READ FILE_IN_RAW.CSV
-    Drop all rows that have blanks
-
-    python -m dropblank --file_in RAW.csv      --file_out RAW_NO_BLANKS.csv
-
-
-
-
-
-
-Step 2
-----------
-    Transform floats to integer categories
-
-    python -m transform --file_in RAW_NO_BLANKS.csv      --file_out RAW_NO_BLANKS_TRANSFORM.csv
-
-
-
-Step 3
-----------
-    One hot encode all strings and integers to categories
-
-    python -m ohe --file_in RAW_NO_BLANKS_TRANSFORM.csv      --file_out RAW_NO_BLANKS_TRANSFORM_OHE.csv --ignore ID
-
-
-
-Step 4
-----------
-    Calculate apriori frequency item sets for all consequents of all antecedents
-
-    python -m market_basket_analysis --file_in RAW_NO_BLANKS_TRANSFORM_OHE.csv --file_out RAW_NO_BLANKS_TRANSFORM_OHE_RESULTS.csv
-
-
-
-
-Step 5
-----------
-   Calculate association rules: support, confidence, lift for all consequents of all antecedents
-
-
-
-
-Step 6
-----------
-    Sort by consequents then by antecedents then by Confidence
-
-
-
-Step 7
-----------
-   Write CSV report
-
-The most common interpretation of r-squared is how well the regression model fits the observed data. For example,
-an r-squared of 60% reveals that 60% of the data fit the regression model. Generally, a higher r-squared indicates a better fit for the model.
-
-
-Correlation Coefficient, denoted by r, tells us how closely data in a scatterplot fall along a straight line.
-The closer that the absolute value of r is to one, the better that the data are described by a linear equation.
-If r =1 or r = -1 then the data set is perfectly aligned. Data sets with values of r close to zero show little to no straight-line relationship.
-We begin with a few preliminary calculations. The quantities from these calculations will be used in subsequent steps of our calculation of r:
-Calculate x̄, the mean of all of the first coordinates of the data xi.
-Calculate ȳ, the mean of all of the second coordinates of the data
-yi.
-Calculate s x the sample standard deviation of all of the first coordinates of the data xi.
-Calculate s y the sample standard deviation of all of the second coordinates of the data yi.
-Use the formula (zx)i = (xi – x̄) / s x and calculate a standardized value for each xi.
-Use the formula (zy)i = (yi – ȳ) / s y and calculate a standardized value for each yi.
-Multiply corresponding standardized values: (zx)i(zy)i
-Add the products from the last step together.
-Divide the sum from the previous step by n – 1, where n is the total number of points in our set of paired data.
-The result of all of this is the correlation coefficient r.
-Generally, a value of r greater than 0.7 is considered a strong correlation. Anything between 0.5 and 0.7 is a
-moderate correlation, and anything less than 0.4 is considered a weak or no correlation.
-
-SUPPORT is how frequent an Antecedent is in all the transactions
-SUPPORT = (Num Transactions with Antecedent AND Consequent )/Total Num Transaction
-
-CONFIDENCE is likeliness of occurrence of Consequent Given the Antecedent
-CONFIDENCE = (Num Transactions with Antecedent AND Consequent )/ Num Transactions with Antecedent
-
-Lift is how much better a Antecedent is at predicting the Consequent than just assuming the Consequent in the first place.
-Lift = ((Num Transactions with Antecedent AND Consequent )/ Num Transactions with Antecedent) )
-/ ((Num Transactions with Consequent) / Total Num Transaction)
+<img src="images/market.png" alt="DIS">
 
 
 
@@ -172,33 +84,14 @@ how to optimize for key metrics such as long term retention and engagement.
 The agent was able to answer this question: what hour do I send each user a message in order to raise engagement.
 It automates new strategies.
 
-
-<img src="images/fi.png" alt="DIS">
-
-
-
-
-<img src="images/ar.png" alt="DIS">
-
-
-<img src="images/scl.png" alt="DIS">
-
-
-<img src="images/rules.png" alt="DIS">
-
-Steps and Parameters:
+Parameters:
 ----------
-
- python -m dropblank --file_in RAW.csv      --file_out RAW_NO_BLANKS.csv
-
-
- python -m transform --file_in RAW_NO_BLANKS.csv      --file_out RAW_NO_BLANKS_TRANSFORM.csv
+    file_in: file
+        csv file of sales
 
 
- python -m ohe --file_in RAW_NO_BLANKS_TRANSFORM.csv      --file_out RAW_NO_BLANKS_TRANSFORM_OHE.csv --ignore ID
-
-
-  python -m market_basket_analysis --file_in RAW_NO_BLANKS_TRANSFORM_OHE.csv --file_out RAW_NO_BLANKS_TRANSFORM_OHE_RESULTS.csv
+    file_out_name: file
+        scores
 
 
 Support:
@@ -242,7 +135,7 @@ python -m market_basket_analysis  \
 
 
 
-TEST 1 - Data Input CSV File:
+Example 1 - Data Input CSV File:
 ----------------------------
 <img src="images/in.png" alt="OHE" width="600" height="300">
 
@@ -250,34 +143,6 @@ TEST 1 - Data Input CSV File:
 Example 1 - Market Basket Analysis Output CSV File:
 -----------------------------
 <img src="images/out.png" alt="OHE" width="600" height="300">
-
-
-
-
-
-
-TEST 2 - Data Input CSV File:
-----------------------------
-<img src="images/2in.png" alt="OHE" width="600" height="300">
-
-
-Example 2 - Market Basket Analysis Output CSV File:
------------------------------
-<img src="images/2out.png" alt="OHE" width="600" height="300">
-
-
-
-
-
-
-TEST 3 - Data Input CSV File:
-----------------------------
-<img src="images/intest3.png" alt="OHE" width="600" height="300">
-
-
-Example 2 - Market Basket Analysis Output CSV File:
------------------------------
-<img src="images/outtest3.png" alt="OHE" width="600" height="300">
 
 
 """

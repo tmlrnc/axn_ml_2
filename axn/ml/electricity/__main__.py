@@ -16,7 +16,6 @@ from mlxtend.frequent_patterns import association_rules
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 import time
 import warnings
 warnings.filterwarnings('ignore')
@@ -103,6 +102,79 @@ def series_to_supervised(data,  col_names, n_in=1, n_out=1, dropnan=True):
 
 
 
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import time
+import warnings
+
+warnings.filterwarnings('ignore')
+
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import cross_val_score
+
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import ElasticNet
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import BaggingRegressor
+from sklearn.ensemble import AdaBoostRegressor
+
+
+
+
+
+import pandas as pd
+import statsmodels.api as sm
+import pickle
+import numpy as np
+import scipy.stats as stats
+
+def multiple_regression(df, name):
+    X = df[[col for col in df.columns if col != 'demand']]
+    y = df['demand']
+    X = sm.add_constant(X)  ## let's add an intercept (beta_0) to our model
+
+    model = sm.OLS(y, X).fit()
+    predictions = model.predict(X)
+
+    print('------------------%s------------------' % name)
+    print(model.summary())
+    return model
+
+
+import csv
+from six.moves import cPickle as pickle
+import numpy as np
+
+
+def pkl_to_csv(path_pickle,path_csv):
+
+    x = []
+
+    pickle.loads(path_pickle)
+    exit()
+
+    pd.read_pickle(path_pickle)
+
+
+    print(pd)
+    df = pd.DataFrame()
+
+    df.to_csv(path_csv)
+    with open(path_pickle,'rb') as f:
+        x = pickle.load(f)
+
+    with open(path_csv,'w') as f:
+        writer = csv.writer(f)
+        for line in x: writer.writerow(line)
+
 def parse_command_line():
     """
     reads the command line args
@@ -123,30 +195,37 @@ def parse_command_line():
 
 def main():
     """
-Market Basket Analysis
-
-also called Association analysis is light on the math concepts and easy to explain to non-technical people.
-In addition, it is an unsupervised learning tool that looks for hidden patterns so there is
-limited need for data prep and feature engineering.
-It is a good start for certain cases of data exploration and can point the way for a deeper dive into the data using other approaches.
-
-Association rules are normally written like this: {Diapers} -> {Beer} which means that there is a strong relationship between customers
-that purchased diapers and also purchased beer in the same transaction.
-
       """
     # pylint: disable=duplicate-code
+    WORKING_DIR = '/Users/tomlorenc/Downloads/'
+    file_in = '/Users/tomlorenc/Downloads/LA_df.pkl'
 
-    args = parse_command_line()
-    file_in_name2 = args.file_in
-    file_out_name2 = args.file_out
-    df2 = pd.read_csv(file_in_name2)
-    #print(df2.head())
-    df3 = df2.fillna(0)
-    #df3 = df2.dropna(axis=0, how='any')
-    #sampleDF['housing'] = sampleDF['housing'].apply(lambda x: 0 if x == 'no' else 1)
+    la_df = pd.read_pickle(file_in)
+    print(la_df)
+
+    X = la_df[[col for col in la_df.columns if col != 'demand']]
+    y = la_df['demand']
+    X = sm.add_constant(X)  ## let's add an intercept (beta_0) to our model
+
+    model = sm.OLS(y, X).fit()
+    predictions = model.predict(X)
+
+    print("*******************")
+    print(model.summary())
+
+    exit()
+    file_out = '/Users/tomlorenc/Downloads/LA.csv'
+    #pkl_to_csv(file_in,file_out)
+
+    m_la = multiple_regression(la_df, 'LOS ANGELES')
+
+    # drop high p-value columns and save
+    la_df = la_df.drop(['hourlywindspeed', 'hourlyheatingdegrees', 'hourlyskyconditions_BKN', 'hourlyskyconditions_FEW',
+                        'hourlyskyconditions_OVC', 'hourlyskyconditions_SCT'], axis=1)
 
 
-    df3.to_csv(file_out_name2)
+
+    #la_df.to_pickle(WORKING_DIR + 'LA_df_final_v2.pkl')
 
     print("MBA --- END ")
 

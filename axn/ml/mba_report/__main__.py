@@ -200,9 +200,10 @@ that purchased diapers and also purchased beer in the same transaction.
             print(str(row[1]))
 
 
-    with open(file_out_name2, 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerows(new_list)
+    mydf = df = pd.DataFrame(new_list,columns=first_row)
+    mydf.sort_values(by=['Consequent'])
+    mydf.to_csv(file_out_name2)
+
 
 
 if __name__ == '__main__':
