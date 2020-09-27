@@ -1,8 +1,6 @@
 """
 Market Basket Analysis
 
-<img src="images/market.png" alt="DIS">
-
 
 
 Market Basket Analysis also called Association analysis is light on the math concepts and easy to explain to non-technical people.

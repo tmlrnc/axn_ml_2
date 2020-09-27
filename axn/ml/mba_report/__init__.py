@@ -1,7 +1,7 @@
 """
 Market Basket Analysis
 
-<img src="images/market.png" alt="DIS">
+<img src="images/market1.png" alt="DIS">
 
 
 
@@ -100,13 +100,20 @@ Support is the relative frequency that the rules show up.
 In many instances, you may want to look for high support in order to make sure it is a useful relationship.
 However, there may be instances where a low support is useful if you are trying to find “hidden” relationships.
 
+SUPPORT is how frequent an Antecedent is in all the transactions
+SUPPORT = (Num Transactions with Antecedent AND Consequent )/Total Num Transaction
+
+
 Confidence:
 ----------
 Confidence is a measure of the reliability of the rule.
 A confidence of .5 in the above example would mean that in 50% of the cases where Diaper and Gum were purchased,
 the purchase also included Beer and Chips. For product recommendation, a 50% confidence may be perfectly acceptable.
 
-<img src="images/conf.png" alt="OHE" width="600" height="300">
+CONFIDENCE is likeliness of occurrence of Consequent Given the Antecedent
+CONFIDENCE = (Num Transactions with Antecedent AND Consequent )/ Num Transactions with Antecedent
+
+<img src="images/market2.png" alt="OHE" width="600" height="300">
 
 
 Lift:
@@ -116,7 +123,7 @@ The basic rule of thumb is that a lift value close to 1 means the rules were com
 Lift values > 1 are generally more “interesting” and could be indicative of a useful rule pattern.
 List > 6 is a HIT
 
-<img src="images/lift.png" alt="OHE" width="600" height="300">
+<img src="images/market3.png" alt="OHE" width="600" height="300">
 
 
 

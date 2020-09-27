@@ -284,13 +284,13 @@ that purchased diapers and also purchased beer in the same transaction.
 
     print(list_of_all)
 
-    frequent_itemsets2 = apriori(df2, min_support=0.1, use_colnames=True)
+    frequent_itemsets2 = apriori(df2, min_support=0.00001, use_colnames=True)
     print("frequent_itemsets2 ... ")
     print(frequent_itemsets2)
     rules = association_rules(
         frequent_itemsets2,
         metric="confidence",
-        min_threshold=0.1)
+        min_threshold=0.00001)
     print(rules.head())
 
     rules["antecedents"] = rules["antecedents"].apply(

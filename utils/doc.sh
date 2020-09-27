@@ -17,7 +17,6 @@ EOF
 
 # Generates documentation for each module
 function generate {
-    echo "fuck"
     pdoc3 --html --force axn/ml/market_basket_analysis
 
 }

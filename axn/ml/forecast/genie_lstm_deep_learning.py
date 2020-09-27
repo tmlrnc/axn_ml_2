@@ -51,6 +51,9 @@ la_df = pd.read_pickle(WORKING_DIR + 'data/LA_df_final.pkl')
 
 dataset = la_df.copy()
 
+file_out = '/Users/tomlorenc/Sites/genie/LA_out.csv'
+la_df.to_csv(file_out)
+
 #set the column we want to predict (demand) to the first columns for consistency
 cols = list(dataset.columns)
 cols.remove('demand')
@@ -73,7 +76,8 @@ reframed.drop(reframed.columns[[15,16,17,18,19,20,21,22,23,24,25,26,27]], axis=1
 
 This involves framing the dataset as a supervised learning problem and normalizing the input variables.
 
-We will frame the supervised learning problem as predicting the electricity demand at the current hour (t) given the electricity demand and weather conditions at the prior time step.
+We will frame the supervised learning problem as predicting the electricity demand at the current hour (t) 
+given the electricity demand and weather conditions at the prior time step.
 
 This formulation is straightforward and just for this demonstration. Some alternate formulations you could explore include:
 
@@ -121,6 +125,13 @@ model.add(LSTM(50, input_shape=(train_X.shape[1], train_X.shape[2])))
 model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam')
 # fit network
+print("train_X *********************")
+print(train_X)
+
+print("train_y *********************")
+print(train_y)
+
+
 history = model.fit(train_X, train_y, epochs=50, batch_size=72, validation_data=(test_X, test_y), verbose=2, shuffle=False)
 # plot history
 
@@ -133,6 +144,13 @@ With forecasts and actual values in their original scale, we can then calculate 
 '''
 # make a prediction
 yhat = model.predict(test_X)
+
+print("test_X *********************")
+print(test_X)
+
+print("yhat *********************")
+print(yhat)
+
 test_X = test_X.reshape((test_X.shape[0], test_X.shape[2]))
 # invert scaling for forecast
 inv_yhat = np.concatenate((yhat, test_X[:, 1:]), axis=1)
@@ -184,10 +202,17 @@ electricity_df = EIA_request_to_df(url_demand_forecast, 'demand_forecast')
 cut_electricity = electricity_df[:'2018-09-01']
 elec_i = dataset[['demand']]
 
+fout2 = '/Users/tomlorenc/Sites/genie/data/demand_forecast.csv'
+print("DEMAND FORCAST *********************")
+cut_electricity.to_csv(fout2)
+
 
 print(cut_electricity)
+fout3 = '/Users/tomlorenc/Sites/genie/data/demand_act.csv'
 
+print("DEMAND *********************")
 print(elec_i)
+elec_i.to_csv(fout3)
 
 exit()
 

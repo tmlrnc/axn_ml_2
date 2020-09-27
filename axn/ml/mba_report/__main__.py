@@ -164,15 +164,17 @@ that purchased diapers and also purchased beer in the same transaction.
     first_row = ["Consequent", "Antecedent",  "Support", "Confidence", "Lift" , "Consequent_Count"]
     #first_row = ["", "", "", "", "", "how frequent an Antecedent is", "likeliness of Consequent Given the Antecedent"]
 
-    new_list.append(first_row)
+    #new_list.append(first_row)
 
     for row in data:
         print(str(row[0]))
         ant_full = str(row[0])
+        ant_full_2 = str(row[1])
 
         if (ant_full.find(',') != -1):
-            print("comma NUM " + str(ant_num))
-        else:
+            print("comma NUM " + str(ant_full))
+        #else:
+        elif (ant_full_2.find('Y') != -1 ):
             for col in mycols:
                 result = ant_full.find(col)
                 if result != -1:
@@ -199,6 +201,7 @@ that purchased diapers and also purchased beer in the same transaction.
 
             print(str(row[1]))
 
+    #mydf = df = pd.DataFrame(new_list)
 
     mydf = df = pd.DataFrame(new_list,columns=first_row)
     mydf.sort_values(by=['Consequent'])

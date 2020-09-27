@@ -1,7 +1,7 @@
 """
 Market Basket Analysis for Association Rules
 
-<img src="images/ar2.png" alt="DIS">
+<img src="images/market1.png" alt="DIS">
 
 
 
@@ -10,7 +10,7 @@ Step 1
     READ FILE_IN_RAW.CSV
     Drop all rows that have blanks
 
-    python -m dropblank --file_in RAW.csv      --file_out RAW_NO_BLANKS.csv
+    python -m zeroblank --file_in RAW.csv      --file_out RAW_NO_BLANKS.csv
 
 
 
@@ -173,23 +173,19 @@ The agent was able to answer this question: what hour do I send each user a mess
 It automates new strategies.
 
 
-<img src="images/fi.png" alt="DIS">
+<img src="images/market2.png" alt="DIS">
 
 
 
 
-<img src="images/ar.png" alt="DIS">
+<img src="images/market3.png" alt="DIS">
 
 
-<img src="images/scl.png" alt="DIS">
-
-
-<img src="images/rules.png" alt="DIS">
 
 Steps and Parameters:
 ----------
 
- python -m dropblank --file_in RAW.csv      --file_out RAW_NO_BLANKS.csv
+ python -m zeroblanks --file_in RAW.csv      --file_out RAW_NO_BLANKS.csv
 
 
  python -m transform --file_in RAW_NO_BLANKS.csv      --file_out RAW_NO_BLANKS_TRANSFORM.csv
@@ -207,14 +203,17 @@ Support is the relative frequency that the rules show up.
 In many instances, you may want to look for high support in order to make sure it is a useful relationship.
 However, there may be instances where a low support is useful if you are trying to find “hidden” relationships.
 
+SUPPORT is how frequent an Antecedent is in all the transactions
+SUPPORT = (Num Transactions with Antecedent AND Consequent )/Total Num Transaction
+
 Confidence:
 ----------
 Confidence is a measure of the reliability of the rule.
 A confidence of .5 in the above example would mean that in 50% of the cases where Diaper and Gum were purchased,
 the purchase also included Beer and Chips. For product recommendation, a 50% confidence may be perfectly acceptable.
 
-<img src="images/conf.png" alt="OHE" width="600" height="300">
-
+CONFIDENCE is likeliness of occurrence of Consequent Given the Antecedent
+CONFIDENCE = (Num Transactions with Antecedent AND Consequent )/ Num Transactions with Antecedent
 
 Lift:
 ----------
@@ -223,37 +222,66 @@ The basic rule of thumb is that a lift value close to 1 means the rules were com
 Lift values > 1 are generally more “interesting” and could be indicative of a useful rule pattern.
 List > 6 is a HIT
 
-<img src="images/lift.png" alt="OHE" width="600" height="300">
+PROCESS:
+Preparing the Dataset of CATEGORIES using OHE
+A one hot encoding is a representation of categorical variables as binary vectors. This first requires that the categorical values be mapped to integer values. Then, each integer value is represented as a binary vector that is all zero values except the index of the integer, which is marked with a 1.
+Extract Frequent Itemsets
+Extract Association Rules
+Extract Rules
+Define Threshold and extract the final associations
 
 
 
 Example 1. CSV Files:
 ---------------------
-python -m market_basket_analysis  \
+
+INPUT:
+<img src="images/ex1in.png" alt="DIS">
 
 
-  --file_in csvs/sales.csv \
+OUTPUT:
+<img src="images/ex1out.png" alt="DIS">
 
-
-
-
-  --file_out_ohe csvs/sales_mba.csv
 
 
 
 
 TEST 1 - Data Input CSV File:
 ----------------------------
-<img src="images/in.png" alt="OHE" width="600" height="300">
 
 
-Example 1 - Market Basket Analysis Output CSV File:
------------------------------
-<img src="images/out.png" alt="OHE" width="600" height="300">
+cd /Users/tomlorenc/Sites/VL_standard/ml/axn/ml
+
+Married_Single_Health_IN_TEST.csv -
+<img src="images/1.png" alt="DIS">
 
 
+1) Zero all rows with blanks
+ADD ID COLUMN
+
+python -m zeroblank --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/Married_Single_Health_IN_TEST.csv
+--file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/Married_Single_Health_IN_TEST_zero.csv
+
+Married_Single_Health_IN_TEST_zero.csv -
+<img src="images/2.png" alt="DIS">
 
 
+2) One hot encode - all strings and integers to categories
+REMOVE ID COLUMN
+
+python -m ohe --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/Married_Single_Health_IN_TEST_zero.csv
+--file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/Married_Single_Health_IN_TEST_zero_ohe.csv --ignore ID
+
+Married_Single_Health_IN_TEST_zero.csv -
+<img src="images/3.png" alt="DIS">
+
+3) MBA
+
+python -m market_basket_analysis --file_in  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/Married_Single_Health_IN_TEST_zero_ohe.csv
+--file_out  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/Married_Single_Health_IN_TEST_zero_ohe_results.csv
+
+Married_Single_Health_IN_TEST_zero_ohe_results.csv -
+<img src="images/4.png" alt="DIS">
 
 
 TEST 2 - Data Input CSV File:
