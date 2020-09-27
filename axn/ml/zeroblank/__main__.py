@@ -57,9 +57,6 @@ that purchased diapers and also purchased beer in the same transaction.
     #sampleDF['housing'] = sampleDF['housing'].apply(lambda x: 0 if x == 'no' else 1)
 
 
-    val = df3[0][0]
-
-    print(df3[0][0])
     df3.to_csv(file_out_name2)
 
     print("MBA --- END ")

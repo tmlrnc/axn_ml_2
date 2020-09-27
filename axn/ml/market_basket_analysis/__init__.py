@@ -232,7 +232,7 @@ Define Threshold and extract the final associations
 
 
 
-Example 1. CSV Files:
+Example 1.
 ---------------------
 
 INPUT:
@@ -284,28 +284,85 @@ Married_Single_Health_IN_TEST_zero_ohe_results.csv -
 <img src="images/4.png" alt="DIS">
 
 
-TEST 2 - Data Input CSV File:
+
+
+
+TEST 2 -
 ----------------------------
-<img src="images/2in.png" alt="OHE" width="600" height="300">
 
 
-Example 2 - Market Basket Analysis Output CSV File:
------------------------------
-<img src="images/2out.png" alt="OHE" width="600" height="300">
+1) Zero all rows with blanks
+ADD ID COLUMN
 
-
-
+python -m zeroblank --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN.csv
+--file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero.csv
 
 
 
-TEST 3 - Data Input CSV File:
+2) One hot encode - all strings and integers to categories
+REMOVE ID COLUMN
+
+python -m ohe --file_in //Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero.csv
+--file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe.csv --ignore ID
+
+3) MBA
+
+python -m market_basket_analysis --file_in  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe.csv
+--file_out  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe_results.csv
+
+
+REMOVE COLUMN
+sed 's/^[^,]*,//' 9_22_MBA_IN_zero_ohe_results.csv > 9_22_MBA_IN_zero_ohe_results_2.csv
+
+4) MBA Report
+
+
+
+python -m mba_report --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe_results_2.csv
+--col_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN.csv
+--count_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe.csv
+ --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe_results_2_report.csv
+
+
+9_22_MBA_IN_zero_ohe_results_2_report.csv -
+<img src="images/report.png" alt="DIS">
+
+TEST 2 -
 ----------------------------
-<img src="images/intest3.png" alt="OHE" width="600" height="300">
 
 
-Example 2 - Market Basket Analysis Output CSV File:
------------------------------
-<img src="images/outtest3.png" alt="OHE" width="600" height="300">
+1) Zero all rows with blanks
+ADD ID COLUMN
+
+python -m zeroblank --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_23_MBA_IN.csv
+--file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_23_MBA_IN_zero.csv
+
+
+
+2) One hot encode - all strings and integers to categories
+REMOVE ID COLUMN
+
+python -m ohe --file_in //Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_23_MBA_IN_zero.csv
+--file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_23_MBA_IN_zero_ohe.csv --ignore ID
+
+3) MBA
+
+python -m market_basket_analysis --file_in  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_23_MBA_IN_zero_ohe.csv
+--file_out  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_23_MBA_IN_zero_ohe_results.csv
+
+
+REMOVE COLUMN
+sed 's/^[^,]*,//' 9_23_MBA_IN_zero_ohe_results.csv > 9_22_MBA_IN_zero_ohe_results_3.csv
+
+4) MBA Report
+
+
+
+python -m mba_report --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe_results_2.csv
+--col_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN.csv
+--count_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe.csv
+ --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe_results_2_report.csv
+
 
 
 """
