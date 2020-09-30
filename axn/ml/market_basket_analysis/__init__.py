@@ -294,34 +294,34 @@ TEST 2 -
 1) Zero all rows with blanks
 ADD ID COLUMN
 
-python -m zeroblank --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN.csv
---file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero.csv
+python -m zeroblank --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6.csv
+--file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_zero.csv
 
 
 
 2) One hot encode - all strings and integers to categories
 REMOVE ID COLUMN
 
-python -m ohe --file_in //Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero.csv
---file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe.csv --ignore ID
+python -m ohe --file_in //Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_zero.csv
+--file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_ohe.csv --ignore ID
 
 3) MBA
 
-python -m market_basket_analysis --file_in  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe.csv
---file_out  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe_results.csv
+python -m market_basket_analysis --file_in  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_ohe.csv
+--file_out  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_ohe_results.csv.csv
 
 
 REMOVE COLUMN
-sed 's/^[^,]*,//' 9_22_MBA_IN_zero_ohe_results.csv > 9_22_MBA_IN_zero_ohe_results_2.csv
+sed 's/^[^,]*,//' 9_29_MBA_IN_V6_ohe_results.csv > 9_29_MBA_IN_V6_ohe_results2.csv
 
 4) MBA Report
 
 
 
-python -m mba_report --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe_results_2.csv
---col_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN.csv
---count_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe.csv
- --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe_results_2_report.csv
+python -m mba_report --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_ohe_results2.csv
+--col_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6.csv
+--count_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_ohe.csv
+ --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_ohe_results_2_report.csv
 
 
 9_22_MBA_IN_zero_ohe_results_2_report.csv -

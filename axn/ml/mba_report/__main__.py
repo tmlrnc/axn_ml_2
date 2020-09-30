@@ -204,8 +204,12 @@ that purchased diapers and also purchased beer in the same transaction.
     #mydf = df = pd.DataFrame(new_list)
 
     mydf = df = pd.DataFrame(new_list,columns=first_row)
-    mydf.sort_values(by=['Consequent'])
-    mydf.to_csv(file_out_name2)
+    df3 = mydf.sort_values(by=['Consequent'])
+
+
+    #df3 = df2.sort_values(by='Consequent')
+
+    df3.to_csv(file_out_name2)
 
 
 
