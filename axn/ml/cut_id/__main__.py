@@ -49,14 +49,11 @@ that purchased diapers and also purchased beer in the same transaction.
     file_out_name2 = args.file_out
     df2 = pd.read_csv(file_in_name2)
     #print(df2.head())
-    df3 = df2.fillna(0)
-    cols = df3.columns
-    print(cols)
 
+    df3 = df2.drop(columns=['ID'])
     #df3 = df2.dropna(axis=0, how='any')
     #sampleDF['housing'] = sampleDF['housing'].apply(lambda x: 0 if x == 'no' else 1)
 
-    df3['ID'] = df3.index
     df3.to_csv(file_out_name2, index=False)
 
     print("MBA --- END ")

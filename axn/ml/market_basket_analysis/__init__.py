@@ -204,6 +204,8 @@ In many instances, you may want to look for high support in order to make sure i
 However, there may be instances where a low support is useful if you are trying to find “hidden” relationships.
 
 SUPPORT is how frequent an Antecedent is in all the transactions
+
+
 SUPPORT = (Num Transactions with Antecedent AND Consequent )/Total Num Transaction
 
 Confidence:
@@ -213,14 +215,10 @@ A confidence of .5 in the above example would mean that in 50% of the cases wher
 the purchase also included Beer and Chips. For product recommendation, a 50% confidence may be perfectly acceptable.
 
 CONFIDENCE is likeliness of occurrence of Consequent Given the Antecedent
+
+
 CONFIDENCE = (Num Transactions with Antecedent AND Consequent )/ Num Transactions with Antecedent
 
-Lift:
-----------
-Lift is the ratio of the observed support to that expected if the two rules were independent.
-The basic rule of thumb is that a lift value close to 1 means the rules were completely independent.
-Lift values > 1 are generally more “interesting” and could be indicative of a useful rule pattern.
-List > 6 is a HIT
 
 PROCESS:
 Preparing the Dataset of CATEGORIES using OHE
@@ -232,136 +230,163 @@ Define Threshold and extract the final associations
 
 
 
-Example 1.
----------------------
-
-INPUT:
-<img src="images/ex1in.png" alt="DIS">
 
 
-OUTPUT:
-<img src="images/ex1out.png" alt="DIS">
-
-
-
-
-
-TEST 1 - Data Input CSV File:
+TEST 1 - RUN:
 ----------------------------
-
 
 cd /Users/tomlorenc/Sites/VL_standard/ml/axn/ml
 
-Married_Single_Health_IN_TEST.csv -
-<img src="images/1.png" alt="DIS">
+
+bash mba_test_1.sh
 
 
-1) Zero all rows with blanks
-ADD ID COLUMN
-
-python -m zeroblank --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/Married_Single_Health_IN_TEST.csv
---file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/Married_Single_Health_IN_TEST_zero.csv
-
-Married_Single_Health_IN_TEST_zero.csv -
-<img src="images/2.png" alt="DIS">
-
-
-2) One hot encode - all strings and integers to categories
-REMOVE ID COLUMN
-
-python -m ohe --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/Married_Single_Health_IN_TEST_zero.csv
---file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/Married_Single_Health_IN_TEST_zero_ohe.csv --ignore ID
-
-Married_Single_Health_IN_TEST_zero.csv -
-<img src="images/3.png" alt="DIS">
-
-3) MBA
-
-python -m market_basket_analysis --file_in  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/Married_Single_Health_IN_TEST_zero_ohe.csv
---file_out  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/Married_Single_Health_IN_TEST_zero_ohe_results.csv
-
-Married_Single_Health_IN_TEST_zero_ohe_results.csv -
-<img src="images/4.png" alt="DIS">
+TEST 1 - INPUT: MBA_IN_TEST1.csv
+----------------------------
+<img src="images/test1_out.png" alt="DIS">
 
 
 
+TEST 1 - OUTPUT: MBA_IN_TEST1_OUT.csv
+----------------------------
+<img src="images/test1_in.png" alt="DIS">
 
 
-TEST 2 -
+
+TEST 1 - SCRIPT:
 ----------------------------
 
 
-1) Zero all rows with blanks
-ADD ID COLUMN
-
-python -m zeroblank --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6.csv
---file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_zero.csv
+python -m zeroblank  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1.csv  \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero.csv
 
 
-
-2) One hot encode - all strings and integers to categories
-REMOVE ID COLUMN
-
-python -m ohe --file_in //Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_zero.csv
---file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_ohe.csv --ignore ID
-
-3) MBA
-
-python -m market_basket_analysis --file_in  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_ohe.csv
---file_out  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_ohe_results.csv.csv
+python -m ohe  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero.csv  \
+  --ignore ID \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero_ohe.csv
 
 
-REMOVE COLUMN
-sed 's/^[^,]*,//' 9_29_MBA_IN_V6_ohe_results.csv > 9_29_MBA_IN_V6_ohe_results2.csv
+python -m cut_id  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero_ohe.csv  \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero_ohe_cut.csv
 
-4) MBA Report
+python -m market_basket_analysis  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero_ohe_cut.csv  \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero_ohe_cut_mba.csv
+
+python -m cut_first  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero_ohe_cut_mba.csv  \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_OUT.csv
 
 
 
-python -m mba_report --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_ohe_results2.csv
---col_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6.csv
---count_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_ohe.csv
- --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_29_MBA_IN_V6_ohe_results_2_report.csv
 
 
-9_22_MBA_IN_zero_ohe_results_2_report.csv -
-<img src="images/report.png" alt="DIS">
 
-TEST 2 -
+TEST 2 - RUN:
+----------------------------
+
+cd /Users/tomlorenc/Sites/VL_standard/ml/axn/ml
+
+
+bash mba_test_2.sh
+
+
+TEST 2 - INPUT: MBA_IN_TEST2.csv
+----------------------------
+<img src="images/test2_in.png" alt="DIS">
+
+
+
+TEST 2 - OUTPUT: MBA_IN_TEST2_OUT.csv
+----------------------------
+<img src="images/test2_out.png" alt="DIS">
+
+
+
+TEST 2 - SCRIPT:
 ----------------------------
 
 
-1) Zero all rows with blanks
-ADD ID COLUMN
-
-python -m zeroblank --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_23_MBA_IN.csv
---file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_23_MBA_IN_zero.csv
+python -m zeroblank  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST2.csv  \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST2_zero.csv
 
 
-
-2) One hot encode - all strings and integers to categories
-REMOVE ID COLUMN
-
-python -m ohe --file_in //Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_23_MBA_IN_zero.csv
---file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_23_MBA_IN_zero_ohe.csv --ignore ID
-
-3) MBA
-
-python -m market_basket_analysis --file_in  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_23_MBA_IN_zero_ohe.csv
---file_out  /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_23_MBA_IN_zero_ohe_results.csv
+python -m ohe  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST2_zero.csv  \
+  --ignore ID \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST2_zero_ohe.csv
 
 
-REMOVE COLUMN
-sed 's/^[^,]*,//' 9_23_MBA_IN_zero_ohe_results.csv > 9_22_MBA_IN_zero_ohe_results_3.csv
+python -m cut_id  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST2_zero_ohe.csv  \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST2_zero_ohe_cut.csv
 
-4) MBA Report
+python -m market_basket_analysis  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST2_zero_ohe_cut.csv  \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST2_zero_ohe_cut_mba.csv
+
+python -m cut_first  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST2_zero_ohe_cut_mba.csv  \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST2_OUT.csv
 
 
 
-python -m mba_report --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe_results_2.csv
---col_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN.csv
---count_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe.csv
- --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/9_22_MBA_IN_zero_ohe_results_2_report.csv
+
+
+
+
+TEST 3 - RUN:
+----------------------------
+
+cd /Users/tomlorenc/Sites/VL_standard/ml/axn/ml
+
+
+bash mba_test_3.sh
+
+
+TEST 3 - INPUT: MBA_IN_TEST3.csv
+----------------------------
+<img src="images/test3_in.png" alt="DIS">
+
+
+
+TEST 3 - OUTPUT: MBA_IN_TEST3_OUT.csv
+----------------------------
+<img src="images/test3_out.png" alt="DIS">
+
+
+
+TEST 3 - SCRIPT:
+----------------------------
+
+
+python -m zeroblank  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST3.csv  \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST3_zero.csv
+
+
+python -m ohe  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST3_zero.csv  \
+  --ignore ID \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST3_zero_ohe.csv
+
+
+python -m cut_id  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST3_zero_ohe.csv  \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST3_zero_ohe_cut.csv
+
+python -m market_basket_analysis  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST3_zero_ohe_cut.csv  \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST3_zero_ohe_cut_mba.csv
+
+python -m cut_first  \
+  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST3_zero_ohe_cut_mba.csv  \
+  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST3_OUT.csv
+
 
 
 
