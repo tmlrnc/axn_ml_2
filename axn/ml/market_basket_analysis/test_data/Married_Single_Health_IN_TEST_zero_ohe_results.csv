@@ -1,9 +1,0 @@
-antecedents,consequents,support,confidence,lift
-axn_Ppl_Married_M,axn_CnsmBhvr_HealthWell_0,0.2,0.4,0.666666667
-axn_Ppl_Married_S,axn_CnsmBhvr_HealthWell_0,0.4,0.8,1.333333333
-axn_Ppl_Married_M,axn_CnsmBhvr_HealthWell_1,0.3,0.6,1.5
-axn_Ppl_Married_S,axn_CnsmBhvr_HealthWell_1,0.1,0.2,0.5
-axn_CnsmBhvr_HealthWell_0,axn_Ppl_Married_M,0.2,0.333333333,0.666666667
-axn_CnsmBhvr_HealthWell_1,axn_Ppl_Married_M,0.3,0.75,1.5
-axn_CnsmBhvr_HealthWell_0,axn_Ppl_Married_S,0.4,0.666666667,1.333333333
-axn_CnsmBhvr_HealthWell_1,axn_Ppl_Married_S,0.1,0.25,0.5
