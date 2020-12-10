@@ -229,7 +229,15 @@ Extract Rules
 Define Threshold and extract the final associations
 
 
+ALL UNIT TESTS RUN:
+----------------------------
 
+cd /Users/tomlorenc/Sites/VL_standard/ml/axn/ml
+
+
+pytest
+
+test_mba.py
 
 
 TEST 1 - RUN:

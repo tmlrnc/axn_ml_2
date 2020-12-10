@@ -287,6 +287,7 @@ that purchased diapers and also purchased beer in the same transaction.
     frequent_itemsets2 = apriori(df2, min_support=0.00001, use_colnames=True)
     print("frequent_itemsets2 ... ")
     print(frequent_itemsets2)
+    # TEST THIS
     rules = association_rules(
         frequent_itemsets2,
         metric="confidence",

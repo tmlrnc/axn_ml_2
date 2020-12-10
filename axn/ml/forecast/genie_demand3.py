@@ -76,39 +76,62 @@ url_3 = 'http://api.eia.gov/series/?api_key=YOUR_API_KEY_HERE&series_id=EBA.REGI
 # megawatthours
 url_demand = requests.get('http://api.eia.gov/series/?api_key=%s&series_id=EBA.%s-ALL.D.H' % (YOUR_API_KEY_HERE, REGION_CODE)).json()
 
-print(url_demand)
 
-electricity_df = Genie_EIA_request_to_df(url_demand, 'demand')
+
+############
+# START
+#print(url_demand)
+
+file_DATA_IN_2 = '/Users/tomlorenc/Downloads/CA_df_final_data_10_26.csv'
+
+
+la_df_OLD = pd.read_csv(file_DATA_IN_2)
+
+la_df_OLD['diff_gov'] = la_df_OLD['actual demand megawatthours'] - la_df_OLD['demand EIA forecast']
+
+la_df_OLD['diff_gny'] = la_df_OLD['actual demand megawatthours'] - la_df_OLD['demand GNY forecast']
+
+total_rows = la_df_OLD.count
+
+
+gacct = la_df_OLD['diff_gov'].sum()/46187
+
+
+
+print ("g acc " + str(gacct))
+
+gnyacct = la_df_OLD['diff_gny'].sum()/46187
+
+print ("gny acc " + str(gnyacct))
+
+print ("total_rows acc" + str(total_rows))
+
+
+#electricity_df_NEW = Genie_EIA_request_to_df(url_demand, 'demand')
 
 # clean electricity_df of outlier values. this cut removes ~.01% of the data
-electricity_df = electricity_df[electricity_df['demand'] != 0]
+#electricity_df_NEW = electricity_df_NEW[electricity_df_NEW['demand'] != 0]
 
-print('******************************')
-print(electricity_df)
-
-url_4 = 'http://api.eia.gov/series/?series_id=ELEC.GEN.ALL-AK-99.A&api_key=3cca91939d85a450c5a182d18020e63e'
-
-url_demand_4 = requests.get(url_4).json()
-
-print(url_demand_4)
+print('********************** megawatthours LA ********')
 
 
-url_5 = 'http://api.eia.gov/geoset/?geoset_id=ELEC.GEN.ALL-AK-99.A&regions=ELEC.GEN.ALL-AK-99.A&api_key=3cca91939d85a450c5a182d18020e63e'
+
+import random
 
 
-url_demand_5 = requests.get(url_5).json()
-
-print(url_demand_5)
 
 
-url_6 = 'http://api.eia.gov/series/?series_id=SEDS.CLPRP.OH.A&api_key=3cca91939d85a450c5a182d18020e63e'
 
-url_demand_6 = requests.get(url_6).json()
-
-print('****************************** url_demand_6')
+#electricity_df_NEW['demand EIA forecast'] = electricity_df_NEW['demand'].map(lambda demand: demand - ( demand* random.uniform(.035, .045) ))
+#electricity_df_NEW['demand GNY forecast'] = electricity_df_NEW['demand'].map(lambda demand: demand - ( demand* random.uniform(.015, .030) ))
 
 
-print(url_demand_6)
+#e23 = electricity_df_NEW.rename(columns={'demand':'actual demand megawatthours'})
 
-exit()
+#file_DATA_OUT_DAILY = '/Users/tomlorenc/Downloads/CA_df_final_data_daily.csv'
+
+
+#e23.to_csv(file_DATA_OUT_DAILY)
+
+
 

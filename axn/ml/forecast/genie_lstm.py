@@ -95,6 +95,9 @@ WORKING_DIR = '/Users/tomlorenc/Sites/genie/'
 
 df = pd.read_pickle(WORKING_DIR + 'data/LA_df_final.pkl')
 DATA_IN = '/Users/tomlorenc/Sites/genie/LA_df_final.csv'
+DATA_IN = '/Users/tomlorenc/Sites/genie/LA_df_final_2.csv'
+
+DATA_IN_2 = '/Users/tomlorenc/Sites/genie/LA_df_final_data.csv'
 
 # set the column we want to predict (demand) to the first columns for consistency
 cols = list(df.columns)
@@ -112,10 +115,19 @@ df = df[cols]
 values = df.values
 # ensure all data is float
 values = values.astype('float32')
+
+
+print('############# df.columns')
+
+print(df.columns)
+
 # frame as supervised learning
 reframed = series_to_supervised(values, df.columns, 1, 1)
 # drop columns we don't want to predict
 reframed.drop(reframed.columns[[15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]], axis=1, inplace=True)
+
+
+
 
 values = reframed.values
 n_train_hours = 365 * 24
@@ -124,6 +136,10 @@ test = values[n_train_hours:, :]
 # split into input and outputs
 X_train, y_train = train[:, :-1], train[:, -1]
 X_test, y_test = test[:, :-1], test[:, -1]
+
+print('############# X_train')
+
+print(X_train)
 
 r2 = []
 rmses = []
@@ -147,7 +163,7 @@ r2_score, rmse_score = genie_evaluate(pipeline, X_test, y_test, X_train, y_train
 
 
 
-
+#megawatthours
 ### GRADIENT BOOSTING REGRESSION ###
 # Create the model pipeline
 steps = [('scaler', MinMaxScaler(feature_range=(0, 1))),
