@@ -13,6 +13,13 @@ from surprise import SVD
 from surprise import Dataset
 
 
+import pandas as pd
+
+from surprise import NormalPredictor
+from surprise import Dataset
+from surprise import Reader
+from surprise.model_selection import cross_validate
+
 def get_top_n(predictions, n=10):
     """Return the top-N recommendation for each user from a set of predictions.
     Args:
@@ -38,22 +45,28 @@ def get_top_n(predictions, n=10):
     return top_n
 
 
-# First train an SVD algorithm on the movielens dataset.
-data = Dataset.load_builtin('ml-100k')
+
+# Creation of the dataframe.
+ratings_dict2 = {'itemID': [1, 7, 1, 2, 2, 3,3,3,3, 1],
+                'userID': [1, 2, 2, 4, 1, 3, 4, 4, 4, 1],
+                'rating': [3, 2, 4, 3, 1,3,2,3,3,1]}
 
 
-iterator = trainset.all_ratings()
-new_df = pd.DataFrame(columns=['uid', 'iid', 'rating'])
-i = 0
-for (uid, iid, rating) in iterator:
-    new_df.loc[i] = [uid, iid, rating]
-    i = i+1
+# Creation of the dataframe.
+ratings_dict = {'itemID': [1, 7, 7, 2, 2, 3,3,3,3, 1],
+                'userID': [1, 2, 2, 4, 1, 3, 4, 4, 4, 1],
+                'rating': [1, 1, 1, 1, 1,1,1,1,1,1]}
+print(type(ratings_dict))
 
-new_df.head(2)
+df = pd.DataFrame(ratings_dict)
 
+# A reader is still needed but only the rating_scale param is requiered.
+reader = Reader(rating_scale=(1, 1))
 
-
+# The columns must correspond to user id, item id and ratings (in that order).
+data = Dataset.load_from_df(df[['userID', 'itemID', 'rating']], reader)
 trainset = data.build_full_trainset()
+
 algo = SVD()
 algo.fit(trainset)
 

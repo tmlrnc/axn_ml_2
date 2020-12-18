@@ -30,7 +30,7 @@ new_df = pd.DataFrame(columns=['uid', 'iid', 'rating'])
 i = 0
 for (uid, iid, rating) in iterator:
     new_df.loc[i] = [uid, iid, rating]
-    print(str(uid))
+    #print(str(uid))
     i = i+1
 
 

@@ -5,59 +5,46 @@ Market Basket Analysis for Association Rules
 
 
 
-Step 1
+Step 1 Zero all cells that have blanks
 ----------
-    READ FILE_IN_RAW.CSV
-    Drop all rows that have blanks
+    Zero all cells that have blanks
 
-    python -m zeroblank --file_in RAW.csv      --file_out RAW_NO_BLANKS.csv
-
+    python -m zeroblank  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1.csv  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero.csv
 
 
 
 
 
-Step 2
+Step 2 ONE HOT ENCODE
 ----------
-    Transform floats to integer categories
+    A one hot encoding is a representation of categorical variables as binary vectors.
 
-    python -m transform --file_in RAW_NO_BLANKS.csv      --file_out RAW_NO_BLANKS_TRANSFORM.csv
+    python -m ohe  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero.csv   --ignore ID  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero_ohe.csv
 
 
-
-Step 3
+Step 3 Cut ID
 ----------
-    One hot encode all strings and integers to categories
+    Cut ID
 
-    python -m ohe --file_in RAW_NO_BLANKS_TRANSFORM.csv      --file_out RAW_NO_BLANKS_TRANSFORM_OHE.csv --ignore ID
+    python -m cut_id  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero_ohe.csv  --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero_ohe_cut.csv
 
 
 
-Step 4
+Step 4 Calculate apriori frequency item sets for all consequents of all antecedents
 ----------
     Calculate apriori frequency item sets for all consequents of all antecedents
 
-    python -m market_basket_analysis --file_in RAW_NO_BLANKS_TRANSFORM_OHE.csv --file_out RAW_NO_BLANKS_TRANSFORM_OHE_RESULTS.csv
+    python -m market_basket_analysis  --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero_ohe_cut.csv   --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero_ohe_cut_mba.csv
 
 
 
-
-Step 5
+Step 5 Sort and Report
 ----------
-   Calculate association rules: support, confidence, lift for all consequents of all antecedents
+   Sort and Report
+
+    python -m cut_first   --file_in /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_zero_ohe_cut_mba.csv   --file_out /Users/tomlorenc/Sites/VL_standard/ml/axn/ml/market_basket_analysis/test_data/MBA_IN_TEST1_OUT.csv
 
 
-
-
-Step 6
-----------
-    Sort by consequents then by antecedents then by Confidence
-
-
-
-Step 7
-----------
-   Write CSV report
 
 The most common interpretation of r-squared is how well the regression model fits the observed data. For example,
 an r-squared of 60% reveals that 60% of the data fit the regression model. Generally, a higher r-squared indicates a better fit for the model.

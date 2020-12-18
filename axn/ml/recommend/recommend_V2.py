@@ -13,6 +13,13 @@ from surprise import SVD
 from surprise import Dataset
 
 
+import pandas as pd
+
+from surprise import NormalPredictor
+from surprise import Dataset
+from surprise import Reader
+from surprise.model_selection import cross_validate
+
 def get_top_n(predictions, n=10):
     """Return the top-N recommendation for each user from a set of predictions.
     Args:
@@ -23,6 +30,17 @@ def get_top_n(predictions, n=10):
     Returns:
     A dict where keys are user (raw) ids and values are lists of tuples:
         [(raw item id, rating estimation), ...] of size n.
+
+
+#iterator = trainset.all_ratings()
+#new_df = pd.DataFrame(columns=['uid', 'iid', 'rating'])
+#i = 0
+#for (uid, iid, rating) in iterator:
+#    new_df.loc[i] = [uid, iid, rating]
+#    i = i+1
+
+#file_out_name2 = "/Users/tomlorenc/Downloads/list.csv"
+#new_df.to_csv(file_out_name2)
     """
 
     # First map the predictions to each user.
@@ -40,20 +58,9 @@ def get_top_n(predictions, n=10):
 
 # First train an SVD algorithm on the movielens dataset.
 data = Dataset.load_builtin('ml-100k')
-
-
-iterator = trainset.all_ratings()
-new_df = pd.DataFrame(columns=['uid', 'iid', 'rating'])
-i = 0
-for (uid, iid, rating) in iterator:
-    new_df.loc[i] = [uid, iid, rating]
-    i = i+1
-
-new_df.head(2)
-
-
-
 trainset = data.build_full_trainset()
+
+
 algo = SVD()
 algo.fit(trainset)
 
@@ -66,3 +73,5 @@ top_n = get_top_n(predictions, n=10)
 # Print the recommended items for each user
 for uid, user_ratings in top_n.items():
     print(uid, [iid for (iid, _) in user_ratings])
+
+
