@@ -395,6 +395,33 @@ import pandas as pd
 from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
 
+def mba(df2):
+    print("MBA --- START ")
+
+    print(df2)
+
+    frequent_itemsets2 = apriori(df2, min_support=0.00001, use_colnames=True)
+    print("frequent_itemsets2 ... ")
+    print(frequent_itemsets2)
+    # TEST THIS
+    rules = association_rules(
+        frequent_itemsets2,
+        metric="confidence",
+        min_threshold=0.00001)
+    print(rules.head())
+
+    rules["antecedents"] = rules["antecedents"].apply(
+        lambda x: ', '.join(list(x))).astype("unicode")
+    rules["consequents"] = rules["consequents"].apply(
+        lambda x: ', '.join(list(x))).astype("unicode")
+
+    # rules.sort_values(by=['consequents', 'antecedents'], inplace=True)
+
+    rules.sort_values(by=['consequents', 'antecedents'], inplace=True)
+    rules.drop(['leverage', 'conviction', 'antecedent support', 'consequent support'], axis=1, inplace=True)
+
+    return rules
+
 
 def main():
     """

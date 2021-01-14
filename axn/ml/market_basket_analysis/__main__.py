@@ -234,10 +234,37 @@ def parse_command_line():
     parser.add_argument(
         '--file_out',
         help='csv file output encoded using one-hot one-of-K encoding scheme')
+    parser.add_argument(
+        '--data_in', const="none",nargs='?')
     args = parser.parse_args()
     return args
 
+def mba(df2):
+    print("MBA --- START ")
 
+    print(df2)
+
+    frequent_itemsets2 = apriori(df2, min_support=0.00001, use_colnames=True)
+    print("frequent_itemsets2 ... ")
+    print(frequent_itemsets2)
+    # TEST THIS
+    rules = association_rules(
+        frequent_itemsets2,
+        metric="confidence",
+        min_threshold=0.00001)
+    print(rules.head())
+
+    rules["antecedents"] = rules["antecedents"].apply(
+        lambda x: ', '.join(list(x))).astype("unicode")
+    rules["consequents"] = rules["consequents"].apply(
+        lambda x: ', '.join(list(x))).astype("unicode")
+
+    # rules.sort_values(by=['consequents', 'antecedents'], inplace=True)
+
+    rules.sort_values(by=['consequents', 'antecedents'], inplace=True)
+    rules.drop(['leverage', 'conviction', 'antecedent support', 'consequent support'], axis=1, inplace=True)
+
+    return rules
 
 
 
@@ -263,6 +290,8 @@ that purchased diapers and also purchased beer in the same transaction.
     args = parse_command_line()
     file_in_name2 = args.file_in
     file_out_name2 = args.file_out
+    data_in = args.data_in
+
 
     ######################################################################
 
@@ -270,39 +299,17 @@ that purchased diapers and also purchased beer in the same transaction.
     #
     # pylint: disable=duplicate-code
 
-    print("MBA --- START ")
 
     #file_in_name2 = "/Users/tomlorenc/Downloads/Final_Dagger_Data_V9.csv"
     # file_out_name2 =
     # "/Users/tomlorenc/Downloads/Final_Dagger_Data_V9_MBA.csv"q
 
+
+
     df2 = pd.read_csv(file_in_name2)
 
-    list_of_all = df2.columns
+    rules = mba(df2)
 
-    print("************")
-
-    print(list_of_all)
-
-    frequent_itemsets2 = apriori(df2, min_support=0.00001, use_colnames=True)
-    print("frequent_itemsets2 ... ")
-    print(frequent_itemsets2)
-    # TEST THIS
-    rules = association_rules(
-        frequent_itemsets2,
-        metric="confidence",
-        min_threshold=0.00001)
-    print(rules.head())
-
-    rules["antecedents"] = rules["antecedents"].apply(
-        lambda x: ', '.join(list(x))).astype("unicode")
-    rules["consequents"] = rules["consequents"].apply(
-        lambda x: ', '.join(list(x))).astype("unicode")
-
-    #rules.sort_values(by=['consequents', 'antecedents'], inplace=True)
-
-    rules.sort_values(by=['consequents', 'antecedents'], inplace=True)
-    rules.drop(['leverage', 'conviction', 'antecedent support', 'consequent support'], axis=1, inplace=True)
 
     #consequents = rules['consequents'].unique()
     #cl = sorted(consequents)
@@ -310,9 +317,11 @@ that purchased diapers and also purchased beer in the same transaction.
 
     rules.to_csv(file_out_name2)
 
-    mycount = rules.count()
+    print("MBA --- OUT ")
 
-    print(str(mycount))
+    print(rules)
+
+    mycount = rules.count()
 
     print("MBA --- END ")
 

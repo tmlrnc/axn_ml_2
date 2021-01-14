@@ -1,0 +1,9 @@
+,antecedents,consequents,support,confidence,lift
+0,Married_M,HealthWell_0.0,0.2,0.4,0.6666666666666667
+4,Married_S,HealthWell_0.0,0.4,0.8,1.3333333333333335
+2,Married_M,HealthWell_1.0,0.3,0.6,1.4999999999999998
+6,Married_S,HealthWell_1.0,0.1,0.2,0.5
+1,HealthWell_0.0,Married_M,0.2,0.33333333333333337,0.6666666666666667
+3,HealthWell_1.0,Married_M,0.3,0.7499999999999999,1.4999999999999998
+5,HealthWell_0.0,Married_S,0.4,0.6666666666666667,1.3333333333333335
+7,HealthWell_1.0,Married_S,0.1,0.25,0.5
