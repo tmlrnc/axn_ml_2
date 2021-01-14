@@ -564,6 +564,7 @@ class SVD_LIST(AlgoBase):
 
     def fit(self, trainset):
 
+        # @LISTORY IMPLEMENTATION
         AlgoBase.fit(self, trainset)
         self.sgd(trainset)
 
@@ -571,6 +572,7 @@ class SVD_LIST(AlgoBase):
 
     def sgd(self, trainset):
 
+        # @LISTORY IMPLEMENTATION
 
 
         bu = []
@@ -626,6 +628,8 @@ class SVD_LIST(AlgoBase):
                 err = r - (global_mean + bu[u] + bi[i] + dot)
 
                 # update biases
+                # @LISTORY IMPLEMENTATION
+
                 if self.biased:
                     bu[u] += lr_bu * (err - reg_bu * bu[u])
                     bi[i] += lr_bi * (err - reg_bi * bi[i])
@@ -693,6 +697,30 @@ def get_top_n(predictions, n=10):
 
     return top_n
 
+
+import pymongo
+
+def get_data_mongodb():
+    user_str =  "tom"
+    password_str =  "wCrb7Jg0mzWVEYky"
+    mongo_str = "mongodb+srv://listory.vmew8.gcp.mongodb.net/Listory"
+    #myclient = pymongo.MongoClient(mongo_str)
+
+    mongo_str2 = "mongodb+srv://tom:wCrb7Jg0mzWVEYky@listory.vmew8.gcp.mongodb.net/Listory"
+    myclient = pymongo.MongoClient(mongo_str2)
+
+
+    mydb = myclient["Listory"]
+    mycol = mydb["Stories"]
+
+    #tags: "Newsletter"
+    myquery = '{tags:"Newsletter"}'
+    print("$$$$$$$$$$$")
+    result = mycol.find({"tags": "Newsletter"})
+    #mydoc = mycol.find(myquery)
+
+    for x in result:
+      print(x)
 
 def get_recommendations_JSON_TEST(file_in_name,file_out_name):
 
@@ -840,6 +868,20 @@ def get_recommendations_JSON_TEST(file_in_name,file_out_name):
     print ("ROW COUNT *****" + str(row_count))
 
 
+def calc_listory_score(storyID = 1,
+                       userID = 1,
+                       current_listory_score = 1,
+                       date_published = 1,
+                       date_read = 1,
+                       time_on_story = 1,
+                       story_category= 1):
+
+    #get_data_mongodb()
+
+
+    return 1
+
+
 def get_recommendations(file_in_name,file_out_name):
 
     # TEST DATA
@@ -855,21 +897,12 @@ def get_recommendations(file_in_name,file_out_name):
     # parse file
     obj_json2 = json.loads(data_json2)
 
-    #print(obj_json2)
-
-
-
-
-
-
     obj_json = obj_json2
     itemID_list = []
     userID_list = []
     rating_list = []
 
     ratings_dict = {'itemID': [], 'userID': [], 'rating': []}
-    ratings_dict_5 = {'itemID': [], 'userID': [], 'rating': []}
-
     # show values
     row_count = 0
     for row in obj_json:
@@ -910,18 +943,21 @@ def get_recommendations(file_in_name,file_out_name):
             print("SKIP")
             continue
 
+        listory_score = calc_listory_score()
+        print("listory_score " + str(listory_score))
+
         itemID_list.append(itemID)
         userID_list.append(userID)
         rating_list.append(1)
 
-        ratings_dict_5['itemID'].append(itemID)
-        ratings_dict_5['userID'].append(userID)
-        ratings_dict_5['rating'].append(1)
+        ratings_dict['itemID'].append(itemID)
+        ratings_dict['userID'].append(userID)
+        ratings_dict['rating'].append(1)
 
     # rememebr to read MOST POPULAR FOR COLD START
 
 
-    df = pd.DataFrame(ratings_dict_5)
+    df = pd.DataFrame(ratings_dict)
 
     # A reader is still needed but only the rating_scale param is requiered.
     reader = Reader(rating_scale=(1, 1))
